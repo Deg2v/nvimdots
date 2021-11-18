@@ -45,11 +45,6 @@ tools["folke/which-key.nvim"] = {
         require("which-key").setup {}
     end
 }
-tools["folke/trouble.nvim"] = {
-    opt = true,
-    cmd = {"Trouble", "TroubleToggle", "TroubleRefresh"},
-    config = conf.trouble
-}
 tools["dstein64/vim-startuptime"] = {opt = true, cmd = "StartupTime"}
 tools["gelguy/wilder.nvim"] = {
     event = "CmdlineEnter",
