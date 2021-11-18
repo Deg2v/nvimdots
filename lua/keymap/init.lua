@@ -4,6 +4,7 @@ local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 local map_plug = bind.map_plug
 require("keymap.config")
+vim.api.nvim_exec([[source ./coc_config.vim]], false)
 
 local plug_map = {
     -- Bufferline
@@ -37,14 +38,7 @@ local plug_map = {
 
     ),
     -- Coc.nvim
-    ["i|<c-space>"] = map_cr("coc#refresh()"):with_silent():with_noremap():with_expr(
-
-    ),
-    ["i|<cr>"] = map_cmd(
-        [[pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]]
-    ):with_noremap(),
-    ["n|gce["] = map_plug("(coc-diagnostic-next)"):with_silent(),
+    ["n|g["] = map_plug("(coc-diagnostic-next)"):with_silent(),
     ["n|g]"] = map_plug("(coc-diagnostic-prev)"):with_silent(),
     ["n|gr"] = map_plug("(coc-rename)"),
     ["n|K"] = map_cr("Lspsaga hover_doc"):with_noremap():with_silent(),
