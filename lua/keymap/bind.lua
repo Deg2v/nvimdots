@@ -15,6 +15,11 @@ function rhs_options:new()
     return instance
 end
 
+function rhs_options:map_plug(cmd_string)
+    self.cmd = ([[:<C-u>execute "normal \<Plug>%s"<CR>]]):format(cmd_string)
+    return self
+end
+
 function rhs_options:map_cmd(cmd_string)
     self.cmd = cmd_string
     return self
@@ -56,6 +61,11 @@ function rhs_options:with_nowait()
 end
 
 local pbind = {}
+
+function pbind.map_plug(cmd_string)
+    local ro = rhs_options:new()
+    return ro:map_plug(cmd_string)
+end
 
 function pbind.map_cr(cmd_string)
     local ro = rhs_options:new()

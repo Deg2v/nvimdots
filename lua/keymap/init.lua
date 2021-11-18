@@ -2,6 +2,7 @@ local bind = require("keymap.bind")
 local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
+local map_plug = bind.map_plug
 require("keymap.config")
 
 local plug_map = {
@@ -35,39 +36,25 @@ local plug_map = {
     ["n|<leader>pc"] = map_cr("PackerClean"):with_silent():with_noremap():with_nowait(
 
     ),
-    -- Lsp mapp work when insertenter and lsp start
-    ["n|<leader>li"] = map_cr("LspInfo"):with_noremap():with_silent():with_nowait(
+    -- Coc.nvim
+    ["i|<c-space>"] = map_cr("coc#refresh()"):with_silent():with_noremap():with_expr(
 
     ),
-    ["n|<leader>lr"] = map_cr("LspRestart"):with_noremap():with_silent():with_nowait(
-
-    ),
-    ["n|g["] = map_cr("Lspsaga diagnostic_jump_next"):with_noremap():with_silent(
-
-    ),
-    ["n|g]"] = map_cr("Lspsaga diagnostic_jump_prev"):with_noremap():with_silent(
-
-    ),
+    ["i|<cr>"] = map_cmd(
+        [[pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]]
+    ):with_noremap(),
+    ["n|gce["] = map_plug("(coc-diagnostic-next)"):with_silent(),
+    ["n|g]"] = map_plug("(coc-diagnostic-prev)"):with_silent(),
+    ["n|gr"] = map_plug("(coc-rename)"),
     ["n|K"] = map_cr("Lspsaga hover_doc"):with_noremap():with_silent(),
-    ["n|<C-Up>"] = map_cr(
-        "lua require('lspsaga.action').smart_scroll_with_saga(-1)"
-    ):with_noremap():with_silent(),
-    ["n|<C-Down>"] = map_cr(
-        "lua require('lspsaga.action').smart_scroll_with_saga(1)"
-    ):with_noremap():with_silent(),
-    ["n|<leader>ca"] = map_cr("Lspsaga code_action"):with_noremap():with_silent(
-
-    ),
-    ["v|<leader>ca"] = map_cu("Lspsaga range_code_action"):with_noremap():with_silent(
-
-    ),
-    ["n|gd"] = map_cr("Lspsaga preview_definition"):with_noremap():with_silent(),
-    ["n|gD"] = map_cr("lua vim.lsp.buf.definition()"):with_noremap():with_silent(
-
-    ),
-    ["n|gs"] = map_cr("Lspsaga signature_help"):with_noremap():with_silent(),
-    ["n|gr"] = map_cr("Lspsaga rename"):with_noremap():with_silent(),
-    ["n|gh"] = map_cr("Lspsaga lsp_finder"):with_noremap():with_silent(),
+    ["n|<leader>ca"] = map_plug("(coc-codeaction-selected)"),
+    ["v|<leader>ca"] = map_plug("(coc-codeaction-selected)"),
+    ["n|gd"] = map_plug("(coc-definition)"):with_silent(),
+    ["n|gh"] = map_plug("(coc-refreences)"):with_silent(),
+    ["n|gy"] = map_plug("(coc-type-definition)"):with_silent(),
+    ["n|gi"] = map_plug("(coc-implementation)"):with_silent(),
+    -- FTerm
     ["n|<A-d>"] = map_cu('lua require("FTerm").toggle()'):with_noremap():with_silent(
 
     ),
@@ -78,23 +65,6 @@ local plug_map = {
 
     ):with_silent(),
     ["n|<Leader>g"] = map_cu("lua require('FTerm').run('gitui')"):with_noremap():with_silent(
-
-    ),
-    -- Plugin trouble
-    ["n|gt"] = map_cr("TroubleToggle"):with_noremap():with_silent(),
-    ["n|gR"] = map_cr("TroubleToggle lsp_references"):with_noremap():with_silent(
-
-    ),
-    ["n|<leader>cd"] = map_cr("TroubleToggle lsp_document_diagnostics"):with_noremap(
-
-    ):with_silent(),
-    ["n|<leader>cw"] = map_cr("TroubleToggle lsp_workspace_diagnostics"):with_noremap(
-
-    ):with_silent(),
-    ["n|<leader>cq"] = map_cr("TroubleToggle quickfix"):with_noremap():with_silent(
-
-    ),
-    ["n|<leader>cl"] = map_cr("TroubleToggle loclist"):with_noremap():with_silent(
 
     ),
     -- Plugin nvim-tree
@@ -140,12 +110,6 @@ local plug_map = {
     -- Plugin EasyAlign
     ["n|ga"] = map_cmd("v:lua.enhance_align('nga')"):with_expr(),
     ["x|ga"] = map_cmd("v:lua.enhance_align('xga')"):with_expr(),
-    -- Plugin ZenMode
-    ["n|<leader><leader>z"] = map_cr("ZenMode"):with_noremap():with_silent(),
-    -- Plugin Twilight
-    ["n|<leader><leader>t"] = map_cr("Twilight"):with_noremap():with_silent(),
-    -- Plugin SymbolOutline
-    ["n|<A-t>"] = map_cr("SymbolsOutline"):with_noremap():with_silent(),
     -- Plugin split-term
     ["n|<F5>"] = map_cr("Term"):with_noremap():with_silent(),
     ["n|<C-w>t"] = map_cr("Term"):with_noremap():with_silent(),
