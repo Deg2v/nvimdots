@@ -4,7 +4,7 @@ local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 local map_plug = bind.map_plug
 require("keymap.config")
-vim.api.nvim_exec([[source ./coc_config.vim]], false)
+vim.api.nvim_exec([[source ~/.config/nvim/lua/keymap/coc_config.vim]], false)
 
 local plug_map = {
     -- Bufferline
