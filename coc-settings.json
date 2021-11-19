@@ -1,0 +1,16 @@
+{
+  "languageserver": {
+    "go": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod"],
+      "trace.server": "verbose",
+      "filetypes": ["go"]
+    }
+  },
+  "rust-analyzer.enable": true,
+  "rust-analyzer.updates.channel": "nightly",
+  "rust-analyzer.server.path": "~/.local/bin/rust-analyzer",
+  "rust-analyzer.updates.checkOnStartup": true,
+  "rust-analyzer.inlayHints.enable": true,
+  "rust-analyzer.inlayHints.typeHints": true
+}
