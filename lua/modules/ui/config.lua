@@ -24,13 +24,12 @@ function config.lualine()
             lualine_a = {"mode"},
             lualine_b = {{"branch"}, {"diff"}},
             lualine_c = {
-                {gps.get_location, condition = gps.is_available},
-                {"lsp_progress"}
+                {gps.get_location, condition = gps.is_available}
             },
             lualine_x = {
                 {
                     "diagnostics",
-                    sources = {"nvim_lsp"},
+                    sources = {"coc"},
                     color_error = "#BF616A",
                     color_warn = "#EBCB8B",
                     color_info = "#81A1AC",
