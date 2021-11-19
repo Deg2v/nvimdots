@@ -2,9 +2,7 @@ local bind = require("keymap.bind")
 local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
-local map_plug = bind.map_plug
 require("keymap.config")
-vim.api.nvim_exec([[source ~/.config/nvim/lua/keymap/coc_config.vim]], false)
 
 local plug_map = {
     -- Bufferline
@@ -37,17 +35,6 @@ local plug_map = {
     ["n|<leader>pc"] = map_cr("PackerClean"):with_silent():with_noremap():with_nowait(
 
     ),
-    -- Coc.nvim
-    ["n|g["] = map_plug("(coc-diagnostic-next)"):with_silent(),
-    ["n|g]"] = map_plug("(coc-diagnostic-prev)"):with_silent(),
-    ["n|gr"] = map_plug("(coc-rename)"),
-    ["n|K"] = map_cr("Lspsaga hover_doc"):with_noremap():with_silent(),
-    ["n|<leader>ca"] = map_plug("(coc-codeaction-selected)"),
-    ["v|<leader>ca"] = map_plug("(coc-codeaction-selected)"),
-    ["n|gd"] = map_plug("(coc-definition)"):with_silent(),
-    ["n|gh"] = map_plug("(coc-refreences)"):with_silent(),
-    ["n|gy"] = map_plug("(coc-type-definition)"):with_silent(),
-    ["n|gi"] = map_plug("(coc-implementation)"):with_silent(),
     -- FTerm
     ["n|<A-d>"] = map_cu('lua require("FTerm").toggle()'):with_noremap():with_silent(
 
