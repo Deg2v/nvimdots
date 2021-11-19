@@ -24,7 +24,7 @@ editor["terrortylor/nvim-comment"] = {
 editor["nvim-treesitter/nvim-treesitter"] = {
     opt = true,
     run = ":TSUpdate",
-    event = "BufRead",
+    after = "coc.nvim",
     config = conf.nvim_treesitter
 }
 editor["nvim-treesitter/nvim-treesitter-textobjects"] = {
