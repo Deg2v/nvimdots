@@ -218,6 +218,10 @@ local plug_map = {
 
     ),
     ["i|<CR>"] = map_cmd([[v:lua.confirm()]]):with_expr():with_noremap(),
+    ["o|m"] = map_cu([[lua require('tsht').nodes()]]):with_silent(),
+    ["v|m"] = map_cr([[lua require('tsht').nodes()]]):with_noremap():with_silent(
+
+    )
 }
 
 bind.nvim_load_mapping(plug_map)
