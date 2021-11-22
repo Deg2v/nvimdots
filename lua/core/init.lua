@@ -138,6 +138,22 @@ local clipboard_settings = function()
     ]]
 end
 
+local coq_config = function()
+    vim.g.coq_settings = {
+        auto_start = true,
+        display = {
+            pum = {
+                fast_close = false
+            }
+        },
+        clients = {
+            tabnine = {
+                enabled = true
+            }
+        }
+    }
+end
+
 local load_core = function()
     local pack = require("core.pack")
     createdir()
@@ -147,6 +163,7 @@ local load_core = function()
     pack.ensure_plugins()
     neovide_config()
     dashboard_config()
+    coq_config()
     -- clipboard_settings()
 
     require("core.options")

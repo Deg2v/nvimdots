@@ -203,7 +203,21 @@ local plug_map = {
     ),
     ["n|<leader>dl"] = map_cr("lua require('dap').repl.open()"):with_noremap():with_silent(
 
-    )
+    ),
+    -- COQ
+    ["i|<ESC>"] = map_cmd([[pumvisible() ? "<c-e><esc>" : "<esc>"]]):with_expr():with_noremap(
+
+    ),
+    ["i|<C-c>"] = map_cmd([[pumvisible() ? "<c-e><c-c>" : "<c-c>"]]):with_expr():with_noremap(
+
+    ),
+    ["i|<tab>"] = map_cmd([[pumvisible() ? "<c-n>" : "<tab>"]]):with_expr():with_noremap(
+
+    ),
+    ["i|<S-tab>"] = map_cmd([[pumvisible() ? "<c-p>" : "<S-tab>"]]):with_expr():with_noremap(
+
+    ),
+    ["i|<CR>"] = map_cmd([[v:lua.confirm()]]):with_expr():with_noremap(),
 }
 
 bind.nvim_load_mapping(plug_map)
