@@ -13,10 +13,6 @@
   "rust-analyzer.updates.checkOnStartup": true,
   "rust-analyzer.inlayHints.enable": true,
   "rust-analyzer.inlayHints.typeHints": true,
-  "rust-analyzer.rustfmt.enableRangeFormatting": true,
-
-  "python.formatting.provider": "black",
-  "python.formatting.blackPath": "~/.local/bin/black",
 
   "clangd.enabled": true,
   "clangd.checkUpdates": false,
@@ -33,10 +29,6 @@
     "json",
     "html",
     "javascript",
-    "typescript",
-    "python",
-    "rust",
-    "cpp",
-    "c"
+    "typescript"
   ]
 }

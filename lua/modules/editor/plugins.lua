@@ -80,6 +80,11 @@ editor["phaazon/hop.nvim"] = {
         require("hop").setup {keys = "etovxqpdygfblzhckisuran"}
     end
 }
+editor["lukas-reineke/format.nvim"] = {
+    opt = true,
+    cmd = {"Format", "FormatWrite"},
+    config = conf.format
+}
 editor["karb94/neoscroll.nvim"] = {
     opt = true,
     event = "WinScrolled",
