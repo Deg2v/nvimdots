@@ -5,22 +5,17 @@ local t = function(str)
 end
 
 _G.enhance_jk_move = function(key)
-    if
-        packer_plugins["accelerated-jk"] and
-            not packer_plugins["accelerated-jk"].loaded
-     then
+    if packer_plugins["accelerated-jk"] and
+        not packer_plugins["accelerated-jk"].loaded then
         vim.cmd [[packadd accelerated-jk]]
     end
-    local map =
-        key == "j" and "<Plug>(accelerated_jk_gj)" or
-        "<Plug>(accelerated_jk_gk)"
+    local map = key == "j" and "<Plug>(accelerated_jk_gj)" or
+                    "<Plug>(accelerated_jk_gk)"
     return t(map)
 end
 
 _G.enhance_ft_move = function(key)
-    if not packer_plugins["vim-eft"].loaded then
-        vim.cmd [[packadd vim-eft]]
-    end
+    if not packer_plugins["vim-eft"].loaded then vim.cmd [[packadd vim-eft]] end
     local map = {
         f = "<Plug>(eft-f)",
         F = "<Plug>(eft-F)",
@@ -60,10 +55,8 @@ _G.backspace = function()
         vim.cmd [[packadd nvim-autopairs]]
     end
     local npairs = require("nvim-autopairs")
-    if
-        vim.fn.pumvisible() ~= 0 and
-            vim.fn.complete_info({"mode"}).mode == "eval"
-     then
+    if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({"mode"}).mode ==
+        "eval" then
         return npairs.esc("<c-e>") .. npairs.autopairs_bs()
     else
         return npairs.autopairs_bs()
