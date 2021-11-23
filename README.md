@@ -25,7 +25,7 @@ This is my neovim's configuration.
 
 I use [packer.nvim](https://github.com/wbthomason/packer.nvim) to manage plugins.
 
-I use [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) and [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) to realize code complete.
+I use [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) and [coq_nvim](https://github.com/ms-jpq/coq_nvim) to realize code complete.
 
 Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 
@@ -95,7 +95,7 @@ paru goneovim
 - For [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer#available-lsps), you
   need to install corresponding language server use it.
 
-- For [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter#supported-languages), all maintained parser will be installed by default.
+- For [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter#supported-languages), all maintained parsers will be installed by default.
 
 - For [format.nvim](https://github.com/sbdchd/neoformat#supported-filetypes), you
   need to install corresponding formatter manually:
@@ -105,8 +105,8 @@ paru goneovim
 sudo pacman -S clang
 # gofmt and goimports for golang
 go get -u golang.org/x/tools/...
-# luafmt for lua
-npm install -g lua-fmt
+# lua-format for lua
+paru -S lua-format-git
 # yapf and autopep8 for python
 pip install autopep8 yapf --user
 # rustfmt
@@ -310,17 +310,7 @@ Then you can figure out what modification makes error.
 |           [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)           |          Neovim native LSP configuration           |
 | [williamboman/nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer) |               Manage each LSP engine               |
 |        [ray-x/lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)        | Show signature when completing function parameters |
-|                [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                |          Auto completion plugin for nvim           |
-|              [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)              |             buffer source for nvim-cmp             |
-|                [hrsh7th/cmp-path](https://github.com/hrsh7th/cmp-path)                |              path source for nvim-cmp              |
-|             [tzachar/cmp-tabnine](https://github.com/tzachar/cmp-tabnine)             |            tabnine source for nvim-cmp             |
-|            [hrsh7th/cmp-nvim-lua](https://github.com/hrsh7th/cmp-nvim-lua)            |              lua source for nvim-cmp               |
-|            [hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)            |              lsp source for nvim-cmp               |
-|                [f3fora/cmp-spell](https://github.com/f3fora/cmp-spell)                |             spell source for nvim-cmp              |
-|        [andersevenrud/compe-tmux](https://github.com/andersevenrud/compe-tmux)        |              tmux source for nvim-cmp              |
-|        [saadparwaiz1/cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)        |            luasnip source for nvim-cmp             |
-|                [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)                |      snippets completion engine for nvim-cmp       |
-|    [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets)    |            snippets source for LusSnip             |
+|                 [ms-jpq/coq_nvim](https://github.com/ms-jpq/coq_nvim)                 |            Fast as FUCK nvim completion            |
 |           [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)           |                  Completion pairs                  |
 |                [github/copilot](https://github.com/github/copilot.vim)                |                Copilot neovim port                 |
 
@@ -414,8 +404,7 @@ The leader key is `,`.
 |                   toggle code quickfix                    |          `<leader>cq`          |
 |                    toggle code loclist                    |          `<leader>cl`          |
 |                                                           |                                |
-|                   next snippet's block                    |            `<C-l>`             |
-|                   prev snippet's block                    |            `<C-h>`             |
+|                   next snippet's block                    |            `<C-h>`             |
 |                                                           |                                |
 |                 select current `()` block                 |             `vab`              |
 |                 select current `{}` block                 |             `vaB`              |
