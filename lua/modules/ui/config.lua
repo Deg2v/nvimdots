@@ -1,7 +1,7 @@
 local config = {}
 
 function config.edge()
-    vim.cmd [[set background=light]]
+    vim.cmd [[set background=dark]]
     vim.g.edge_style = "aura"
     vim.g.edge_enable_italic = 1
     vim.g.edge_disable_italic_comment = 1
@@ -12,10 +12,18 @@ end
 function config.lualine()
     local gps = require("nvim-gps")
 
+    local function gps_content()
+        if gps.is_available() then
+            return gps.get_location()
+        else
+            return ""
+        end
+    end
+
     require("lualine").setup {
         options = {
             icons_enabled = true,
-            theme = "onelight",
+            theme = "onedark",
             disabled_filetypes = {},
             component_separators = "|",
             section_separators = {left = "", right = ""}
@@ -23,7 +31,7 @@ function config.lualine()
         sections = {
             lualine_a = {"mode"},
             lualine_b = {{"branch"}, {"diff"}},
-            lualine_c = {{gps.get_location, condition = gps.is_available}},
+            lualine_c = {{gps_content, cond = gps.is_available}},
             lualine_x = {
                 {
                     "diagnostics",
@@ -47,7 +55,7 @@ function config.lualine()
             lualine_z = {}
         },
         tabline = {},
-        extensions = {}
+        extensions = {"quickfix", "nvim-tree", "toggleterm", "fugitive"}
     }
 end
 
