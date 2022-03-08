@@ -367,31 +367,12 @@ function config.lualine()
 		table.insert(config.sections.lualine_x, component)
 	  end
 
-
-	--   ins_left({
-	--     function()
-	--       return '▊'
-	--     end,
-	--     color = { fg = colors.blue }, -- Sets highlighting of component
-	--     padding = { left = 0, right = 1 }, -- We don't need space before this
-	--   })
-
-	--   ins_left({
-	--     -- mode component
-	--     function()
-	--       -- auto change color according to neovims mode
-	--       local mode_color = {
-	--         n = colors.red,
-	--         i = colors.green,
-	--         v = colors.blue,
-	--         ['
-
-	-- ins_left({
-	-- 	'filename',
-	-- 	cond = conditions.buffer_not_empty,
-	-- 	color = { fg = colors.green, gui = 'bold' },
-	-- 	-- color = { fg = colors.magenta, gui = 'bold' },
-	-- })
+	ins_left({
+		'filename',
+		cond = conditions.buffer_not_empty,
+		-- color = { fg = colors.green, gui = 'bold' },
+		color = { fg = colors.magenta, gui = 'bold' },
+	})
 	ins_left({
 		-- filesize component
 		'filesize',
@@ -411,9 +392,9 @@ function config.lualine()
 
 		--   ins_left({ 'progress', color = { fg = colors.fg, gui = 'bold' } })
 
-	ins_left({
+	ins_right({
 		'diagnostics',
-		sources = { 'nvim_diagnostic' },
+		sources = { 'nvim_lsp' },
 		symbols = { error = ' ', warn = ' ', info = '  ' },
 		diagnostics_color = {
 		color_error = { fg = colors.red },
@@ -424,11 +405,11 @@ function config.lualine()
 
 		  -- Insert mid section. You can make any number of sections in neovim :)
 		  -- for lualine it's any number greater then 2
-		  ins_left({
-			function()
-			  return '%='
-			end,
-		  })
+		--   ins_left({
+		-- 	function()
+		-- 	  return '%='
+		-- 	end,
+		--   })
 
 		  ins_left({
 			-- Lsp server name .
@@ -457,7 +438,7 @@ function config.lualine()
 			color = { fg = colors.violet, gui = 'bold' },
 		  })
 
-		  ins_left({
+		  ins_right({
 			'diff',
 			-- Is it me or the symbol for modified us really weird
 			symbols = { added = ' ', modified = '柳 ', removed = ' ' },
