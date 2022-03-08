@@ -217,34 +217,49 @@ function config.lualine()
 		magenta  = '#c678dd',
 		blue     = '#51afef',
 		red      = '#ec5f67',
-	  }
+	}
 
 
-	  local conditions = {
+	local conditions = {
 		buffer_not_empty = function()
-		  return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
+		return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
 		end,
 		hide_in_width = function()
-		  return vim.fn.winwidth(0) > 80
+		return vim.fn.winwidth(0) > 80
 		end,
 		check_git_workspace = function()
-		  local filepath = vim.fn.expand('%:p:h')
-		  local gitdir = vim.fn.finddir('.git', filepath .. ';')
-		  return gitdir and #gitdir > 0 and #gitdir < #filepath
+		local filepath = vim.fn.expand('%:p:h')
+		local gitdir = vim.fn.finddir('.git', filepath .. ';')
+		return gitdir and #gitdir > 0 and #gitdir < #filepath
 		end,
-	  }
-		  local symbols_outline = {
-		  sections = {
-			  lualine_a = { "mode" },
-			  lualine_b = { "filetype" },
-			  lualine_c = {},
-			  lualine_x = {},
-			  lualine_y = {},
-			  lualine_z = { "location" },
-		  },
-		  filetypes = { "Outline" },
-	  }
-
+	}
+	local symbols_outline = {
+		sections = {
+		lualine_a = { "mode" },
+		lualine_b = { "filetype" },
+		lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = { "location" },
+		},
+		filetypes = { "Outline" },
+	}
+	local mini_sections = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = { "location" },
+	}
+	local minimap = {
+		sections = mini_sections,
+		filetypes = { "minimap" },
+	}
+	local aerial = {
+		sections = mini_sections,
+		filetypes = { "aerial" },
+	}
 	local dapui_scopes = {
 		sections = {
 			lualine_a = {},
@@ -333,7 +348,8 @@ function config.lualine()
 			  "nvim-tree",
 			  "toggleterm",
 			  "fugitive",
-			  symbols_outline,
+			  minimap,
+			aerial,
   			dapui_scopes,
 			dapui_breakpoints,
 			dapui_stacks,
@@ -370,12 +386,12 @@ function config.lualine()
 	--         v = colors.blue,
 	--         ['
 
-	ins_left({
-		'filename',
-		cond = conditions.buffer_not_empty,
-		color = { fg = colors.green, gui = 'bold' },
-		-- color = { fg = colors.magenta, gui = 'bold' },
-	})
+	-- ins_left({
+	-- 	'filename',
+	-- 	cond = conditions.buffer_not_empty,
+	-- 	color = { fg = colors.green, gui = 'bold' },
+	-- 	-- color = { fg = colors.magenta, gui = 'bold' },
+	-- })
 	ins_left({
 		-- filesize component
 		'filesize',
@@ -395,16 +411,16 @@ function config.lualine()
 
 		--   ins_left({ 'progress', color = { fg = colors.fg, gui = 'bold' } })
 
-		  ins_left({
-			'diagnostics',
-			sources = { 'nvim_diagnostic' },
-			symbols = { error = ' ', warn = ' ', info = ' ' },
-			diagnostics_color = {
-			  color_error = { fg = colors.red },
-			  color_warn = { fg = colors.yellow },
-			  color_info = { fg = colors.cyan },
+	ins_left({
+		'diagnostics',
+		sources = { 'nvim_diagnostic' },
+		symbols = { error = ' ', warn = ' ', info = '  ' },
+		diagnostics_color = {
+		color_error = { fg = colors.red },
+		color_warn = { fg = colors.yellow },
+		color_info = { fg = colors.cyan },
 			},
-		  })
+		})
 
 		  -- Insert mid section. You can make any number of sections in neovim :)
 		  -- for lualine it's any number greater then 2
@@ -441,14 +457,14 @@ function config.lualine()
 			color = { fg = colors.violet, gui = 'bold' },
 		  })
 
-		  ins_right({
+		  ins_left({
 			'diff',
 			-- Is it me or the symbol for modified us really weird
 			symbols = { added = ' ', modified = '柳 ', removed = ' ' },
 			diff_color = {
-			  added = { fg = colors.green },
+			  added = { fg = colors.red },
 			  modified = { fg = colors.orange },
-			  removed = { fg = colors.red },
+			  removed = { fg = colors.magenta },
 			},
 			cond = conditions.hide_in_width,
 		  })
@@ -509,7 +525,7 @@ function config.nvim_bufferline()
 	require("bufferline").setup({
 		options = {
 			number = "none",
-			modified_icon = "✥",
+			modified_icon = "",
 			buffer_close_icon = "",
 			left_trunc_marker = "",
 			right_trunc_marker = "",
