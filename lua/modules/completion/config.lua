@@ -320,6 +320,7 @@ function config.luasnip()
 		updateevents = "TextChanged,TextChangedI",
 	})
 	require("luasnip/loaders/from_vscode").load()
+	require("luasnip.loaders.from_vscode").load({ paths = { "./my-snippets" } })
 end
 
 -- function config.tabnine()

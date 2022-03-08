@@ -1,0 +1,26 @@
+{
+	"while333": {
+		"prefix": "whileif",
+		"body": [
+			"while ($1) {",
+			"\t$0",
+			"}"
+		],
+		"description": ""
+	},
+	"goroutine anonymous function": {
+		"prefix": "go",
+		"body": "go func($1) {\n\t$0\n}($2)",
+		"description": "Snippet for anonymous goroutine declaration"
+	},
+	"gous function": {
+		"prefix": "gogggg",
+		"body": "go func($1) {\n\t$0\n}($2)",
+		"description": "Snippet for anonymous goroutine declaration"
+	},
+	"goroutine function": {
+		"prefix": "gf",
+		"body": "go ${1:func}($0)",
+		"description": "Snippet for goroutine declaration"
+	}
+}

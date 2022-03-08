@@ -7,15 +7,23 @@ editor["itchyny/vim-cursorword"] = {
 	event = { "BufReadPre", "BufNewFile" },
 	config = conf.vim_cursorwod,
 }
-editor["terrortylor/nvim-comment"] = {
+-- editor["terrortylor/nvim-comment"] = {
+-- 	opt = false,
+-- 	config = function()
+-- 		require("nvim_comment").setup({
+-- 			hook = function()
+-- 				require("ts_context_commentstring.internal").update_commentstring()
+-- 			end,
+-- 		})
+-- 	end,
+-- }
+editor["numToStr/Comment.nvim"] = {
 	opt = false,
-	config = function()
-		require("nvim_comment").setup({
-			hook = function()
-				require("ts_context_commentstring.internal").update_commentstring()
-			end,
+	config = function ()
+		require("Comment").setup({
+			ignore = '^$'
 		})
-	end,
+	end
 }
 editor["nvim-treesitter/nvim-treesitter"] = {
 	opt = true,
