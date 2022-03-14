@@ -219,7 +219,33 @@ function config.lualine()
 		red      = '#ec5f67',
 	}
 
+	local custom_fname = require('lualine.components.filename'):extend()
+	local highlight = require'lualine.highlight'
+	-- local default_status_colors = { saved = '#228B22', modified = '#C70039' }
+	local default_status_colors = { saved = '#98be65', modified = '#C70039' }
 
+	function custom_fname:init(options)
+	  custom_fname.super.init(self, options)
+	  self.status_colors = {
+		saved = highlight.create_component_highlight_group(
+		  {fg = default_status_colors.saved}, 'filename_status_saved', self.options),
+		modified = highlight.create_component_highlight_group(
+		  {fg = default_status_colors.modified}, 'filename_status_modified', self.options),
+	  }
+	  if self.options.color == nil then self.options.color = '' end
+	end
+
+	function custom_fname:update_status()
+	  local data = custom_fname.super.update_status(self)
+	  data = highlight.component_format_highlight(vim.bo.modified
+												  and self.status_colors.modified
+												  or self.status_colors.saved) .. data
+	  return data
+	end
+
+	-- require'lualine'.setup {
+	--   lualine_c = {custom_fname},
+	-- }
 	local conditions = {
 		buffer_not_empty = function()
 		return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
@@ -233,20 +259,17 @@ function config.lualine()
 		return gitdir and #gitdir > 0 and #gitdir < #filepath
 		end,
 	}
-	local symbols_outline = {
-		sections = {
-		lualine_a = { "mode" },
-		lualine_b = { "filetype" },
+	local mini_sections = {
+		lualine_a = {},
+		lualine_b = {},
 		lualine_c = {},
 		lualine_x = {},
 		lualine_y = {},
 		lualine_z = { "location" },
-		},
-		filetypes = { "Outline" },
 	}
-	local mini_sections = {
-		lualine_a = {},
-		lualine_b = {},
+	local simple_sections = {
+		lualine_a = { "mode" },
+		lualine_b = { "filetype" },
 		lualine_c = {},
 		lualine_x = {},
 		lualine_y = {},
@@ -261,57 +284,30 @@ function config.lualine()
 		filetypes = { "aerial" },
 	}
 	local dapui_scopes = {
-		sections = {
-			lualine_a = {},
-			lualine_b = { "filetype" },
-			lualine_c = {},
-			lualine_x = {},
-			lualine_y = {},
-			lualine_z = { "location" },
-		},
+		sections = simple_sections,
 		filetypes = { "dapui_scopes" },
 	}
 
 	local dapui_breakpoints = {
-		sections = {
-			lualine_a = {},
-			lualine_b = { "filetype" },
-			lualine_c = {},
-			lualine_x = {},
-			lualine_y = {},
-			lualine_z = { "location" },
-		},
+		sections = simple_sections,
 		filetypes = { "dapui_breakpoints" },
 	}
 
 	local dapui_stacks = {
-		sections = {
-			lualine_a = {},
-			lualine_b = { "filetype" },
-			lualine_c = {},
-			lualine_x = {},
-			lualine_y = {},
-			lualine_z = { "location" },
-		},
+		sections = simple_sections,
 		filetypes = { "dapui_stacks" },
 	}
 
 	local dapui_watches = {
-		sections = {
-			lualine_a = {},
-			lualine_b = { "filetype" },
-			lualine_c = {},
-			lualine_x = {},
-			lualine_y = {},
-			lualine_z = { "location" },
-		},
+		sections = simple_sections,
 		filetypes = { "dapui_watches" },
 	}
 
 	  -- Config
-	  local config = {
+	  local config1 = {
 		options = {
 		  -- Disable sections and component separators
+		  icons_enabled = true,
 		  component_separators = '',
 		  section_separators = {left = "", right = ""},
 		  theme = "catppuccin"
@@ -328,7 +324,16 @@ function config.lualine()
 		  -- these are to remove the defaults
 		  lualine_a = {'mode'},
 		  lualine_b = {},
-		  lualine_y = {"filetype", "encoding", "fileformat"},
+		  lualine_y = {{"filetype", "encoding",}, {"fileformat",
+		  icons_enabled = true,
+		  symbols = {
+			  unix = "LF",
+			  dos = "CRLF",
+			  mac = "CR",
+		  },
+		},
+	},
+
 		  lualine_z = { '%l:%c', '%p%%/%L'},
 		  -- These will be filled later
 		  lualine_c = {},
@@ -340,8 +345,8 @@ function config.lualine()
 		  lualine_b = {},
 		  lualine_y = {},
 		  lualine_z = {},
-		  lualine_c = {},
-		  lualine_x = {},
+		  lualine_c = { "filename" },
+		  lualine_x = { "location" },
 		},
 				extensions = {
 			  "quickfix",
@@ -359,19 +364,20 @@ function config.lualine()
 
 	  -- Inserts a component in lualine_c at left section
 	  local function ins_left(component)
-		table.insert(config.sections.lualine_c, component)
+		table.insert(config1.sections.lualine_c, component)
 	  end
 
 	  -- Inserts a component in lualine_x ot right section
 	  local function ins_right(component)
-		table.insert(config.sections.lualine_x, component)
+		table.insert(config1.sections.lualine_x, component)
 	  end
 
 	ins_left({
-		'filename',
-		cond = conditions.buffer_not_empty,
+		custom_fname,
+		-- cond = conditions.buffer_not_empty,
 		-- color = { fg = colors.green, gui = 'bold' },
-		color = { fg = colors.magenta, gui = 'bold' },
+		-- {modified,color ={fg = colors.magenta, gui = 'bold'}},
+		-- color = { fg = colors.magenta, gui = 'bold' },
 	})
 	ins_left({
 		-- filesize component
@@ -392,7 +398,7 @@ function config.lualine()
 
 		--   ins_left({ 'progress', color = { fg = colors.fg, gui = 'bold' } })
 
-	ins_right({
+	ins_left({
 		'diagnostics',
 		sources = { 'nvim_lsp' },
 		symbols = { error = ' ', warn = ' ', info = '  ' },
@@ -421,7 +427,7 @@ function config.lualine()
 				return msg
 			  end
 			  for _, client in ipairs(clients) do
-				local filetypes = client.config.filetypes
+				local filetypes = client.config1.filetypes
 				if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
 				  return client.name
 				end
@@ -450,18 +456,7 @@ function config.lualine()
 			cond = conditions.hide_in_width,
 		  })
 
-
-		--   ins_right({
-		--     function()
-		--       return '▊'
-		--     end,
-		--     color = { fg = colors.blue },
-		--     padding = { left = 1 },
-		--   })
-
-		  -- Now don't forget to initialize lualine
-		--   lualine.setup(config)
-		  require("lualine").setup(config)
+		  require("lualine").setup(config1)
 		end
 
 function config.nvim_tree()
