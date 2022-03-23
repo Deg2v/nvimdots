@@ -28,6 +28,96 @@ function config.kanagawa()
 	})
 end
 
+function config.onedarkpro()
+	require("onedarkpro").setup({
+  -- Theme can be overwritten with 'onedark' or 'onelight' as a string
+  theme = function()
+    if vim.o.background == "dark" then
+      return "onedark"
+    else
+      return "onelight"
+    end
+  end,
+  colors = {}, -- Override default colors by specifying colors for 'onelight' or 'onedark' themes
+  hlgroups = {}, -- Override default highlight groups
+  filetype_hlgroups = {}, -- Override default highlight groups for specific filetypes
+  plugins = { -- Override which plugins highlight groups are loaded
+      native_lsp = true,
+      polygot = true,
+      treesitter = true,
+      -- NOTE: Other plugins have been omitted for brevity
+  },
+  styles = {
+      strings = "NONE", -- Style that is applied to strings
+      comments = "italic", -- Style that is applied to comments
+      keywords = "italic", -- Style that is applied to keywords
+      functions = "bold,italic", -- Style that is applied to functions
+      variables = "italic", -- Style that is applied to variables
+  },
+  options = {
+      bold = true, -- Use the themes opinionated bold styles?
+      italic = true, -- Use the themes opinionated italic styles?
+      underline = true, -- Use the themes opinionated underline styles?
+      undercurl = true, -- Use the themes opinionated undercurl styles?
+      cursorline = true, -- Use cursorline highlighting?
+      transparency = true, -- Use a transparent background?
+      terminal_colors = true, -- Use the theme's colors for Neovim's :terminal?
+      window_unfocussed_color = true, -- When the window is out of focus, change the normal background?
+  }
+})
+end
+
+function config.onedark()
+	-- Lua
+require('onedark').setup({
+    -- Main options --
+    style = 'dark', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+    transparent = false,  -- Show/hide background
+    term_colors = true, -- Change terminal color as per the selected theme style
+    ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
+    -- toggle theme style ---
+    toggle_style_key = '<leader>ts', -- Default keybinding to toggle
+    toggle_style_list = {'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light'}, -- List of styles to toggle between
+
+    -- Change code style ---
+    -- Options are italic, bold, underline, none
+    -- You can configure multiple style with comma seperated, For e.g., keywords = 'italic,bold'
+    code_style = {
+        comments = 'italic',
+        keywords = 'italic',
+        functions = 'bold,italic',
+        strings = 'none',
+        variables = 'italic'
+    },
+
+    -- Custom Highlights --
+    colors = {
+		bright_orange = "#ff8800",    -- define a new color
+    -- green = '#00ffaa',            -- redefine an existing color
+	}, -- Override default colors
+    highlights = {
+		TSVariable = {fg = '#e06150'},
+	}, -- Override highlight groups
+
+    -- Plugins Config --
+    diagnostics = {
+        darker = true, -- darker colors for diagnostic
+        undercurl = true,   -- use undercurl instead of underline for diagnostics
+        background = true,    -- use background color for virtual text
+    },
+})
+end
+
+function config.nvcode_color_schemes()
+	require('nvim-treesitter.configs').setup ({
+		ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+		highlight = {
+		  enable = true,              -- false will disable the whole extension
+		  disable = { "rust" },  -- list of language that will be disabled
+		},
+	  })
+end
+
 function config.catppuccin()
 	require("catppuccin").setup({
 		transparent_background = true,
@@ -401,11 +491,12 @@ function config.lualine()
 	ins_left({
 		'diagnostics',
 		sources = { 'nvim_diagnostic' },
-		symbols = { error = ' ', warn = ' ', info = '  ' },
+		symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
 		diagnostics_color = {
-		color_error = { fg = colors.red },
-		color_warn = { fg = colors.yellow },
-		color_info = { fg = colors.cyan },
+		color_error = { fg = '#e32636' },
+		warn = { fg = '#ffa500' },
+		info = { fg = '#ebdbb2' },
+		hint = {fg = colors.magenta}
 			},
 		})
 
@@ -494,7 +585,7 @@ function config.nvim_tree()
 		update_to_buf_dir = { enable = true, auto_open = true },
 		diagnostics = {
 			enable = false,
-			icons = { hint = "", info = "", warning = "", error = "" },
+			icons = { hint = "ﯦ", info = "", warning = "", error = "" },
 		},
 		update_focused_file = {
 			enable = true,
