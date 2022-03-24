@@ -28,6 +28,96 @@ function config.kanagawa()
 	})
 end
 
+function config.onedarkpro()
+	require("onedarkpro").setup({
+  -- Theme can be overwritten with 'onedark' or 'onelight' as a string
+  theme = function()
+    if vim.o.background == "dark" then
+      return "onedark"
+    else
+      return "onelight"
+    end
+  end,
+  colors = {}, -- Override default colors by specifying colors for 'onelight' or 'onedark' themes
+  hlgroups = {}, -- Override default highlight groups
+  filetype_hlgroups = {}, -- Override default highlight groups for specific filetypes
+  plugins = { -- Override which plugins highlight groups are loaded
+      native_lsp = true,
+      polygot = true,
+      treesitter = true,
+      -- NOTE: Other plugins have been omitted for brevity
+  },
+  styles = {
+      strings = "NONE", -- Style that is applied to strings
+      comments = "italic", -- Style that is applied to comments
+      keywords = "italic", -- Style that is applied to keywords
+      functions = "bold,italic", -- Style that is applied to functions
+      variables = "italic", -- Style that is applied to variables
+  },
+  options = {
+      bold = true, -- Use the themes opinionated bold styles?
+      italic = true, -- Use the themes opinionated italic styles?
+      underline = true, -- Use the themes opinionated underline styles?
+      undercurl = true, -- Use the themes opinionated undercurl styles?
+      cursorline = true, -- Use cursorline highlighting?
+      transparency = true, -- Use a transparent background?
+      terminal_colors = true, -- Use the theme's colors for Neovim's :terminal?
+      window_unfocussed_color = true, -- When the window is out of focus, change the normal background?
+  }
+})
+end
+
+function config.onedark()
+	-- Lua
+require('onedark').setup({
+    -- Main options --
+    style = 'dark', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+    transparent = false,  -- Show/hide background
+    term_colors = true, -- Change terminal color as per the selected theme style
+    ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
+    -- toggle theme style ---
+    toggle_style_key = '<leader>ts', -- Default keybinding to toggle
+    toggle_style_list = {'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light'}, -- List of styles to toggle between
+
+    -- Change code style ---
+    -- Options are italic, bold, underline, none
+    -- You can configure multiple style with comma seperated, For e.g., keywords = 'italic,bold'
+    code_style = {
+        comments = 'italic',
+        keywords = 'italic',
+        functions = 'bold,italic',
+        strings = 'none',
+        variables = 'italic'
+    },
+
+    -- Custom Highlights --
+    colors = {
+		bright_orange = "#ff8800",    -- define a new color
+    -- green = '#00ffaa',            -- redefine an existing color
+	}, -- Override default colors
+    highlights = {
+		TSVariable = {fg = '#e06150'},
+	}, -- Override highlight groups
+
+    -- Plugins Config --
+    diagnostics = {
+        darker = true, -- darker colors for diagnostic
+        undercurl = true,   -- use undercurl instead of underline for diagnostics
+        background = true,    -- use background color for virtual text
+    },
+})
+end
+
+function config.nvcode_color_schemes()
+	require('nvim-treesitter.configs').setup ({
+		ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+		highlight = {
+		  enable = true,              -- false will disable the whole extension
+		  disable = { "rust" },  -- list of language that will be disabled
+		},
+	  })
+end
+
 function config.catppuccin()
 	require("catppuccin").setup({
 		transparent_background = true,
@@ -219,7 +309,33 @@ function config.lualine()
 		red      = '#ec5f67',
 	}
 
+	local custom_fname = require('lualine.components.filename'):extend()
+	local highlight = require'lualine.highlight'
+	-- local default_status_colors = { saved = '#228B22', modified = '#C70039' }
+	local default_status_colors = { saved = '#98be65', modified = '#C70039' }
 
+	function custom_fname:init(options)
+	  custom_fname.super.init(self, options)
+	  self.status_colors = {
+		saved = highlight.create_component_highlight_group(
+		  {fg = default_status_colors.saved}, 'filename_status_saved', self.options),
+		modified = highlight.create_component_highlight_group(
+		  {fg = default_status_colors.modified}, 'filename_status_modified', self.options),
+	  }
+	  if self.options.color == nil then self.options.color = '' end
+	end
+
+	function custom_fname:update_status()
+	  local data = custom_fname.super.update_status(self)
+	  data = highlight.component_format_highlight(vim.bo.modified
+												  and self.status_colors.modified
+												  or self.status_colors.saved) .. data
+	  return data
+	end
+
+	-- require'lualine'.setup {
+	--   lualine_c = {custom_fname},
+	-- }
 	local conditions = {
 		buffer_not_empty = function()
 		return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
@@ -233,20 +349,17 @@ function config.lualine()
 		return gitdir and #gitdir > 0 and #gitdir < #filepath
 		end,
 	}
-	local symbols_outline = {
-		sections = {
-		lualine_a = { "mode" },
-		lualine_b = { "filetype" },
+	local mini_sections = {
+		lualine_a = {},
+		lualine_b = {},
 		lualine_c = {},
 		lualine_x = {},
 		lualine_y = {},
 		lualine_z = { "location" },
-		},
-		filetypes = { "Outline" },
 	}
-	local mini_sections = {
-		lualine_a = {},
-		lualine_b = {},
+	local simple_sections = {
+		lualine_a = { "mode" },
+		lualine_b = { "filetype" },
 		lualine_c = {},
 		lualine_x = {},
 		lualine_y = {},
@@ -261,57 +374,30 @@ function config.lualine()
 		filetypes = { "aerial" },
 	}
 	local dapui_scopes = {
-		sections = {
-			lualine_a = {},
-			lualine_b = { "filetype" },
-			lualine_c = {},
-			lualine_x = {},
-			lualine_y = {},
-			lualine_z = { "location" },
-		},
+		sections = simple_sections,
 		filetypes = { "dapui_scopes" },
 	}
 
 	local dapui_breakpoints = {
-		sections = {
-			lualine_a = {},
-			lualine_b = { "filetype" },
-			lualine_c = {},
-			lualine_x = {},
-			lualine_y = {},
-			lualine_z = { "location" },
-		},
+		sections = simple_sections,
 		filetypes = { "dapui_breakpoints" },
 	}
 
 	local dapui_stacks = {
-		sections = {
-			lualine_a = {},
-			lualine_b = { "filetype" },
-			lualine_c = {},
-			lualine_x = {},
-			lualine_y = {},
-			lualine_z = { "location" },
-		},
+		sections = simple_sections,
 		filetypes = { "dapui_stacks" },
 	}
 
 	local dapui_watches = {
-		sections = {
-			lualine_a = {},
-			lualine_b = { "filetype" },
-			lualine_c = {},
-			lualine_x = {},
-			lualine_y = {},
-			lualine_z = { "location" },
-		},
+		sections = simple_sections,
 		filetypes = { "dapui_watches" },
 	}
 
 	  -- Config
-	  local config = {
+	  local config1 = {
 		options = {
 		  -- Disable sections and component separators
+		  icons_enabled = true,
 		  component_separators = '',
 		  section_separators = {left = "", right = ""},
 		  theme = "catppuccin"
@@ -328,7 +414,16 @@ function config.lualine()
 		  -- these are to remove the defaults
 		  lualine_a = {'mode'},
 		  lualine_b = {},
-		  lualine_y = {"filetype", "encoding", "fileformat"},
+		  lualine_y = {{"filetype", "encoding",}, {"fileformat",
+		  icons_enabled = true,
+		  symbols = {
+			  unix = "LF",
+			  dos = "CRLF",
+			  mac = "CR",
+		  },
+		},
+	},
+
 		  lualine_z = { '%l:%c', '%p%%/%L'},
 		  -- These will be filled later
 		  lualine_c = {},
@@ -340,8 +435,8 @@ function config.lualine()
 		  lualine_b = {},
 		  lualine_y = {},
 		  lualine_z = {},
-		  lualine_c = {},
-		  lualine_x = {},
+		  lualine_c = { "filename" },
+		  lualine_x = { "location" },
 		},
 				extensions = {
 			  "quickfix",
@@ -359,39 +454,21 @@ function config.lualine()
 
 	  -- Inserts a component in lualine_c at left section
 	  local function ins_left(component)
-		table.insert(config.sections.lualine_c, component)
+		table.insert(config1.sections.lualine_c, component)
 	  end
 
 	  -- Inserts a component in lualine_x ot right section
 	  local function ins_right(component)
-		table.insert(config.sections.lualine_x, component)
+		table.insert(config1.sections.lualine_x, component)
 	  end
 
-
-	--   ins_left({
-	--     function()
-	--       return '▊'
-	--     end,
-	--     color = { fg = colors.blue }, -- Sets highlighting of component
-	--     padding = { left = 0, right = 1 }, -- We don't need space before this
-	--   })
-
-	--   ins_left({
-	--     -- mode component
-	--     function()
-	--       -- auto change color according to neovims mode
-	--       local mode_color = {
-	--         n = colors.red,
-	--         i = colors.green,
-	--         v = colors.blue,
-	--         ['
-
-	-- ins_left({
-	-- 	'filename',
-	-- 	cond = conditions.buffer_not_empty,
-	-- 	color = { fg = colors.green, gui = 'bold' },
-	-- 	-- color = { fg = colors.magenta, gui = 'bold' },
-	-- })
+	ins_left({
+		custom_fname,
+		-- cond = conditions.buffer_not_empty,
+		-- color = { fg = colors.green, gui = 'bold' },
+		-- {modified,color ={fg = colors.magenta, gui = 'bold'}},
+		-- color = { fg = colors.magenta, gui = 'bold' },
+	})
 	ins_left({
 		-- filesize component
 		'filesize',
@@ -414,21 +491,22 @@ function config.lualine()
 	ins_left({
 		'diagnostics',
 		sources = { 'nvim_diagnostic' },
-		symbols = { error = ' ', warn = ' ', info = '  ' },
+		symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
 		diagnostics_color = {
-		color_error = { fg = colors.red },
-		color_warn = { fg = colors.yellow },
-		color_info = { fg = colors.cyan },
+		color_error = { fg = '#e32636' },
+		warn = { fg = '#ffa500' },
+		info = { fg = '#ebdbb2' },
+		hint = {fg = colors.magenta}
 			},
 		})
 
 		  -- Insert mid section. You can make any number of sections in neovim :)
 		  -- for lualine it's any number greater then 2
-		  ins_left({
-			function()
-			  return '%='
-			end,
-		  })
+		--   ins_left({
+		-- 	function()
+		-- 	  return '%='
+		-- 	end,
+		--   })
 
 		  ins_left({
 			-- Lsp server name .
@@ -440,7 +518,7 @@ function config.lualine()
 				return msg
 			  end
 			  for _, client in ipairs(clients) do
-				local filetypes = client.config.filetypes
+				local filetypes = client.config1.filetypes
 				if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
 				  return client.name
 				end
@@ -457,7 +535,7 @@ function config.lualine()
 			color = { fg = colors.violet, gui = 'bold' },
 		  })
 
-		  ins_left({
+		  ins_right({
 			'diff',
 			-- Is it me or the symbol for modified us really weird
 			symbols = { added = ' ', modified = '柳 ', removed = ' ' },
@@ -469,18 +547,7 @@ function config.lualine()
 			cond = conditions.hide_in_width,
 		  })
 
-
-		--   ins_right({
-		--     function()
-		--       return '▊'
-		--     end,
-		--     color = { fg = colors.blue },
-		--     padding = { left = 1 },
-		--   })
-
-		  -- Now don't forget to initialize lualine
-		--   lualine.setup(config)
-		  require("lualine").setup(config)
+		  require("lualine").setup(config1)
 		end
 
 function config.nvim_gps()
@@ -518,7 +585,7 @@ function config.nvim_tree()
 		update_to_buf_dir = { enable = true, auto_open = true },
 		diagnostics = {
 			enable = false,
-			icons = { hint = "", info = "", warning = "", error = "" },
+			icons = { hint = "ﯦ", info = "", warning = "", error = "" },
 		},
 		update_focused_file = {
 			enable = true,

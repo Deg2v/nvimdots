@@ -3,6 +3,9 @@ local conf = require("modules.ui.config")
 
 ui["kyazdani42/nvim-web-devicons"] = { opt = false }
 ui["sainnhe/edge"] = { opt = false, config = conf.edge }
+ui["olimorris/onedarkpro.nvim"] = {opt = false, config = conf.onedarkpro }
+ui["navarasu/onedark.nvim"] = {opt = false, config = conf.onedark}
+ui["ChristianChiarulli/nvcode-color-schemes.vim"] = {opt = false, config = conf.nvcode_color_schemes}
 ui["rebelot/kanagawa.nvim"] = { opt = false, config = conf.kanagawa }
 ui["catppuccin/nvim"] = {
 	opt = false,

@@ -97,7 +97,7 @@ function config.trouble()
 		auto_preview = true, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
 		auto_fold = false, -- automatically fold a file trouble list at creation
 		signs = {
-			-- icons / text used for a diagnostic
+			-- icons / text used for a diagnostic  in the <leader>cd
 			error = "",
 			warning = "",
 			hint = "",

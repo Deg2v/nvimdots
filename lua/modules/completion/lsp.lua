@@ -12,6 +12,7 @@ local lsp_installer = require("nvim-lsp-installer")
 
 -- Override diagnostics symbol
 
+-- the linenum
 saga.init_lsp_saga({
 	error_sign = "",
 	warn_sign = "",
@@ -207,6 +208,13 @@ local enhance_server_opts = {
 			custom_attach(client)
 		end
 	end,
+	-- ["pylsp"] = function(opts)
+	-- 	-- Disable `tsserver`'s format
+	-- 	opts.on_attach = function(client)
+	-- 		client.resolved_capabilities.document_formatting = false
+	-- 		custom_attach(client)
+	-- 	end
+	-- end,
 	["dockerls"] = function(opts)
 		-- Disable `dockerls`'s format
 		opts.on_attach = function(client)
@@ -312,7 +320,7 @@ efmls.setup({
 	c = { formatter = clangfmt, linter = clangtidy },
 	cpp = { formatter = clangfmt, linter = clangtidy },
 	go = { formatter = goimports, linter = staticcheck },
-	python = { formatter = black },
+	-- python = { formatter = black },
 	vue = { formatter = prettier },
 	typescript = { formatter = prettier, linter = eslint },
 	javascript = { formatter = prettier, linter = eslint },
