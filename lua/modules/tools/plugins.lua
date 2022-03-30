@@ -55,5 +55,12 @@ tools["nathom/filetype.nvim"] = {
 	opt = false,
 	config = conf.filetype,
 }
+tools["folke/todo-comments.nvim"] = {
+	opt = false,
+	config = conf.todo_comments,
+	requires = {
+		{ "nvim-lua/plenary.nvim", opt = false },
+	},
+}
 
 return tools

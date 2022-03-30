@@ -336,6 +336,22 @@ function config.autopairs()
 	local cmp = require("cmp")
 	cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
 	cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = "racket"
+    pairs_map = {
+        ["'"] = "'",
+        ['"'] = '"',
+        ['('] = ')',
+        ['['] = ']',
+        ['{'] = '}',
+        ['`'] = '`',
+        -- python strings (working)
+        ["b'"] = "'",
+        ["f'"] = "'",
+        ["r'"] = "'",
+        -- python strings (error)
+        ['b"'] = '"',
+        ['f"'] = '"',
+        ['r"'] = '"',
+    }
 end
 
 function config.nvim_lsputils()
