@@ -28,6 +28,15 @@ function config.kanagawa()
 	})
 end
 
+function config.nord()
+	vim.g.nord_contrast = true
+	vim.g.nord_borders = false
+	vim.g.nord_cursorline_transparent = true
+	vim.g.nord_disable_background = false
+	vim.g.nord_enable_sidebar_background = true
+	vim.g.nord_italic = false
+end
+
 function config.onedarkpro()
 	require("onedarkpro").setup({
   -- Theme can be overwritten with 'onedark' or 'onelight' as a string
