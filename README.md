@@ -1,3 +1,8 @@
+# 0.Modified from [nvimdots](https://github.com/ayamir/nvimdots)
+
+my custom configuration is in branch **mycustom**
+
+------
 # Introduction
 
 ![Dashboard](https://raw.githubusercontent.com/ayamir/blog-imgs/main/dashboard.png)
