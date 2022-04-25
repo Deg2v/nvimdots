@@ -6,7 +6,6 @@ ui["shaunsingh/nord.nvim"] = { opt = false, config = conf.nord }
 ui["sainnhe/edge"] = { opt = false, config = conf.edge }
 ui["olimorris/onedarkpro.nvim"] = {opt = false, config = conf.onedarkpro }
 ui["navarasu/onedark.nvim"] = {opt = false, config = conf.onedark}
-ui["ChristianChiarulli/nvcode-color-schemes.vim"] = {opt = false, config = conf.nvcode_color_schemes}
 ui["rebelot/kanagawa.nvim"] = { opt = false, config = conf.kanagawa }
 ui["catppuccin/nvim"] = {
 	opt = false,
