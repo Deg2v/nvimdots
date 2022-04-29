@@ -133,6 +133,10 @@ local plug_map = {
 	-- Plugin Diffview
 	["n|<leader>D"] = map_cr("DiffviewOpen"):with_silent():with_noremap(),
 	["n|<leader><leader>D"] = map_cr("DiffviewClose"):with_silent():with_noremap(),
+	-- Plugin vim-illuminate
+	-- ["n|<A-j>"] = map_cr("lua require('illuminate').next_reference()"):with_noremap(),
+	-- ["n|<A-k>"] = map_cr("lua require('illuminate').next_reference()"):with_noremap()
+
 }
 
 bind.nvim_load_mapping(plug_map)

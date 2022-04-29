@@ -17,6 +17,7 @@ editor["RRethy/vim-illuminate"] = {
 			"Outline",
 			"toggleterm",
 		}
+	vim.cmd([[autocmd VimEnter * hi link illuminatedWord Underlined]])
 	end,
 }
 -- editor["terrortylor/nvim-comment"] = {
