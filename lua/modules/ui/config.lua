@@ -408,9 +408,16 @@ function config.lualine()
 		options = {
 		  -- Disable sections and component separators
 		  icons_enabled = true,
-		  component_separators = '',
-		  section_separators = {left = "", right = ""},
-		  theme = "catppuccin"
+		  -- component_separators = '',
+		  component_separators = { left = '', right = ''},
+		  -- section_separators = {left = "", right = ""},
+		  -- section_separators = {left = "▊", right = "▊"},
+		  section_separators = { left = '', right = ''},
+		  -- section_separators = {left = "▊", right = "▊"},
+
+		  -- theme = "catppuccin"
+		  theme = "onedarkpro"
+
 		--   theme = {
 		--     -- We are going to use lualine_c an lualine_x as left and
 		--     -- right section. Both are highlighted by c theme .  So we
@@ -427,9 +434,12 @@ function config.lualine()
 		  lualine_y = {{"filetype", "encoding",}, {"fileformat",
 		  icons_enabled = true,
 		  symbols = {
-			  unix = "LF",
-			  dos = "CRLF",
-			  mac = "CR",
+			  unix = '', -- e712
+			  dos = '',  -- e70f
+			  mac = '',  -- e711
+			  -- unix = "LF",
+			  -- dos = "CRLF",
+			  -- mac = "CR",
 		  },
 		},
 	},
