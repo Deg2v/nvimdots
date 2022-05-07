@@ -79,21 +79,14 @@ editor["romainl/vim-cool"] = {
 editor["phaazon/hop.nvim"] = {
 	opt = true,
 	branch = "v1",
-	cmd = {
-		"HopLine",
-		"HopLineStart",
-		"HopWord",
-		"HopPattern",
-		"HopChar1",
-		"HopChar2",
-	},
+	event = "BufReadPost",
 	config = function()
 		require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
 	end,
 }
 editor["karb94/neoscroll.nvim"] = {
 	opt = true,
-	event = "WinScrolled",
+	event = "BufReadPost",
 	config = conf.neoscroll,
 }
 editor["vimlab/split-term.vim"] = { opt = true, cmd = { "Term", "VTerm" } }
