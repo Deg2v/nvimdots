@@ -325,22 +325,22 @@ function config.lualine()
 	local default_status_colors = { saved = '#98be65', modified = '#C70039' }
 
 	function custom_fname:init(options)
-	  custom_fname.super.init(self, options)
-	  self.status_colors = {
+		custom_fname.super.init(self, options)
+		self.status_colors = {
 		saved = highlight.create_component_highlight_group(
-		  {fg = default_status_colors.saved}, 'filename_status_saved', self.options),
+			{fg = default_status_colors.saved}, 'filename_status_saved', self.options),
 		modified = highlight.create_component_highlight_group(
-		  {fg = default_status_colors.modified}, 'filename_status_modified', self.options),
-	  }
-	  if self.options.color == nil then self.options.color = '' end
+			{fg = default_status_colors.modified}, 'filename_status_modified', self.options),
+		}
+		if self.options.color == nil then self.options.color = '' end
 	end
 
 	function custom_fname:update_status()
-	  local data = custom_fname.super.update_status(self)
-	  data = highlight.component_format_highlight(vim.bo.modified
+		local data = custom_fname.super.update_status(self)
+	  		data = highlight.component_format_highlight(vim.bo.modified
 												  and self.status_colors.modified
 												  or self.status_colors.saved) .. data
-	  return data
+		return data
 	end
 
 	-- require'lualine'.setup {
@@ -403,7 +403,7 @@ function config.lualine()
 		filetypes = { "dapui_watches" },
 	}
 
-	  -- Config
+	-- Config
 	local function python_venv()
 		local function env_cleanup(venv)
 			if string.find(venv, "/") then
@@ -429,94 +429,87 @@ function config.lualine()
 		return ""
 	end
 
-	  local config1 = {
+	local config1 = {
 		options = {
-		  -- Disable sections and component separators
-		  icons_enabled = true,
-		  -- component_separators = '',
-		  component_separators = { left = '', right = ''},
-		  -- section_separators = {left = "", right = ""},
-		  -- section_separators = {left = "▊", right = "▊"},
-		  section_separators = { left = '', right = ''},
-		  -- section_separators = {left = "▊", right = "▊"},
+			-- Disable sections and component separators
+			icons_enabled = true,
+			-- component_separators = '',
+			component_separators = { left = '', right = ''},
+			-- section_separators = {left = "", right = ""},
+			-- section_separators = {left = "▊", right = "▊"},
+			section_separators = { left = '', right = ''},
+			-- section_separators = {left = "▊", right = "▊"},
 
-		  -- theme = "catppuccin"
-		  theme = "onedarkpro"
+			-- theme = "catppuccin"
+			theme = "onedarkpro"
 
-		--   theme = {
-		--     -- We are going to use lualine_c an lualine_x as left and
-		--     -- right section. Both are highlighted by c theme .  So we
-		--     -- are just setting default looks o statusline
-		--     normal = { c = { fg = colors.fg, bg = colors.bg } },
-		--     inactive = { c = { fg = colors.fg, bg = colors.bg } },
-		--   },
+			--   theme = {
+			--     -- We are going to use lualine_c an lualine_x as left and
+			--     -- right section. Both are highlighted by c theme .  So we
+			--     -- are just setting default looks o statusline
+			--     normal = { c = { fg = colors.fg, bg = colors.bg } },
+			--     inactive = { c = { fg = colors.fg, bg = colors.bg } },
+			--   },
 		},
 
+		-- these are to remove the defaults
 		sections = {
-		  -- these are to remove the defaults
-		  lualine_a = {'mode'},
-		  lualine_b = {},
+			lualine_a = {'mode'},
+			lualine_b = {},
 			lualine_y = {
-				{ "filetype", colored = true, icon_only = true },
 				{ python_venv },
+				{ "filetype", colored = true, icon_only = true },
 				{ "encoding" },
 				{
 					"fileformat",
 					icons_enabled = true,
 					symbols = {
-						unix = "LF",
-						dos = "CRLF",
-						mac = "CR",
+						unix = '', -- e712
+						dos = '',  -- e70f
+						mac = '',  -- e711
+						-- unix = "LF",
+						-- dos = "CRLF",
+						-- mac = "CR",
 					},
 				},
 			},
-		  icons_enabled = true,
-		  symbols = {
-			  unix = '', -- e712
-			  dos = '',  -- e70f
-			  mac = '',  -- e711
-			  -- unix = "LF",
-			  -- dos = "CRLF",
-			  -- mac = "CR",
-		  },
-
-		  lualine_z = { '%l:%c', '%p%%/%L'},
-		  -- These will be filled later
-		  lualine_c = {},
-		  lualine_x = {},
+			lualine_z = { '%l:%c', '%p%%/%L'},
+			-- These will be filled later
+			lualine_c = {},
+			lualine_x = {},
 		},
 		inactive_sections = {
-		  -- these are to remove the defaults
-		  lualine_a = {},
-		  lualine_b = {},
-		  lualine_y = {},
-		  lualine_z = {},
-		  lualine_c = { "filename" },
-		  lualine_x = { "location" },
+			-- these are to remove the defaults
+			lualine_a = {},
+			lualine_b = {},
+			lualine_y = {},
+			lualine_z = {},
+			lualine_c = { "filename" },
+			lualine_x = { "location" },
 		},
-				extensions = {
-			  "quickfix",
-			  "nvim-tree",
-			  "toggleterm",
-			  "fugitive",
-			  minimap,
+		extensions = {
+			"quickfix",
+			"nvim-tree",
+			"toggleterm",
+			"fugitive",
+			minimap,
 			aerial,
-  			dapui_scopes,
+			dapui_scopes,
 			dapui_breakpoints,
 			dapui_stacks,
 			dapui_watches,
-		  },
-	  }
+		},
+	}
 
-	  -- Inserts a component in lualine_c at left section
-	  local function ins_left(component)
+	-- Inserts a component in lualine_c at left section
+	local function ins_left(component)
 		table.insert(config1.sections.lualine_c, component)
-	  end
+	end
 
-	  -- Inserts a component in lualine_x ot right section
-	  local function ins_right(component)
+	-- Inserts a component in lualine_x ot right section
+	local function ins_right(component)
 		table.insert(config1.sections.lualine_x, component)
-	  end
+	end
 
 	ins_left({
 		custom_fname,
@@ -530,13 +523,13 @@ function config.lualine()
 		'filesize',
 		cond = conditions.buffer_not_empty,
 		color = { fg = colors.cyan, gui = 'bold' },
-		})
+	})
 
-		ins_left({
-			-- "lsp_progress",
-			gps_content, cond = gps.is_available,
-			color = { fg = colors.magenta, gui = 'bold' }
-		})
+	ins_left({
+		-- "lsp_progress",
+		gps_content, cond = gps.is_available,
+		color = { fg = colors.magenta, gui = 'bold' }
+	})
 
 		--   ins_left({ '%l:%c  %p%%/%L',
 		--   color = { fg = colors.magenta, gui = 'bold' },
@@ -554,57 +547,57 @@ function config.lualine()
 		info = { fg = '#ebdbb2' },
 		hint = {fg = colors.magenta}
 			},
-		})
+	})
 
-		  -- Insert mid section. You can make any number of sections in neovim :)
-		  -- for lualine it's any number greater then 2
+		-- Insert mid section. You can make any number of sections in neovim :)
+		-- for lualine it's any number greater then 2
 		--   ins_left({
 		-- 	function()
 		-- 	  return '%='
 		-- 	end,
 		--   })
 
-		  ins_left({
-			-- Lsp server name .
-			function()
-			  local msg = 'No Active Lsp'
-			  local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-			  local clients = vim.lsp.get_active_clients()
-			  if next(clients) == nil then
-				return msg
-			  end
-			  for _, client in ipairs(clients) do
-				local filetypes = client.config1.filetypes
-				if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-				  return client.name
-				end
-			  end
-			  return msg
-			end,
-			icon = ' LSP:',
-			color = { fg = '#ff8800', gui = 'bold' },
-		  })
+	ins_left({
+	-- Lsp server name .
+		function()
+			local msg = 'No Active Lsp'
+			local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+			local clients = vim.lsp.get_active_clients()
+			if next(clients) == nil then
+			return msg
+			end
+			for _, client in ipairs(clients) do
+			local filetypes = client.config1.filetypes
+			if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+				return client.name
+			end
+			end
+			return msg
+		end,
+		icon = ' LSP:',
+		color = { fg = '#ff8800', gui = 'bold' },
+	})
 
-		  ins_right({
-			'branch',
-			icon = '',
-			color = { fg = colors.violet, gui = 'bold' },
-		  })
+	ins_right({
+	'branch',
+	icon = '',
+	color = { fg = colors.violet, gui = 'bold' },
+	})
 
-		  ins_right({
-			'diff',
-			-- Is it me or the symbol for modified us really weird
-			symbols = { added = ' ', modified = '柳 ', removed = ' ' },
-			diff_color = {
-			  added = { fg = colors.red },
-			  modified = { fg = colors.orange },
-			  removed = { fg = colors.magenta },
-			},
-			cond = conditions.hide_in_width,
-		  })
+	ins_right({
+	'diff',
+	-- Is it me or the symbol for modified us really weird
+	symbols = { added = ' ', modified = '柳 ', removed = ' ' },
+	diff_color = {
+		added = { fg = colors.red },
+		modified = { fg = colors.orange },
+		removed = { fg = colors.magenta },
+	},
+	cond = conditions.hide_in_width,
+	})
 
-		  require("lualine").setup(config1)
-		end
+	require("lualine").setup(config1)
+end
 
 function config.nvim_gps()
 	require("nvim-gps").setup({
