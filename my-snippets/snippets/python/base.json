@@ -38,5 +38,15 @@
 			"import matplotlib.pyplot as plt"
 		],
 		"description": "numpy matplotlib"
+	},
+	"plot3": {
+		"prefix": "snlogg",
+		"body": [
+			"import logging",
+			"file_handler.setFormatter(formatter)",
+			"logger.addHandler(file_handler)",
+			"fjslkdfj"
+		],
+		"description": "logfhdsjfger"
 	}
 }

@@ -1,0 +1,28 @@
+{
+	"plot2": {
+		"prefix": "plott2",
+		"body": [
+			"import numpy as np",
+			"import matplotlib.pyplot as plt"
+		],
+		"description": "numpy matplotlib"
+	},
+	"logging": {
+		"prefix": "sn_logg",
+		"body": [
+			"import logging",
+			"ch = logging.StreamHandler()",
+			"formatter = logging.Formatter('%(asctime)s [%(name)s] %(levelname)s: %(message)s')",
+			"ch.setFormatter(formatter)",
+			"logger = logging.getLogger('--hzf--')",
+			"# if not logger.handlers:   # 解决重复输出",
+			"logger.setLevel(logging.DEBUG)",
+			"logger.addHandler(ch)",
+			"file_handler = logging.FileHandler(filename='checkerboard.log')",
+			"file_handler.setLevel(logging.DEBUG)",
+			"file_handler.setFormatter(formatter)",
+			"logger.addHandler(file_handler)\n"
+		],
+		"description": "logger"
+	}
+}
