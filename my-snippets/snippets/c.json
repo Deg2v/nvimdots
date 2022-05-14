@@ -1,8 +1,8 @@
 {
-	"while333": {
-		"prefix": "whileif",
+	"fori": {
+		"prefix": "fori",
 		"body": [
-			"while ($1) {",
+			"for (${1:int} ${2:i} = ${3:0}; $2 < ${4:length}; ++$2) {",
 			"\t$0",
 			"}"
 		],
@@ -17,26 +17,5 @@
 		"prefix": "gogggg",
 		"body": "go func($1) {\n\t$0\n}($2)",
 		"description": "Snippet for anonymous goroutine declaration"
-	},
-	"goroutine function": {
-		"prefix": "gf",
-		"body": "go ${1:func}($0)",
-		"description": "Snippet for goroutine declaration"
-	},
-	"plot": {
-		"prefix": "plott",
-		"body": [
-			"import numpy as np",
-			"import matplotlib.pyplot as plt"
-		],
-		"description": "numpy matplotlib"
-	},
-	"plot2": {
-		"prefix": "plott2",
-		"body": [
-			"import numpy as np",
-			"import matplotlib.pyplot as plt"
-		],
-		"description": "numpy matplotlib"
 	}
 }
