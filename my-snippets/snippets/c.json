@@ -1,26 +1,11 @@
 {
-	"while333": {
-		"prefix": "whileif",
+	"fori": {
+		"prefix": "fori",
 		"body": [
-			"while ($1) {",
+			"for (${1:int} ${2:i} = ${3:0}; $2 < ${4:length}; ++$2) {",
 			"\t$0",
 			"}"
 		],
-		"description": ""
-	},
-	"goroutine anonymous function": {
-		"prefix": "go",
-		"body": "go func($1) {\n\t$0\n}($2)",
-		"description": "Snippet for anonymous goroutine declaration"
-	},
-	"gous function": {
-		"prefix": "gogggg",
-		"body": "go func($1) {\n\t$0\n}($2)",
-		"description": "Snippet for anonymous goroutine declaration"
-	},
-	"goroutine function": {
-		"prefix": "gf",
-		"body": "go ${1:func}($0)",
-		"description": "Snippet for goroutine declaration"
+		"description": "Code snippet for 'fori' loop"
 	}
 }
