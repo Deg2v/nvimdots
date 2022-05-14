@@ -16,6 +16,7 @@ local conf = require("modules.lang.config")
 -- }
 lang["nvim-orgmode/orgmode"] = {
     opt = true,
+	after = "nvim-treesitter",
     ft = "org",
     config = conf.lang_org
 }
