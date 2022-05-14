@@ -14,11 +14,11 @@ local conf = require("modules.lang.config")
 -- 	config = conf.rust_tools,
 -- 	requires = { { "nvim-lua/plenary.nvim", opt = false } },
 -- }
--- lang["kristijanhusak/orgmode.nvim"] = {
---     opt = true,
---     ft = "org",
---     config = conf.lang_org
--- }
+lang["nvim-orgmode/orgmode"] = {
+    opt = true,
+    ft = "org",
+    config = conf.lang_org
+}
 lang["iamcco/markdown-preview.nvim"] = {
 	opt = true,
 	ft = "markdown",

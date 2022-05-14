@@ -78,11 +78,12 @@ function config.lang_go()
 	vim.g.go_def_mapping_enabled = false
 end
 
--- function config.lang_org()
---     require("orgmode").setup({
---         org_agenda_files = {"~/Sync/org/*"},
---         org_default_notes_file = "~/Sync/org/refile.org"
---     })
--- end
+function config.lang_org()
+	require('orgmode').setup_ts_grammar()
+    require("orgmode").setup({
+        org_agenda_files = {"~/Sync/org/*"},
+        org_default_notes_file = "~/Sync/org/refile.org"
+    })
+end
 
 return config
