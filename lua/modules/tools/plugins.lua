@@ -1,7 +1,6 @@
 local tools = {}
 local conf = require("modules.tools.config")
 
-tools["RishabhRD/popfix"] = { opt = false }
 tools["nvim-lua/plenary.nvim"] = { opt = false }
 tools["nvim-telescope/telescope.nvim"] = {
 	opt = true,
@@ -35,7 +34,7 @@ tools["michaelb/sniprun"] = {
 }
 tools["folke/which-key.nvim"] = {
 	opt = true,
-	keys = ",",
+	keys = "\\",
 	config = conf.which_key,
 }
 tools["folke/trouble.nvim"] = {
