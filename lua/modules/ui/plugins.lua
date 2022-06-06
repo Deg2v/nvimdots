@@ -10,6 +10,7 @@ ui["rebelot/kanagawa.nvim"] = { opt = false, config = conf.kanagawa }
 ui["catppuccin/nvim"] = {
 	opt = false,
 	as = "catppuccin",
+	commit = "f079dda3dc23450d69b4bad11bfbd9af2c77f6f3",
 	config = conf.catppuccin,
 }
 ui["rcarriga/nvim-notify"] = {
@@ -18,7 +19,7 @@ ui["rcarriga/nvim-notify"] = {
 }
 ui["hoob3rt/lualine.nvim"] = {
 	opt = true,
-	after = "lualine-lsp-progress",
+	after = "nvim-gps",
 	config = conf.lualine,
 }
 ui["SmiteshP/nvim-gps"] = {
@@ -26,7 +27,6 @@ ui["SmiteshP/nvim-gps"] = {
 	after = "nvim-treesitter",
 	config = conf.nvim_gps,
 }
-ui["arkav/lualine-lsp-progress"] = { opt = true, after = "nvim-gps" }
 ui["goolord/alpha-nvim"] = {
 	opt = true,
 	event = "BufWinEnter",
@@ -64,6 +64,13 @@ ui["dstein64/nvim-scrollview"] = {
 ui["mbbill/undotree"] = {
 	opt = true,
 	cmd = "UndotreeToggle",
+}
+ui["j-hui/fidget.nvim"] = {
+	opt = true,
+	event = "BufRead",
+	config = function()
+		require("fidget").setup({})
+	end,
 }
 
 return ui
