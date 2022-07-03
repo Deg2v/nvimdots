@@ -15,7 +15,6 @@ function config.nvim_treesitter()
 			"gomod",
 			"json",
 			"yaml",
-			"latex",
 			"make",
 			"python",
 			"rust",
@@ -25,7 +24,7 @@ function config.nvim_treesitter()
 			"vue",
 			"css",
 		},
-		highlight = { enable = true, disable = { "vim" } },
+		highlight = { enable = true, disable = { "vim", "latex" } },
 		textobjects = {
 			select = {
 				enable = true,
@@ -93,6 +92,20 @@ function config.nvim_colorizer()
 	require("colorizer").setup()
 end
 
+function config.comment()
+	require("Comment").setup({
+
+		---Add a space b/w comment and the line
+		---@type boolean|fun():boolean
+		padding = true,
+
+		---Whether the cursor should stay at its position
+		---NOTE: This only affects NORMAL mode mappings and doesn't work with dot-repeat
+		---@type boolean
+		sticky = true,
+		ignore = "^$",
+	})
+end
 function config.neoscroll()
 	require("neoscroll").setup({
 		-- All these keys will be mapped to their corresponding default scrolling animation

@@ -222,6 +222,7 @@ require("todo-comments").setup {
         alt = { "FIXME", "BUG", "FIXIT", "ISSUE","ERROR" }, -- a set of other keywords that all map to this FIX keywords
         -- signs = false, -- configure signs for some keywords individually
       },
+      EXPLA = {icon = "", color = "explanation", alt = {"explain","DESC"}},
       CRITICAL ={icon = " ",color = "critical"},
       TODO = { icon = " ", color = "info" },
       HACK = { icon = " ", color = "warning" },
@@ -235,23 +236,24 @@ require("todo-comments").setup {
     -- * keyword: highlights of the keyword
     -- * after: highlights after the keyword (todo text)
     highlight = {
-      before = "", -- "fg" or "bg" or empty
-      keyword = "wide", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
-      after = "fg", -- "fg" or "bg" or empty
-      pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlightng (vim regex)
-      comments_only = true, -- uses treesitter to match keywords in comments only
-      max_line_len = 400, -- ignore lines longer than this
-      exclude = {}, -- list of file types to exclude highlighting
+        before = "", -- "fg" or "bg" or empty
+        keyword = "wide", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
+        after = "fg", -- "fg" or "bg" or empty
+        pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlightng (vim regex)
+        comments_only = true, -- uses treesitter to match keywords in comments only
+        max_line_len = 400, -- ignore lines longer than this
+        exclude = {}, -- list of file types to exclude highlighting
     },
     -- list of named colors where we try to extract the guifg from the
     -- list of hilight groups or use the hex color if hl not found as a fallback
     colors = {
-    critical = {"#FF0000"},
-      error = { "#DC2626" },
-      warning = { "#FBBF24" },
-      info = { "#2563EB" },
-      hint = { "#10B981" },
-      default = { "#7C3AED" },
+        explanation={"#ABDC78"},
+        critical = {"#FF0000"},
+        error = { "#DC2626" },
+        warning = { "#FBBF24" },
+        info = { "#2563EB" },
+        hint = { "#10B981" },
+        default = { "#7C3AED" },
     },
     search = {
       command = "rg",

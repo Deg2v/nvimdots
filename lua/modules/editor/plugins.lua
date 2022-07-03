@@ -17,7 +17,7 @@ editor["RRethy/vim-illuminate"] = {
 			"Outline",
 			"toggleterm",
 		}
-	vim.cmd([[autocmd VimEnter * hi link illuminatedWord Underlined]])
+		vim.cmd([[autocmd VimEnter * hi link illuminatedWord Underlined]])
 	end,
 }
 -- editor["terrortylor/nvim-comment"] = {
@@ -32,11 +32,7 @@ editor["RRethy/vim-illuminate"] = {
 -- }
 editor["numToStr/Comment.nvim"] = {
 	opt = false,
-	config = function ()
-		require("Comment").setup({
-			ignore = '^$'
-		})
-	end
+	config = conf.comment,
 }
 editor["nvim-treesitter/nvim-treesitter"] = {
 	opt = true,

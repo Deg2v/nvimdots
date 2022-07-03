@@ -4,8 +4,8 @@ local conf = require("modules.ui.config")
 ui["kyazdani42/nvim-web-devicons"] = { opt = false }
 ui["shaunsingh/nord.nvim"] = { opt = false, config = conf.nord }
 ui["sainnhe/edge"] = { opt = false, config = conf.edge }
-ui["olimorris/onedarkpro.nvim"] = {opt = false, config = conf.onedarkpro }
-ui["navarasu/onedark.nvim"] = {opt = false, config = conf.onedark}
+ui["olimorris/onedarkpro.nvim"] = { opt = false, config = conf.onedarkpro }
+ui["navarasu/onedark.nvim"] = { opt = false, config = conf.onedark }
 -- ui["rebelot/kanagawa.nvim"] = { opt = false, config = conf.kanagawa }
 ui["catppuccin/nvim"] = {
 	opt = false,
@@ -72,5 +72,4 @@ ui["j-hui/fidget.nvim"] = {
 		require("fidget").setup({})
 	end,
 }
-
 return ui
