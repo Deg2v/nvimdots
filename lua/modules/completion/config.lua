@@ -171,6 +171,18 @@ function config.cmp()
 			-- { name = "cmp_tabnine" },
 		},
 	})
+	cmp.setup.cmdline("/", {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = { { name = "buffer" } },
+	})
+	cmp.setup.cmdline("?", {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = { { name = "buffer" } },
+	})
+	cmp.setup.cmdline(":", {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } }),
+	})
 end
 
 function config.luasnip()
@@ -217,22 +229,22 @@ function config.autopairs()
 			},
 		})
 	)
-    pairs_map = {
-        ["'"] = "'",
-        ['"'] = '"',
-        ['('] = ')',
-        ['['] = ']',
-        ['{'] = '}',
-        ['`'] = '`',
-        -- python strings (working)
-        ["b'"] = "'",
-        ["f'"] = "'",
-        ["r'"] = "'",
-        -- python strings (error)
-        ['b"'] = '"',
-        ['f"'] = '"',
-        ['r"'] = '"',
-    }
+	pairs_map = {
+		["'"] = "'",
+		['"'] = '"',
+		["("] = ")",
+		["["] = "]",
+		["{"] = "}",
+		["`"] = "`",
+		-- python strings (working)
+		["b'"] = "'",
+		["f'"] = "'",
+		["r'"] = "'",
+		-- python strings (error)
+		['b"'] = '"',
+		['f"'] = '"',
+		['r"'] = '"',
+	}
 end
 
 function config.bqf()

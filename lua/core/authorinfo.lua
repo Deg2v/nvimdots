@@ -76,7 +76,7 @@ local function addtitle()
 		"Email     : " .. email,
 		"Version   : 0.0",
 		"LastChange: " .. time,
-		"History   : ",
+		"History   : Created",
 		"=============================================================================",
 	}
 
@@ -136,6 +136,7 @@ local function addtitle()
 		else
 			require("Comment.opfunc").count(commentlength, Config, 2) -- block eg   /*  */
 		end
+		vim.api.nvim_win_set_cursor(0, { shebangnum + 3, 16 })
 		-- for key, val in pairs(lines2) do
 		-- 	vim.api.nvim_win_set_cursor(0, { key + shebangnum, 1 })
 		-- 	require("Comment.api").toggle_current_linewise(Config)

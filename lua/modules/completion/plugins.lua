@@ -35,7 +35,7 @@ completion["kosayoda/nvim-lightbulb"] = {
 completion["ray-x/lsp_signature.nvim"] = { opt = true, after = "nvim-lspconfig" }
 completion["hrsh7th/nvim-cmp"] = {
 	config = conf.cmp,
-	event = "InsertEnter",
+	event = { "InsertEnter", "CmdlineEnter" },
 	requires = {
 		{ "lukas-reineke/cmp-under-comparator" },
 		{ "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },
@@ -46,6 +46,7 @@ completion["hrsh7th/nvim-cmp"] = {
 		{ "f3fora/cmp-spell", after = "cmp-path" },
 		{ "hrsh7th/cmp-buffer", after = "cmp-spell" },
 		{ "kdheepak/cmp-latex-symbols", after = "cmp-buffer" },
+		{ "hrsh7th/cmp-cmdline", after = "cmp-buffer" },
 		-- {
 		-- 	"tzachar/cmp-tabnine",
 		-- 	run = "./install.sh",
