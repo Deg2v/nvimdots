@@ -3,21 +3,8 @@ local conf = require("modules.editor.config")
 
 editor["junegunn/vim-easy-align"] = { opt = true, cmd = "EasyAlign" }
 editor["RRethy/vim-illuminate"] = {
-	event = "BufRead",
-	config = function()
-		vim.g.Illuminate_highlightUnderCursor = 0
-		vim.g.Illuminate_ftblacklist = {
-			"help",
-			"dashboard",
-			"alpha",
-			"packer",
-			"norg",
-			"DoomInfo",
-			"NvimTree",
-			"Outline",
-			"toggleterm",
-		}
-	end,
+	event = "BufReadPost",
+	config = conf.illuminate,
 }
 -- editor["terrortylor/nvim-comment"] = {
 -- 	opt = false,
@@ -31,16 +18,16 @@ editor["RRethy/vim-illuminate"] = {
 -- }
 editor["numToStr/Comment.nvim"] = {
 	opt = false,
-	config = function ()
+	config = function()
 		require("Comment").setup({
-			ignore = '^$'
+			ignore = "^$",
 		})
-	end
+	end,
 }
 editor["nvim-treesitter/nvim-treesitter"] = {
 	opt = true,
 	run = ":TSUpdate",
-	event = "BufRead",
+	event = "BufReadPost",
 	config = conf.nvim_treesitter,
 }
 editor["nvim-treesitter/nvim-treesitter-textobjects"] = {
@@ -50,7 +37,7 @@ editor["nvim-treesitter/nvim-treesitter-textobjects"] = {
 editor["p00f/nvim-ts-rainbow"] = {
 	opt = true,
 	after = "nvim-treesitter",
-	event = "BufRead",
+	event = "BufReadPost",
 }
 editor["JoosepAlviste/nvim-ts-context-commentstring"] = {
 	opt = true,
@@ -80,9 +67,7 @@ editor["phaazon/hop.nvim"] = {
 	opt = true,
 	branch = "v1",
 	event = "BufReadPost",
-	config = function()
-		require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
-	end,
+	config = conf.hop,
 }
 editor["karb94/neoscroll.nvim"] = {
 	opt = true,
@@ -92,13 +77,13 @@ editor["karb94/neoscroll.nvim"] = {
 editor["vimlab/split-term.vim"] = { opt = true, cmd = { "Term", "VTerm" } }
 editor["akinsho/toggleterm.nvim"] = {
 	opt = true,
-	event = "BufRead",
+	event = "BufReadPost",
 	config = conf.toggleterm,
 }
-editor["numtostr/FTerm.nvim"] = { opt = true, event = "BufRead" }
+editor["numtostr/FTerm.nvim"] = { opt = true, event = "BufReadPost" }
 editor["norcalli/nvim-colorizer.lua"] = {
 	opt = true,
-	event = "BufRead",
+	event = "BufReadPost",
 	config = conf.nvim_colorizer,
 }
 editor["rmagatti/auto-session"] = {
@@ -106,7 +91,11 @@ editor["rmagatti/auto-session"] = {
 	cmd = { "SaveSession", "RestoreSession", "DeleteSession" },
 	config = conf.auto_session,
 }
-editor["jdhao/better-escape.vim"] = { opt = true, event = "InsertEnter" }
+editor["max397574/better-escape.nvim"] = {
+	opt = true,
+	event = "BufReadPost",
+	config = conf.better_escape,
+}
 editor["rcarriga/nvim-dap-ui"] = {
 	opt = false,
 	config = conf.dapui,
@@ -146,6 +135,10 @@ editor["brglng/vim-im-select"] = {
 	opt = true,
 	event = "BufReadPost",
 	config = conf.imselect,
+}
+editor["luukvbaal/stabilize.nvim"] = {
+	opt = true,
+	event = "BufReadPost",
 }
 
 return editor
