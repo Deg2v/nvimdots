@@ -44,6 +44,11 @@ local plug_map = {
 	["n|gh"] = map_cr("lua vim.lsp.buf.references()"):with_noremap():with_silent(),
 	["n|<A-d>"] = map_cu('lua require("FTerm").toggle()'):with_noremap():with_silent(),
 	["t|<A-d>"] = map_cu([[<C-\><C-n><CMD>lua require("FTerm").toggle()]]):with_noremap():with_silent(),
+	["n|<A-s>"] = map_cu("Lspsaga open_floaterm"):with_noremap():with_silent(),
+	["t|<A-s>"] = map_cu([[<C-\><C-n>:Lspsaga close_floaterm<CR>]]):with_noremap():with_silent(),
+	-- tmap({ '<A-d>', [[<C-\><C-n>:Lspsaga close_floaterm<CR>]], opts(noremap, silent) })
+
+	-- { '<A-d>', cmd('Lspsaga open_floaterm'), opts(noremap, silent) },
 	["t|<A-S-d>"] = map_cu([[<C-\><C-n><CMD>lua require("FTerm").exit()]]):with_noremap():with_silent(),
 	["n|<Leader>g"] = map_cu("lua require('FTerm').run('gitui')"):with_noremap():with_silent(),
 	["n|<Leader>G"] = map_cu("Git"):with_noremap():with_silent(),
@@ -93,8 +98,8 @@ local plug_map = {
 	["n|ga"] = map_cmd("v:lua.enhance_align('nga')"):with_expr(),
 	["x|ga"] = map_cmd("v:lua.enhance_align('xga')"):with_expr(),
 	-- Plugin split-term
-	["n|<F5>"] = map_cr("VTerm"):with_noremap():with_silent(),
-	["n|<C-w>t"] = map_cr("VTerm"):with_noremap():with_silent(),
+	-- ["n|<F5>"] = map_cr("VTerm"):with_noremap():with_silent(),
+	-- ["n|<C-w>t"] = map_cr("VTerm"):with_noremap():with_silent(),
 	-- Plugin MarkdownPreview
 	["n|<F12>"] = map_cr("MarkdownPreviewToggle"):with_noremap():with_silent(),
 	-- Plugin auto_session
@@ -132,7 +137,6 @@ local plug_map = {
 	-- Plugin vim-illuminate
 	-- ["n|<A-j>"] = map_cr("lua require('illuminate').next_reference()"):with_noremap(),
 	-- ["n|<A-k>"] = map_cr("lua require('illuminate').next_reference()"):with_noremap()
-
 }
 
 bind.nvim_load_mapping(plug_map)

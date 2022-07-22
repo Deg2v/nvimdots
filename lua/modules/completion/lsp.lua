@@ -14,18 +14,41 @@ local lsp_installer = require("nvim-lsp-installer")
 -- Override diagnostics symbol
 
 -- the linenum
-saga.init_lsp_saga({
-	error_sign = "",
-	warn_sign = "",
-	hint_sign = "",
-	infor_sign = "",
-})
+-- saga.init_lsp_saga({
+-- 	error_sign = "",
+-- 	warn_sign = "",
+-- 	hint_sign = "",
+-- 	infor_sign = "",
+-- })
 
 lsp_installer.setup({})
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
+vim.cmd("command! -nargs=0 LspLog call v:lua.open_lsp_log()")
+vim.cmd("command! -nargs=0 LspRestart call v:lua.reload_lsp()")
+
+local signs = {
+	Error = " ",
+	Warn = " ",
+	Info = " ",
+	Hint = "ﴞ ",
+}
+-- for type, icon in pairs(signs) do
+-- 	local hl = "DiagnosticSign" .. type
+-- 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+-- end
+
+vim.diagnostic.config({
+	signs = true,
+	update_in_insert = false,
+	underline = true,
+	severity_sort = true,
+	virtual_text = {
+		source = true,
+	},
+})
 local function custom_attach(client)
 	require("lsp_signature").on_attach({
 		bind = true,
@@ -264,7 +287,7 @@ efmls.setup({
 	lua = { formatter = luafmt },
 	c = { formatter = clangfmt, linter = clangtidy },
 	cpp = { formatter = clangfmt, linter = clangtidy },
-	-- python = { formatter = black },
+	python = { formatter = black },
 	vue = { formatter = prettier },
 	typescript = { formatter = prettier, linter = eslint },
 	javascript = { formatter = prettier, linter = eslint },

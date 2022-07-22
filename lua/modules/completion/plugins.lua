@@ -18,7 +18,7 @@ completion["kevinhwang91/nvim-bqf"] = {
 	ft = "qf",
 	config = conf.bqf,
 }
-completion["tami5/lspsaga.nvim"] = {
+completion["glepnir/lspsaga.nvim"] = {
 	opt = true,
 	after = "nvim-lspconfig",
 }
