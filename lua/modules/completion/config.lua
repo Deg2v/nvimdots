@@ -280,7 +280,7 @@ function config.mason_install()
 			"black",
 
 			"prettier",
-			"eslint",
+			"eslint-lsp",
 
 			"bash-language-server",
 			"shellcheck",
