@@ -18,6 +18,7 @@ ui["glepnir/galaxyline.nvim"] = {
 	branch = "main",
 	config = conf.galaxyline,
 	requires = "kyazdani42/nvim-web-devicons",
+	after = "nvim-gps",
 }
 ui["rcarriga/nvim-notify"] = {
 	opt = false,

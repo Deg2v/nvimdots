@@ -47,18 +47,151 @@
 -- return theme
 
 local status_ok, galaxyline = pcall(require, "galaxyline")
+local vim = vim
 if not status_ok then
 	return
 end
 
-local colors = require("galaxyline.theme").default
+local function buffer_is_readonly()
+	if vim.bo.filetype == "help" then
+		return false
+	end
+	return vim.bo.readonly
+end
+-- local colors = require("galaxyline.theme").default
 local condition = require("galaxyline.condition")
+local fileinfo = require("galaxyline.provider_fileinfo")
 local gls = galaxyline.section
 galaxyline.short_line_list = { "NvimTree", "vista", "dbui", "packer" }
 
+local colors = {
+	main = "#ff87ff",
+	bg_alt = "#0B0C15",
+	main_bg = "#262626",
+	lightbg = "#21252B",
+	commented = "#5c6370",
+	grey = "#3c4048",
+	line_bg = "#282c34",
+	creamydark = "#282c34",
+	purple = "#252930",
+	cyan = "#00FFFF",
+	nord = "#81A1C1",
+	lightblue = "#81a1c1",
+	darkblue = "#61afef",
+	blue = "#61afef",
+	limegreen = "#bbe67e",
+	--   green = '#98be65',
+	violet = "#a9a1e1",
+	green = "#7ed491",
+	fg_green = "#65a380",
+	creamygreen = "#a3be8c",
+	yellow = "#cccc00",
+	creamyorange = "#ff8800",
+	orange = "#FF8800",
+	bg = "#000B0C15",
+	fg = "#D8DEE9",
+	magenta = "#c678dd",
+	red = "#ec5f67",
+	-- red = "#df8890",
+	crimsonRed = "#990000",
+	crimsonRed2 = "#ff4d4d",
+	greenYel = "#EBCB8B",
+	white = "#d8dee9",
+	brown = "#91684a",
+	teal = "#23D4AC",
+	blue2 = "#5c5c81",
+	icon_inactive = "#9896AA",
+}
+
+----------------------------------- ==== function === -------------------------------------------------
+local checkwidth = function()
+	local squeeze_width = vim.fn.winwidth(0) / 2
+	if squeeze_width > 40 then
+		return true
+	end
+	return false
+end
+local function file_name(is_active, highlight_group)
+	local normal_fg = is_active and colors.green or colors.blue2
+	local modified_fg = is_active and "#ff0000" or "#cc8800"
+	if vim.bo.modifiable then
+		if vim.bo.modified then
+			vim.api.nvim_command("hi " .. highlight_group .. " guifg=" .. modified_fg .. " gui=bold")
+		else
+			vim.api.nvim_command("hi " .. highlight_group .. " guifg=" .. normal_fg .. " gui=NONE")
+		end
+	end
+
+	if buffer_is_readonly() then
+		vim.api.nvim_command("hi " .. highlight_group .. " guifg=" .. modified_fg .. " gui=bold")
+		-- file = readonly_icon .. ' ' ..file
+	end
+	local fname = fileinfo.get_current_file_name("", "")
+	-- local fname = fileinfo.get_current_file_name(icons.file.modified, icons.file.read_only)
+	-- if (require("galaxyline.condition").check_git_workspace()) and checkwidth() then
+	-- 	local git_dir = require("galaxyline.provider_vcs").get_git_dir(vim.fn.expand("%:p"))
+	-- 	local current_dir = vim.fn.expand("%:p:h")
+	-- 	if git_dir == current_dir .. "/.git" or git_dir == nil then
+	-- 		return fname
+	-- 	end
+	-- 	local get_path_from_git_root = current_dir:sub(#git_dir - 3)
+	-- 	return get_path_from_git_root .. "/" .. fname
+	-- end
+	return fname
+end
+
+local gps = require("nvim-gps")
+local function gps_content()
+	if gps.is_available() then
+		return gps.get_location()
+	else
+		return ""
+	end
+end
+
+local function python_venv()
+	local function env_cleanup(venv)
+		if string.find(venv, "/") then
+			local final_venv = venv
+			for w in venv:gmatch("([^/]+)") do
+				final_venv = w
+			end
+			venv = final_venv
+		end
+		return venv
+	end
+
+	if vim.bo.filetype == "python" then
+		local venv = os.getenv("CONDA_DEFAULT_ENV")
+		if venv then
+			return string.format("%s", env_cleanup(venv))
+		end
+		venv = os.getenv("VIRTUAL_ENV")
+		if venv then
+			return string.format("%s", env_cleanup(venv))
+		end
+	end
+	return ""
+end
+
+local function escape_status()
+	local ok, m = pcall(require, "better_escape")
+	return ok and m.waiting and " ✺ " or ""
+end
+----------------------------------- ==== left === -------------------------------------------------
 gls.left[1] = {
+	-- RainbowRed = {
+	-- 	provider = function()
+	-- 		return "█  " .. "  " .. os.date("%H:%M") .. " "
+	-- 	end,
+	-- 	-- highlight = { colors.background, colors.green },
+	-- 	highlight = { colors.blue, colors.bg },
+	-- 	separator = " ",
+	-- 	separator_highlight = { colors.lightBackground, colors.lightBackground },
+	-- },
 	RainbowRed = {
 		provider = function()
+			-- return " " .. "  " .. os.date("%H:%M")
 			return "█ "
 		end,
 		highlight = { colors.blue, colors.bg },
@@ -70,29 +203,80 @@ gls.left[2] = {
 		provider = function()
 			-- auto change color according the vim mode
 			local mode_color = {
-				["!"] = colors.red,
-				[""] = colors.blue,
-				[""] = colors.orange,
-				["r?"] = colors.cyan,
-				c = colors.magenta,
-				ce = colors.red,
-				cv = colors.red,
-				i = colors.green,
-				ic = colors.yellow,
+
 				n = colors.red,
 				no = colors.red,
-				r = colors.cyan,
-				R = colors.violet,
-				rm = colors.cyan,
-				Rv = colors.violet,
-				s = colors.orange,
-				S = colors.orange,
-				t = colors.red,
-				v = colors.blue,
-				V = colors.blue,
+				i = colors.green,
+				ic = colors.green,
+				c = colors.orange,
+				ce = colors.orange,
+				cv = colors.orange,
+				v = colors.lightblue,
+				V = colors.lightblue,
+				[""] = colors.brown,
+				R = colors.crimsonRed2,
+				["r?"] = colors.lightblue,
+				Rv = colors.crimsonRed2,
+				r = colors.blue2,
+				rm = colors.blue2,
+				s = colors.greenYelenYel,
+				S = colors.greenYelenYel,
+				[""] = colors.greenYelenYel,
+				t = colors.magenta,
+				["!"] = colors.crimsonRed,
+				-- ["!"] = colors.red,
+				-- [""] = colors.blue,
+				-- [""] = colors.orange,
+				-- ["r?"] = colors.cyan,
+				-- c = colors.magenta,
+				-- ce = colors.red,
+				-- cv = colors.red,
+				-- i = colors.green,
+				-- ic = colors.yellow,
+				-- n = colors.red,
+				-- no = colors.red,
+				-- r = colors.cyan,
+				-- R = colors.violet,
+				-- rm = colors.cyan,
+				-- Rv = colors.violet,
+				-- s = colors.orange,
+				-- S = colors.orange,
+				-- t = colors.red,
+				-- v = colors.blue,
+				-- V = colors.blue,
+			}
+			local aliasname = {
+
+				n = "NORMAL  ",
+				no = "NORMAL  ",
+				i = "INSERT  ",
+				ic = "INSERT  ",
+				c = "COMMAND ",
+				ce = "COMMAND ",
+				cv = "COMMAND ",
+				v = "VISUAL  ",
+				V = "VISUAL  ",
+				[""] = "VISUAL  ",
+				R = "REPLACE ",
+				["r?"] = "REPLACE ",
+				Rv = "REPLACE ",
+				r = "REPLACE ",
+				rm = "REPLACE ",
+				s = "SELECT  ",
+				S = "SELECT  ",
+				[""] = "SELECT  ",
+				t = "TERMINAL",
+				["!"] = " ",
+				-- n   = "NORMAL",
+				-- i = "INSERT",
+				-- c = "COMMAND",
+				-- V = "VISUAL",
+				-- [""] = "VISUAL",
+				-- v = "VISUAL",
+				-- R = "REPLACE",
 			}
 			vim.api.nvim_command("hi GalaxyViMode guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.bg)
-			return "  "
+			return aliasname[vim.fn.mode()] .. "  "
 		end,
 	},
 }
@@ -118,38 +302,14 @@ gls.left[5] = {
 	FileName = {
 		condition = condition.buffer_not_empty,
 		highlight = {
-			-- function()
-			-- 	local mode_color = {
-			-- 		["!"] = colors.red,
-			-- 		[""] = colors.blue,
-			-- 		[""] = colors.orange,
-			-- 		["r?"] = colors.cyan,
-			-- 		c = colors.magenta,
-			-- 		ce = colors.red,
-			-- 		cv = colors.red,
-			-- 		i = colors.green,
-			-- 		ic = colors.yellow,
-			-- 		n = colors.red,
-			-- 		no = colors.red,
-			-- 		r = colors.cyan,
-			-- 		R = colors.violet,
-			-- 		rm = colors.cyan,
-			-- 		Rv = colors.violet,
-			-- 		s = colors.orange,
-			-- 		S = colors.orange,
-			-- 		t = colors.red,
-			-- 		v = colors.blue,
-			-- 		V = colors.blue,
-			-- 	}
-			-- 	-- vim.api.nvim_command("hi GalaxyViMode guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.bg)
-			-- 	return mode_color[vim.fn.mode()]
-			-- 	-- return "  "
-			-- end
-			colors.red,
+			colors.green,
 			colors.bg,
 			"bold",
 		},
-		provider = "FileName",
+		provider = function()
+			return file_name(true, "GalaxyFileName")
+		end,
+		-- provider = "FileName",
 		separator = "",
 	},
 }
@@ -204,6 +364,17 @@ gls.left[11] = {
 	},
 }
 
+gls.left[12] = {
+	GPS = {
+
+		condition = gps.is_available,
+
+		provider = function()
+			return gps_content()
+		end,
+		highlight = { colors.magenta, colors.bg },
+	},
+}
 gls.mid[1] = {
 	ShowLspClient = {
 		condition = function()
@@ -219,7 +390,7 @@ gls.mid[1] = {
 	},
 }
 
-gls.right[1] = {
+gls.right[7] = {
 	FileEncode = {
 		condition = condition.hide_in_width,
 		highlight = { colors.green, colors.bg, "bold" },
@@ -229,7 +400,7 @@ gls.right[1] = {
 	},
 }
 
-gls.right[2] = {
+gls.right[8] = {
 	FileFormat = {
 		condition = condition.hide_in_width,
 		highlight = { colors.green, colors.bg, "bold" },
@@ -239,7 +410,7 @@ gls.right[2] = {
 	},
 }
 
-gls.right[3] = {
+gls.right[1] = {
 	GitIcon = {
 		provider = function()
 			return "  "
@@ -251,7 +422,7 @@ gls.right[3] = {
 	},
 }
 
-gls.right[4] = {
+gls.right[2] = {
 	GitBranch = {
 		condition = condition.check_git_workspace,
 		highlight = { colors.violet, colors.bg, "bold" },
@@ -259,7 +430,7 @@ gls.right[4] = {
 	},
 }
 
-gls.right[5] = {
+gls.right[3] = {
 	Separator = {
 		provider = function()
 			return " "
@@ -267,7 +438,7 @@ gls.right[5] = {
 	},
 }
 
-gls.right[6] = {
+gls.right[4] = {
 	DiffAdd = {
 		condition = condition.hide_in_width,
 		highlight = { colors.green, colors.bg },
@@ -276,7 +447,7 @@ gls.right[6] = {
 	},
 }
 
-gls.right[7] = {
+gls.right[5] = {
 	DiffModified = {
 		condition = condition.hide_in_width,
 		highlight = { colors.orange, colors.bg },
@@ -285,7 +456,7 @@ gls.right[7] = {
 	},
 }
 
-gls.right[8] = {
+gls.right[6] = {
 	DiffRemove = {
 		condition = condition.hide_in_width,
 		highlight = { colors.red, colors.bg },
@@ -303,6 +474,14 @@ gls.right[9] = {
 	},
 }
 
+gls.right[10] = {
+	PythonEnv = {
+		provider = function()
+			return python_venv()
+		end,
+		highlight = { colors.yellow, colors.blue },
+	},
+}
 gls.short_line_left[1] = {
 	BufferType = {
 		highlight = { colors.blue, colors.bg, "bold" },
@@ -324,5 +503,13 @@ gls.short_line_right[1] = {
 	BufferIcon = {
 		highlight = { colors.red, colors.bg },
 		provider = "BufferIcon",
+	},
+}
+
+gls.mid[2] = {
+	EscapeIcon = {
+		provider = function()
+			return escape_status()
+		end,
 	},
 }
