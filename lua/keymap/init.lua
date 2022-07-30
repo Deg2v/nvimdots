@@ -50,7 +50,7 @@ local plug_map = {
 
 	-- { '<A-d>', cmd('Lspsaga open_floaterm'), opts(noremap, silent) },
 	["t|<A-S-d>"] = map_cu([[<C-\><C-n><CMD>lua require("FTerm").exit()]]):with_noremap():with_silent(),
-	["n|<Leader>g"] = map_cu("lua require('FTerm').run('gitui')"):with_noremap():with_silent(),
+	["n|<Leader>g"] = map_cu("lua require('FTerm').run('lazygit')"):with_noremap():with_silent(),
 	["n|<Leader>G"] = map_cu("Git"):with_noremap():with_silent(),
 	["n|gps"] = map_cr("G push"):with_noremap():with_silent(),
 	["n|gpl"] = map_cr("G pull"):with_noremap():with_silent(),
