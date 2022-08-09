@@ -2,23 +2,19 @@ local ui = {}
 local conf = require("modules.ui.config")
 
 ui["kyazdani42/nvim-web-devicons"] = { opt = false }
--- ui["shaunsingh/nord.nvim"] = { opt = false, config = conf.nord }
--- ui["sainnhe/edge"] = { opt = false, config = conf.edge }
--- ui["olimorris/onedarkpro.nvim"] = { opt = false, config = conf.onedarkpro }
 ui["navarasu/onedark.nvim"] = { opt = false, config = conf.onedark }
--- ui["rebelot/kanagawa.nvim"] = { opt = false, config = conf.kanagawa }
--- ui["catppuccin/nvim"] = {
--- 	opt = false,
--- 	as = "catppuccin",
--- 	commit = "f079dda3dc23450d69b4bad11bfbd9af2c77f6f3",
--- 	config = conf.catppuccin,
--- }
-
 ui["glepnir/galaxyline.nvim"] = {
 	branch = "main",
 	config = conf.galaxyline,
 	requires = "kyazdani42/nvim-web-devicons",
 	after = "nvim-gps",
+}
+ui["shaunsingh/nord.nvim"] = { opt = false, config = conf.nord }
+ui["sainnhe/edge"] = { opt = false, config = conf.edge }
+ui["catppuccin/nvim"] = {
+	opt = false,
+	as = "catppuccin",
+	config = conf.catppuccin,
 }
 ui["rcarriga/nvim-notify"] = {
 	opt = false,
