@@ -9,13 +9,13 @@ ui["glepnir/galaxyline.nvim"] = {
 	requires = "kyazdani42/nvim-web-devicons",
 	after = "nvim-gps",
 }
-ui["shaunsingh/nord.nvim"] = { opt = false, config = conf.nord }
-ui["sainnhe/edge"] = { opt = false, config = conf.edge }
-ui["catppuccin/nvim"] = {
-	opt = false,
-	as = "catppuccin",
-	config = conf.catppuccin,
-}
+-- ui["shaunsingh/nord.nvim"] = { opt = false, config = conf.nord }
+-- ui["sainnhe/edge"] = { opt = false, config = conf.edge }
+-- ui["catppuccin/nvim"] = {
+-- 	opt = false,
+-- 	as = "catppuccin",
+-- 	config = conf.catppuccin,
+-- }
 ui["rcarriga/nvim-notify"] = {
 	opt = false,
 	config = conf.notify,
