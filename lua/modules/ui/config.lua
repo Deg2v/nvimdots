@@ -172,7 +172,7 @@ function config.onedark()
 			TSVariable = { fg = "#e06150" },
 			-- TSParameter = { fg = "#ffb900" },
 			TSParameter = { fg = "#ff8800" },
-			-- rainbowcol1 = "#ff8800",
+			rainbowcol1 = { fg = "#ff8800" },
 		}, -- Override highlight groups
 
 		-- Plugins Config --

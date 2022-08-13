@@ -247,16 +247,16 @@ gls.left[2] = {
 			}
 			local aliasname = {
 
-				n = "NORMAL  ",
-				no = "NORMAL  ",
-				i = "INSERT  ",
-				ic = "INSERT  ",
+				n = "NORMAL ",
+				no = "NORMAL ",
+				i = "INSERT ",
+				ic = "INSERT ",
 				c = "COMMAND ",
 				ce = "COMMAND ",
 				cv = "COMMAND ",
-				v = "VISUAL  ",
-				V = "VISUAL  ",
-				[""] = "VISUAL  ",
+				v = "VISUAL ",
+				V = "VISUAL ",
+				[""] = "VISUAL ",
 				R = "REPLACE ",
 				["r?"] = "REPLACE ",
 				Rv = "REPLACE ",
@@ -276,7 +276,8 @@ gls.left[2] = {
 				-- R = "REPLACE",
 			}
 			vim.api.nvim_command("hi GalaxyViMode guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.bg)
-			return aliasname[vim.fn.mode()] .. "  "
+			return aliasname[vim.fn.mode()]
+			-- .. " "
 		end,
 	},
 }
