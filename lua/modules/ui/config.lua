@@ -321,10 +321,10 @@ function config.catppuccin()
 			neotree = { enabled = false, show_root = true, transparent_panel = false },
 			telekasten = false,
 			mini = false,
-			aerial = true,
+			aerial = false,
 			vimwiki = true,
 			beacon = false,
-			navic = false,
+			navic = true,
 			overseer = false,
 		},
 		color_overrides = {
@@ -497,6 +497,155 @@ end
 
 function config.galaxyline()
 	require("modules.ui.eviline")
+-- function config.lualine()
+-- 	local gps = require("nvim-gps")
+-- 	local navic = require("nvim-navic")
+
+-- 	local function escape_status()
+-- 		local ok, m = pcall(require, "better_escape")
+-- 		return ok and m.waiting and "✺ " or ""
+-- 	end
+
+-- 	local function code_context()
+-- 		if navic.is_available() and navic.get_location() ~= "" then
+-- 			return navic.get_location()
+-- 		elseif gps.is_available() then
+-- 			return gps.get_location()
+-- 		else
+-- 			return ""
+-- 		end
+-- 	end
+
+-- 	local conditions = {
+-- 		check_code_context = function()
+-- 			return gps.is_available() or navic.is_available()
+-- 		end,
+-- 	}
+
+-- 	local mini_sections = {
+-- 		lualine_a = {},
+-- 		lualine_b = {},
+-- 		lualine_c = {},
+-- 		lualine_x = {},
+-- 		lualine_y = {},
+-- 		lualine_z = { "location" },
+-- 	}
+-- 	local simple_sections = {
+-- 		lualine_a = { "mode" },
+-- 		lualine_b = { "filetype" },
+-- 		lualine_c = {},
+-- 		lualine_x = {},
+-- 		lualine_y = {},
+-- 		lualine_z = { "location" },
+-- 	}
+-- 	local outline = {
+-- 		sections = mini_sections,
+-- 		filetypes = { "lspsagaoutline" },
+-- 	}
+-- 	local dapui_scopes = {
+-- 		sections = simple_sections,
+-- 		filetypes = { "dapui_scopes" },
+-- 	}
+
+-- 	local dapui_breakpoints = {
+-- 		sections = simple_sections,
+-- 		filetypes = { "dapui_breakpoints" },
+-- 	}
+
+-- 	local dapui_stacks = {
+-- 		sections = simple_sections,
+-- 		filetypes = { "dapui_stacks" },
+-- 	}
+
+-- 	local dapui_watches = {
+-- 		sections = simple_sections,
+-- 		filetypes = { "dapui_watches" },
+-- 	}
+
+-- 	local function python_venv()
+-- 		local function env_cleanup(venv)
+-- 			if string.find(venv, "/") then
+-- 				local final_venv = venv
+-- 				for w in venv:gmatch("([^/]+)") do
+-- 					final_venv = w
+-- 				end
+-- 				venv = final_venv
+-- 			end
+-- 			return venv
+-- 		end
+
+-- 		if vim.bo.filetype == "python" then
+-- 			local venv = os.getenv("CONDA_DEFAULT_ENV")
+-- 			if venv then
+-- 				return string.format("%s", env_cleanup(venv))
+-- 			end
+-- 			venv = os.getenv("VIRTUAL_ENV")
+-- 			if venv then
+-- 				return string.format("%s", env_cleanup(venv))
+-- 			end
+-- 		end
+-- 		return ""
+-- 	end
+
+-- 	require("lualine").setup({
+-- 		options = {
+-- 			icons_enabled = true,
+-- 			theme = "catppuccin",
+-- 			disabled_filetypes = {},
+-- 			component_separators = "|",
+-- 			section_separators = { left = "", right = "" },
+-- 		},
+-- 		sections = {
+-- 			lualine_a = { "mode" },
+-- 			lualine_b = { { "branch" }, { "diff" } },
+-- 			lualine_c = {
+-- 				{ code_context, cond = conditions.check_code_context },
+-- 			},
+-- 			lualine_x = {
+-- 				{ escape_status },
+-- 				{
+-- 					"diagnostics",
+-- 					sources = { "nvim_diagnostic" },
+-- 					symbols = { error = " ", warn = " ", info = " " },
+-- 				},
+-- 			},
+-- 			lualine_y = {
+-- 				{ "filetype", colored = true, icon_only = true },
+-- 				{ python_venv },
+-- 				{ "encoding" },
+-- 				{
+-- 					"fileformat",
+-- 					icons_enabled = true,
+-- 					symbols = {
+-- 						unix = "LF",
+-- 						dos = "CRLF",
+-- 						mac = "CR",
+-- 					},
+-- 				},
+-- 			},
+-- 			lualine_z = { "progress", "location" },
+-- 		},
+-- 		inactive_sections = {
+-- 			lualine_a = {},
+-- 			lualine_b = {},
+-- 			lualine_c = { "filename" },
+-- 			lualine_x = { "location" },
+-- 			lualine_y = {},
+-- 			lualine_z = {},
+-- 		},
+-- 		tabline = {},
+-- 		extensions = {
+-- 			"quickfix",
+-- 			"nvim-tree",
+-- 			"toggleterm",
+-- 			"fugitive",
+-- 			outline,
+-- 			dapui_scopes,
+-- 			dapui_breakpoints,
+-- 			dapui_stacks,
+-- 			dapui_watches,
+-- 		},
+-- 	})
 end
 
 -- function config.lualine()
@@ -664,6 +813,45 @@ function config.nvim_gps()
 			["rust"] = true,
 		},
 		separator = " > ",
+	})
+end
+
+function config.nvim_navic()
+	vim.g.navic_silence = true
+
+	require("nvim-navic").setup({
+		icons = {
+			Method = " ",
+			Function = " ",
+			Constructor = " ",
+			Field = " ",
+			Variable = " ",
+			Class = "ﴯ ",
+			Interface = " ",
+			Module = " ",
+			Property = "ﰠ ",
+			Enum = " ",
+			File = " ",
+			EnumMember = " ",
+			Constant = " ",
+			Struct = " ",
+			Event = " ",
+			Operator = " ",
+			TypeParameter = " ",
+			Namespace = " ",
+			Object = " ",
+			Array = " ",
+			Boolean = " ",
+			Number = " ",
+			Null = "ﳠ ",
+			Key = " ",
+			String = " ",
+			Package = " ",
+		},
+		highlight = true,
+		separator = " > ",
+		depth_limit = 0,
+		depth_limit_indicator = "..",
 	})
 end
 
