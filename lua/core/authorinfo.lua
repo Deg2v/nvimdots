@@ -106,7 +106,8 @@ local function addtitle()
 			vim.api.nvim_buf_set_lines(0, key + filenamechange - 1, key + filenamechange, 1, update_time) -- 替换
 			vim.api.nvim_win_set_cursor(0, { key + filenamechange, 1 })
 			if filetype_cur ~= "c" and filetype_cur ~= "cpp" then
-				require("Comment.api").toggle_current_linewise()
+				-- require("Comment.api").toggle_current_linewise()
+				require("Comment.api").locked("toggle.linewise.current")()
 			end
 		end
 		if string.find(val, pattern) then
@@ -116,7 +117,8 @@ local function addtitle()
 				vim.api.nvim_buf_set_lines(0, key - 1, key, 1, update_filename) -- key, key 添加
 				vim.api.nvim_win_set_cursor(0, { key, 1 })
 				if filetype_cur ~= "c" and filetype_cur ~= "cpp" then
-					require("Comment.api").toggle_current_linewise()
+					-- require("Comment.api").toggle_current_linewise()
+					require("Comment.api").locked("toggle.linewise.current")()
 				end
 			end
 		end
@@ -124,7 +126,7 @@ local function addtitle()
 
 	-- no comment title and add
 	if findtitle > 0 then
-		vim.notify("Success to update doc information")
+		vim.notify("Success to update doc information!")
 	elseif findtitle == 0 then
 		vim.api.nvim_buf_set_lines(0, shebangnum, shebangnum, 1, comment_str)
 		vim.api.nvim_win_set_cursor(0, { shebangnum + 1, 1 })
@@ -132,9 +134,11 @@ local function addtitle()
 		local commentlength = length(comment_str)
 		-- require("Comment.api").toggle_linewise_count(Config)  -- TODO:  comment n count
 		if filetype_cur ~= "c" and filetype_cur ~= "cpp" then --TODO:  comment.api
-			require("Comment.opfunc").count(commentlength, Config, 1) -- line
+			-- require("Comment.opfunc").count(commentlength, Config, 1) -- line
+			require("Comment.api").toggle.linewise.count(commentlength, Config)
 		else
-			require("Comment.opfunc").count(commentlength, Config, 2) -- block eg   /*  */
+			-- require("Comment.opfunc").count(commentlength, Config, 2) -- block eg   /*  */
+			require("Comment.api").toggle.blockwise.count(commentlength, Config)
 		end
 		vim.api.nvim_win_set_cursor(0, { shebangnum + 3, 16 })
 		-- for key, val in pairs(lines2) do
@@ -142,7 +146,7 @@ local function addtitle()
 		-- 	require("Comment.api").toggle_current_linewise(Config)
 		-- end
 
-		vim.notify("Success to add doc information")
+		vim.notify("Success to add doc information!")
 	end
 
 	-- after_title()
