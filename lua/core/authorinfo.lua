@@ -28,7 +28,7 @@ local function findfirstline()
 	elseif filetype == "sh" then
 		readnum = 1
 	end
-	local findmath = 0
+	local findmatch = 0
 	if readnum > 0 then
 		local line = vim.api.nvim_buf_get_lines(0, 0, readnum, 1)
 		for keyline, valline in pairs(line) do
@@ -36,18 +36,18 @@ local function findfirstline()
 				if key == "python" then
 					for key2, val2 in pairs(val) do
 						if string.find(valline, val2) then
-							findmath = findmath + 1
+							findmatch = findmatch + 1
 						end
 					end
 				else
 					if string.find(valline, val) then
-						findmath = findmath + 1
+						findmatch = findmatch + 1
 					end
 				end
 			end
 		end
 	end
-	return findmath, filetype
+	return findmatch, filetype
 end
 
 -- local function before_title()
@@ -59,7 +59,7 @@ end
 
 local function addtitle()
 	local Config = require("Comment").setup({ ignore = "^$" })
-	local shebangnum, filetype_cur = findfirstline()
+	local num_shebang, filetype_cur = findfirstline()
 	-- before_title()
 	local file = vim.api.nvim_buf_get_name(0)
 	local filename = string.match(file, ".+/([^/]*%.%w+)$") -- 只有文件名，去除路径
@@ -128,21 +128,21 @@ local function addtitle()
 	if findtitle > 0 then
 		vim.notify("Success to update doc information!")
 	elseif findtitle == 0 then
-		vim.api.nvim_buf_set_lines(0, shebangnum, shebangnum, 1, comment_str)
-		vim.api.nvim_win_set_cursor(0, { shebangnum + 1, 1 })
+		vim.api.nvim_buf_set_lines(0, num_shebang, num_shebang, 1, comment_str)
+		vim.api.nvim_win_set_cursor(0, { num_shebang + 1, 1 })
 
-		local commentlength = length(comment_str)
+		local comment_num = length(comment_str)
 		-- require("Comment.api").toggle_linewise_count(Config)  -- TODO:  comment n count
 		if filetype_cur ~= "c" and filetype_cur ~= "cpp" then --TODO:  comment.api
-			-- require("Comment.opfunc").count(commentlength, Config, 1) -- line
-			require("Comment.api").toggle.linewise.count(commentlength, Config)
+			-- require("Comment.opfunc").count(comment_num, Config, 1) -- line
+			require("Comment.api").toggle.linewise.count(comment_num, Config)
 		else
-			-- require("Comment.opfunc").count(commentlength, Config, 2) -- block eg   /*  */
-			require("Comment.api").toggle.blockwise.count(commentlength, Config)
+			-- require("Comment.opfunc").count(comment_num, Config, 2) -- block eg   /*  */
+			require("Comment.api").toggle.blockwise.count(comment_num, Config)
 		end
-		vim.api.nvim_win_set_cursor(0, { shebangnum + 3, 16 })
+		vim.api.nvim_win_set_cursor(0, { num_shebang + 3, 16 })
 		-- for key, val in pairs(lines2) do
-		-- 	vim.api.nvim_win_set_cursor(0, { key + shebangnum, 1 })
+		-- 	vim.api.nvim_win_set_cursor(0, { key + num_shebang, 1 })
 		-- 	require("Comment.api").toggle_current_linewise(Config)
 		-- end
 
