@@ -84,6 +84,12 @@ function config.illuminate()
 		"Outline",
 		"toggleterm",
 	}
+	vim.g.Illuminate_ftwhitelist = {
+		"vim",
+		"sh",
+		"python",
+	}
+	-- vim.cmd("autocmd VimEnter * hi link illuminatedWord Underlined")
 end
 
 function config.nvim_comment()

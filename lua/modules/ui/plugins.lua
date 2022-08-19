@@ -7,7 +7,7 @@ ui["glepnir/galaxyline.nvim"] = {
 	branch = "main",
 	config = conf.galaxyline,
 	requires = "kyazdani42/nvim-web-devicons",
-	after = "nvim-gps",
+	after = { "nvim-gps", "nvim-navic" },
 }
 -- ui["shaunsingh/nord.nvim"] = { opt = false, config = conf.nord }
 -- ui["sainnhe/edge"] = { opt = false, config = conf.edge }

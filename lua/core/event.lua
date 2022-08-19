@@ -35,6 +35,7 @@ function autocmd.load_autocmds()
 			{ "BufWritePre", "*.bak", "setlocal noundofile" },
 			-- auto change directory
 			{ "BufEnter", "*", "silent! lcd %:p:h" },
+			{ "VimEnter", "*", "hi link illuminatedWord Underlined" },
 			-- auto place to last edit
 			{
 				"BufReadPost",

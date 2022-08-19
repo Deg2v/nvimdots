@@ -144,8 +144,8 @@ local gps = require("nvim-gps")
 local navic = require("nvim-navic")
 local function gps_content()
 	if navic.is_available() and navic.get_location() ~= "" then
-		return navic.get_location()
-	elseif gps.is_available() then
+		-- 	return navic.get_location()
+		-- elseif gps.is_available() then
 		return gps.get_location()
 	else
 		return ""
