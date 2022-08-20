@@ -367,7 +367,7 @@ gls.left[11] = {
 
 gls.left[12] = {
 	GPS = {
-		condition = or navic.is_available,
+		condition = navic.is_available,
 		provider = function()
 			return location_content()
 		end,
