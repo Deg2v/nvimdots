@@ -140,13 +140,10 @@ local function file_name(is_active, highlight_group)
 	return fname
 end
 
-local gps = require("nvim-gps")
 local navic = require("nvim-navic")
-local function gps_content()
+local function location_content()
 	if navic.is_available() and navic.get_location() ~= "" then
-		-- 	return navic.get_location()
-		-- elseif gps.is_available() then
-		return gps.get_location()
+		return navic.get_location()
 	else
 		return ""
 	end
@@ -370,9 +367,9 @@ gls.left[11] = {
 
 gls.left[12] = {
 	GPS = {
-		condition = gps.is_available or navic.is_available,
+		condition = or navic.is_available,
 		provider = function()
-			return gps_content()
+			return location_content()
 		end,
 		highlight = { colors.magenta, colors.bg },
 	},
