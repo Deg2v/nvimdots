@@ -22,7 +22,7 @@ ui["rcarriga/nvim-notify"] = {
 }
 ui["hoob3rt/lualine.nvim"] = {
 	opt = true,
-	after = { "nvim-navic" },
+	after = "nvim-navic",
 	config = conf.lualine,
 }
 ui["SmiteshP/nvim-navic"] = {

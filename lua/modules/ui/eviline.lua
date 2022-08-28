@@ -62,6 +62,7 @@ end
 local condition = require("galaxyline.condition")
 local fileinfo = require("galaxyline.provider_fileinfo")
 local gls = galaxyline.section
+local navic = require("nvim-navic")
 galaxyline.short_line_list = { "NvimTree", "vista", "dbui", "packer" }
 
 local colors = {
@@ -140,14 +141,14 @@ local function file_name(is_active, highlight_group)
 	return fname
 end
 
-local navic = require("nvim-navic")
-local function location_content()
-	if navic.is_available() and navic.get_location() ~= "" then
-		return navic.get_location()
-	else
-		return ""
-	end
-end
+-- local function location_content()
+-- 	if navic.is_available() and navic.get_location() ~= "" then
+-- 		print(navic.get_location())
+-- 		return navic.get_location()
+-- 	else
+-- 		return ""
+-- 	end
+-- end
 
 local function python_venv()
 	local function env_cleanup(venv)
@@ -367,10 +368,11 @@ gls.left[11] = {
 
 gls.left[12] = {
 	GPS = {
-		condition = navic.is_available,
+		condition = navic.is_available(),
 		provider = function()
-			return location_content()
+			return navic.get_location()
 		end,
+		-- provider = navic.get_location(),
 		highlight = { colors.magenta, colors.bg },
 	},
 }
