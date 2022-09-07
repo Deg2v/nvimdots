@@ -367,12 +367,13 @@ gls.left[11] = {
 }
 
 gls.left[12] = {
-	GPS = {
-		condition = navic.is_available(),
+	nvimNavic = {
 		provider = function()
 			return navic.get_location()
 		end,
-		-- provider = navic.get_location(),
+		condition = function()
+			return navic.is_available()
+		end,
 		highlight = { colors.magenta, colors.bg },
 	},
 }
@@ -514,3 +515,13 @@ gls.mid[2] = {
 		end,
 	},
 }
+
+-- GPS = {
+-- 	condition = function()
+-- 		return navic.is_available()
+-- 	end,
+-- 	provider = function()
+-- 		return navic.get_location()
+-- 	end,
+-- 	-- provider = navic.get_location(),
+-- },

@@ -4,6 +4,7 @@ local conf = require("modules.ui.config")
 ui["kyazdani42/nvim-web-devicons"] = { opt = false }
 ui["navarasu/onedark.nvim"] = { opt = false, config = conf.onedark }
 ui["glepnir/galaxyline.nvim"] = {
+	opt = true,
 	branch = "main",
 	config = conf.galaxyline,
 	requires = "kyazdani42/nvim-web-devicons",

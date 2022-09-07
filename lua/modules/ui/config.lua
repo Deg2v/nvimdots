@@ -473,10 +473,6 @@ function config.notify()
 	vim.notify = notify
 end
 
-function config.galaxyline()
-	require("modules.ui.eviline")
-end
-
 -- function config.lualine()
 -- 	local navic = require("nvim-navic")
 
@@ -567,7 +563,7 @@ end
 -- 			theme = "onedark",
 -- 			disabled_filetypes = {},
 -- 			component_separators = "|",
--- 			section_separators = { left = "", right = "" },
+-- 			section_separators = { left = "", right = "" },
 -- 		},
 -- 		sections = {
 -- 			lualine_a = { "mode" },
@@ -1067,4 +1063,7 @@ function config.fidget()
 	})
 end
 
+function config.galaxyline()
+	require("modules.ui.eviline")
+end
 return config
