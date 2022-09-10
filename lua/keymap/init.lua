@@ -39,8 +39,8 @@ local plug_map = {
 	["n|<C-Up>"] = map_cr("lua require('lspsaga.action').smart_scroll_with_saga(-1)"):with_noremap():with_silent(),
 	["n|<C-Down>"] = map_cr("lua require('lspsaga.action').smart_scroll_with_saga(1)"):with_noremap():with_silent(),
 	["n|<leader>ca"] = map_cr("Lspsaga code_action"):with_noremap():with_silent(),
-	["v|<leader>ca"] = map_cu("Lspsaga range_code_action"):with_noremap():with_silent(),
-	["n|gd"] = map_cr("Lspsaga preview_definition"):with_noremap():with_silent(),
+	["v|<leader>ca"] = map_cu("Lspsaga code_action"):with_noremap():with_silent(),
+	["n|gd"] = map_cr("Lspsaga peek_definition"):with_noremap():with_silent(),
 	["n|gD"] = map_cr("lua vim.lsp.buf.definition()"):with_noremap():with_silent(),
 
 	["n|<A-s>"] = map_cu("Lspsaga open_floaterm"):with_noremap():with_silent(),
