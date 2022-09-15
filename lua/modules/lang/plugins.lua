@@ -15,10 +15,10 @@ local conf = require("modules.lang.config")
 -- 	requires = { { "nvim-lua/plenary.nvim", opt = false } },
 -- }
 lang["nvim-orgmode/orgmode"] = {
-    opt = true,
+	opt = true,
 	after = "nvim-treesitter",
-    ft = "org",
-    config = conf.lang_org
+	ft = "org",
+	config = conf.lang_org,
 }
 lang["iamcco/markdown-preview.nvim"] = {
 	opt = true,
@@ -26,5 +26,5 @@ lang["iamcco/markdown-preview.nvim"] = {
 	run = "cd app && yarn install",
 }
 lang["chrisbra/csv.vim"] = { opt = true, ft = "csv" }
-lang["lervag/vimtex"] = { opt = true, ft = "tex"}
+lang["lervag/vimtex"] = { opt = true, ft = "tex" }
 return lang
