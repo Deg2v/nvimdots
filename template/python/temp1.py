@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 
-import numpy as np 
+# import numpy as np
 
 
-def f1():
-    {{_cursor_}}
+# def f1():
+#     {{_cursor_}}
 
 
-def main():
-    return {{_variable_}}
-
+# def main():
+#     return {{_variable_}}

@@ -2,6 +2,6 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package {{_file_name_}}
+// package {{_file_name_}}
 
-{{_cursor_}}
+// {{_cursor_}}

@@ -1,6 +1,6 @@
-local api,fn = vim.api,vim.fn
-local {{_variable_}}
+-- local api,fn = vim.api,vim.fn
+-- local {{_variable_}}
 
-{{_cursor_}}
+-- {{_cursor_}}
 
-return {{_variable_}}
+-- return {{_variable_}}
