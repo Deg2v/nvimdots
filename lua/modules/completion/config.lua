@@ -328,7 +328,7 @@ function config.mason_install()
 			"shellcheck",
 			-- "shfmt",
 
-			"vint",
+			-- "vint",
 		},
 
 		-- if set to true this will check each tool for updates. If updates
