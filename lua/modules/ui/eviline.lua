@@ -28,8 +28,6 @@
 --     circle = '●'
 -- }
 
--- local theme = {}
-
 -- theme.default = {
 --   bg = '#202328',
 --   fg = '#bbc2cf',
@@ -43,8 +41,6 @@
 --   blue = '#51afef';
 --   red = '#ec5f67';
 -- }
-
--- return theme
 
 local status_ok, galaxyline = pcall(require, "galaxyline")
 local vim = vim
@@ -87,9 +83,8 @@ local colors = {
 	fg_green = "#65a380",
 	creamygreen = "#a3be8c",
 	yellow = "#cccc00",
-	creamyorange = "#ff8800",
 	orange = "#FF8800",
-	bg = "#000B0C15",
+	bg = "#000B0C",
 	fg = "#D8DEE9",
 	magenta = "#c678dd",
 	red = "#ec5f67",
@@ -204,50 +199,28 @@ gls.left[2] = {
 		provider = function()
 			-- auto change color according the vim mode
 			local mode_color = {
-
 				n = colors.red,
-				no = colors.red,
 				i = colors.green,
-				ic = colors.green,
-				c = colors.orange,
-				ce = colors.orange,
-				cv = colors.orange,
-				v = colors.lightblue,
-				V = colors.lightblue,
+				v = colors.blue,
 				[""] = colors.brown,
+				V = colors.lightblue,
+				c = colors.orange,
+				no = colors.red,
+				s = colors.greenYel,
+				S = colors.greenYel,
+				[""] = colors.greenYel,
+				ic = colors.green,
 				R = colors.crimsonRed2,
-				["r?"] = colors.lightblue,
 				Rv = colors.crimsonRed2,
+				cv = colors.orange,
+				ce = colors.orange,
 				r = colors.blue2,
 				rm = colors.blue2,
-				s = colors.greenYelenYel,
-				S = colors.greenYelenYel,
-				[""] = colors.greenYelenYel,
-				t = colors.magenta,
+				["r?"] = colors.lightblue,
 				["!"] = colors.crimsonRed,
-				-- ["!"] = colors.red,
-				-- [""] = colors.blue,
-				-- [""] = colors.orange,
-				-- ["r?"] = colors.cyan,
-				-- c = colors.magenta,
-				-- ce = colors.red,
-				-- cv = colors.red,
-				-- i = colors.green,
-				-- ic = colors.yellow,
-				-- n = colors.red,
-				-- no = colors.red,
-				-- r = colors.cyan,
-				-- R = colors.violet,
-				-- rm = colors.cyan,
-				-- Rv = colors.violet,
-				-- s = colors.orange,
-				-- S = colors.orange,
-				-- t = colors.red,
-				-- v = colors.blue,
-				-- V = colors.blue,
+				t = colors.magenta,
 			}
 			local aliasname = {
-
 				n = "NORMAL ",
 				no = "NORMAL ",
 				i = "INSERT ",
@@ -267,18 +240,11 @@ gls.left[2] = {
 				S = "SELECT  ",
 				[""] = "SELECT  ",
 				t = "TERMINAL",
-				["!"] = " ",
-				-- n   = "NORMAL",
-				-- i = "INSERT",
-				-- c = "COMMAND",
-				-- V = "VISUAL",
-				-- [""] = "VISUAL",
-				-- v = "VISUAL",
-				-- R = "REPLACE",
+				["!"] = "THELE",
 			}
 			vim.api.nvim_command("hi GalaxyViMode guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.bg)
 			return aliasname[vim.fn.mode()]
-			-- .. " "
+			-- return " "
 		end,
 	},
 }
@@ -515,13 +481,3 @@ gls.mid[2] = {
 		end,
 	},
 }
-
--- GPS = {
--- 	condition = function()
--- 		return navic.is_available()
--- 	end,
--- 	provider = function()
--- 		return navic.get_location()
--- 	end,
--- 	-- provider = navic.get_location(),
--- },
