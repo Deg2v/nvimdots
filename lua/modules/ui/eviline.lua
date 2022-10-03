@@ -58,7 +58,7 @@ end
 local condition = require("galaxyline.condition")
 local fileinfo = require("galaxyline.provider_fileinfo")
 local gls = galaxyline.section
-local navic = require("nvim-navic")
+-- local navic = require("nvim-navic")
 galaxyline.short_line_list = { "NvimTree", "vista", "dbui", "packer" }
 
 local colors = {
@@ -101,13 +101,13 @@ local colors = {
 }
 
 ----------------------------------- ==== function === -------------------------------------------------
-local checkwidth = function()
-	local squeeze_width = vim.fn.winwidth(0) / 2
-	if squeeze_width > 40 then
-		return true
-	end
-	return false
-end
+-- local checkwidth = function()
+-- 	local squeeze_width = vim.fn.winwidth(0) / 2
+-- 	if squeeze_width > 40 then
+-- 		return true
+-- 	end
+-- 	return false
+-- end
 local function file_name(is_active, highlight_group)
 	local normal_fg = is_active and colors.green or colors.blue2
 	local modified_fg = is_active and "#ff0000" or "#cc8800"
@@ -333,17 +333,17 @@ gls.left[11] = {
 	},
 }
 
-gls.left[12] = {
-	nvimNavic = {
-		provider = function()
-			return navic.get_location()
-		end,
-		condition = function()
-			return navic.is_available()
-		end,
-		highlight = { colors.magenta, colors.bg },
-	},
-}
+-- gls.left[12] = {
+-- 	nvimNavic = {
+-- 		provider = function()
+-- 			return navic.get_location()
+-- 		end,
+-- 		condition = function()
+-- 			return navic.is_available()
+-- 		end,
+-- 		highlight = { colors.magenta, colors.bg },
+-- 	},
+-- }
 gls.mid[1] = {
 	ShowLspClient = {
 		condition = function()

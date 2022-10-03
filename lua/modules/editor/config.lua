@@ -108,7 +108,7 @@ function config.hop()
 end
 
 function config.matchup()
-	vim.cmd([[let g:matchup_matchparen_offscreen = {'method': 'popup'}]])
+	vim.cmd([[let g:matchup_matchparen_offscreen = {}]])
 end
 
 function config.autotag()
