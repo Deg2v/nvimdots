@@ -107,10 +107,6 @@ function config.hop()
 	require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
 end
 
-function config.matchup()
-	vim.cmd([[let g:matchup_matchparen_offscreen = {}]])
-end
-
 function config.autotag()
 	require("nvim-ts-autotag").setup({
 		filetypes = {
