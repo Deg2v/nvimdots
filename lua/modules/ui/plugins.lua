@@ -4,11 +4,10 @@ local conf = require("modules.ui.config")
 ui["kyazdani42/nvim-web-devicons"] = { opt = false }
 ui["navarasu/onedark.nvim"] = { opt = false, config = conf.onedark }
 ui["glepnir/galaxyline.nvim"] = {
-	opt = true,
+	opt = false,
 	branch = "main",
 	config = conf.galaxyline,
 	requires = "kyazdani42/nvim-web-devicons",
-	after = "nvim-navic",
 }
 -- ui["shaunsingh/nord.nvim"] = { opt = false, config = conf.nord }
 -- ui["sainnhe/edge"] = { opt = false, config = conf.edge }
@@ -21,16 +20,11 @@ ui["rcarriga/nvim-notify"] = {
 	opt = false,
 	config = conf.notify,
 }
-ui["hoob3rt/lualine.nvim"] = {
-	opt = true,
-	after = "nvim-navic",
-	config = conf.lualine,
-}
-ui["SmiteshP/nvim-navic"] = {
-	opt = true,
-	after = "nvim-lspconfig",
-	config = conf.nvim_navic,
-}
+-- ui["hoob3rt/lualine.nvim"] = {
+-- 	opt = true,
+-- 	after = "nvim-lspconfig",
+-- 	config = conf.lualine,
+-- }
 ui["goolord/alpha-nvim"] = {
 	opt = true,
 	event = "BufWinEnter",

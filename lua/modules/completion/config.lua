@@ -5,13 +5,20 @@ function config.nvim_lsp()
 end
 
 function config.lspsaga()
+	local icons = {
+		diagnostics = require("modules.ui.icons").get("diagnostics", true),
+		kind = require("modules.ui.icons").get("kind", true),
+		type = require("modules.ui.icons").get("type", true),
+		ui = require("modules.ui.icons").get("ui", true),
+	}
+
 	local function set_sidebar_icons()
 		-- Set icons for sidebar.
 		local diagnostic_icons = {
-			Error = " ",
-			Warn = " ",
-			Info = " ",
-			Hint = " ",
+			Error = icons.diagnostics.Error_alt,
+			Warn = icons.diagnostics.Warning_alt,
+			Info = icons.diagnostics.Information_alt,
+			Hint = icons.diagnostics.Hint_alt,
 		}
 		for type, icon in pairs(diagnostic_icons) do
 			local hl = "DiagnosticSign" .. type
@@ -42,45 +49,90 @@ function config.lspsaga()
 	local colors = get_palette()
 
 	require("lspsaga").init_lsp_saga({
-		diagnostic_header = { " ", " ", "  ", " " },
+		diagnostic_header = {
+			icons.diagnostics.Error_alt,
+			icons.diagnostics.Warning_alt,
+			icons.diagnostics.Information_alt,
+			icons.diagnostics.Hint_alt,
+		},
 		custom_kind = {
-			File = { " ", colors.rosewater },
-			Module = { " ", colors.blue },
-			Namespace = { " ", colors.blue },
-			Package = { " ", colors.blue },
-			Class = { "ﴯ ", colors.yellow },
-			Method = { " ", colors.blue },
-			Property = { "ﰠ ", colors.teal },
-			Field = { " ", colors.teal },
-			Constructor = { " ", colors.sapphire },
-			Enum = { " ", colors.yellow },
-			Interface = { " ", colors.yellow },
-			Function = { " ", colors.blue },
-			Variable = { " ", colors.peach },
-			Constant = { " ", colors.peach },
-			String = { " ", colors.green },
-			Number = { " ", colors.peach },
-			Boolean = { " ", colors.peach },
-			Array = { " ", colors.peach },
-			Object = { " ", colors.yellow },
-			Key = { " ", colors.red },
-			Null = { "ﳠ ", colors.yellow },
-			EnumMember = { " ", colors.teal },
-			Struct = { " ", colors.yellow },
-			Event = { " ", colors.yellow },
-			Operator = { " ", colors.sky },
-			TypeParameter = { " ", colors.maroon },
-			-- ccls-specific icons.
-			TypeAlias = { " ", colors.green },
-			Parameter = { " ", colors.blue },
-			StaticMethod = { "ﴂ ", colors.peach },
-			Macro = { " ", colors.red },
+			-- Kind
+			Class = { icons.kind.Class, colors.yellow },
+			Constant = { icons.kind.Constant, colors.peach },
+			Constructor = { icons.kind.Constructor, colors.sapphire },
+			Enum = { icons.kind.Enum, colors.yellow },
+			EnumMember = { icons.kind.EnumMember, colors.teal },
+			Event = { icons.kind.Event, colors.yellow },
+			Field = { icons.kind.Field, colors.teal },
+			File = { icons.kind.File, colors.rosewater },
+			Function = { icons.kind.Function, colors.blue },
+			Interface = { icons.kind.Interface, colors.yellow },
+			Key = { icons.kind.Keyword, colors.red },
+			Method = { icons.kind.Method, colors.blue },
+			Module = { icons.kind.Module, colors.blue },
+			Namespace = { icons.kind.Namespace, colors.blue },
+			Number = { icons.kind.Number, colors.peach },
+			Operator = { icons.kind.Operator, colors.sky },
+			Package = { icons.kind.Package, colors.blue },
+			Property = { icons.kind.Property, colors.teal },
+			Struct = { icons.kind.Struct, colors.yellow },
+			TypeParameter = { icons.kind.TypeParameter, colors.maroon },
+			Variable = { icons.kind.Variable, colors.peach },
+			-- Type
+			Array = { icons.type.Array, colors.peach },
+			Boolean = { icons.type.Boolean, colors.peach },
+			Null = { icons.type.Null, colors.yellow },
+			Object = { icons.type.Object, colors.yellow },
+			String = { icons.type.String, colors.green },
+			-- ccls-specific iconss.
+			TypeAlias = { icons.kind.TypeAlias, colors.green },
+			Parameter = { icons.kind.Parameter, colors.blue },
+			StaticMethod = { icons.kind.StaticMethod, colors.peach },
+		},
+		symbol_in_winbar = {
+			enable = true,
+			in_custom = false,
+			separator = " " .. icons.ui.Separator,
+			show_file = true,
+			-- define how to customize filename, eg: %:., %
+			-- if not set, use default value `%:t`
+			-- more information see `vim.fn.expand` or `expand`
+			-- ## only valid after set `show_file = true`
+			file_formatter = "",
+			click_support = function(node, clicks, button, modifiers)
+				-- To see all avaiable details: vim.pretty_print(node)
+				local st = node.range.start
+				local en = node.range["end"]
+				if button == "l" then
+					if clicks == 2 then
+					-- double left click to do nothing
+					else -- jump to node's starting line+char
+						vim.fn.cursor(st.line + 1, st.character + 1)
+					end
+				elseif button == "r" then
+					if modifiers == "s" then
+						print("lspsaga") -- shift right click to print "lspsaga"
+					end -- jump to node's ending line+char
+					vim.fn.cursor(en.line + 1, en.character + 1)
+				elseif button == "m" then
+					-- middle click to visual select node
+					vim.fn.cursor(st.line + 1, st.character + 1)
+					vim.api.nvim_command([[normal v]])
+					vim.fn.cursor(en.line + 1, en.character + 1)
+				end
+			end,
 		},
 	})
 end
 
 function config.cmp()
-	-- vim.cmd([[packadd cmp-tabnine]])
+	local icons = {
+		kind = require("modules.ui.icons").get("kind", true),
+		type = require("modules.ui.icons").get("type", true),
+		cmp = require("modules.ui.icons").get("cmp", true),
+	}
+
+	-- vim.api.nvim_command([[packadd cmp-tabnine]])
 	local t = function(str)
 		return vim.api.nvim_replace_termcodes(str, true, true, true)
 	end
@@ -147,7 +199,8 @@ function config.cmp()
 				mode = "symbol_text",
 				maxwidth = 50,
 				ellipsis_char = "...",
-				symbol_map = { Copilot = "" },
+				-- symbol_map = { Copilot = "" },
+				symbol_map = vim.tbl_deep_extend("force", icons.kind, icons.cmp, icons.type),
 			}),
 		},
 		-- You can set mappings if you want
@@ -214,7 +267,11 @@ function config.cmp()
 end
 
 function config.luasnip()
-	vim.o.runtimepath = vim.o.runtimepath .. "," .. os.getenv("HOME") .. "/.config/nvim/my-snippets/,"
+	local snippet_path = os.getenv("HOME") .. "/.config/nvim/my-snippets/"
+	if not vim.tbl_contains(vim.opt.rtp:get(), snippet_path) then
+		vim.opt.rtp:append(snippet_path)
+	end
+
 	require("luasnip").config.set_config({
 		history = true,
 		updateevents = "TextChanged,TextChangedI",

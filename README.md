@@ -20,15 +20,16 @@ This is my neovim's configuration, which contains two branches.
 
 I use [packer.nvim](https://github.com/wbthomason/packer.nvim) to manage plugins.
 
-| Branch |   Completion Solution   |
-| :----: | :---------------------: |
-|  main  | nvim-lspconfig+nvim-cmp |
+| Branch |    Completion Solution     |
+| :----: | :------------------------: |
+|  main  | config for nvim 0.8 stable |
+|  0.7   | config for nvim 0.7 stable |
 
 Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 
 **Pros**:
 
-- Fast. Less than **50ms** to start(Depends on SSD, tested on Sumsung 970 evo).
+- Fast. Less than **30ms** to start (Depends on SSD and CPU, tested on Zephyrus G14 2022 version).
 - Simple. Run out of the box.
 - Modern. Pure lua to config.
 - Modular. Easy to customize.
@@ -42,7 +43,7 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 
 # Details
 
-Please refer to [wiki](https://github.com/ayamir/nvimdots/wiki).
+Please **make sure** to follow [wiki](https://github.com/ayamir/nvimdots/wiki) to install.
 
 # Acknowledgement
 

@@ -1,19 +1,20 @@
 local config = {}
 
 function config.telescope()
-	vim.cmd([[packadd sqlite.lua]])
-	vim.cmd([[packadd telescope-fzf-native.nvim]])
-	vim.cmd([[packadd telescope-project.nvim]])
-	vim.cmd([[packadd telescope-frecency.nvim]])
-	vim.cmd([[packadd telescope-zoxide]])
+	vim.api.nvim_command([[packadd sqlite.lua]])
+	vim.api.nvim_command([[packadd telescope-fzf-native.nvim]])
+	vim.api.nvim_command([[packadd telescope-project.nvim]])
+	vim.api.nvim_command([[packadd telescope-frecency.nvim]])
+	vim.api.nvim_command([[packadd telescope-zoxide]])
 
+	local icons = { ui = require("modules.ui.icons").get("ui", true) }
 	local telescope_actions = require("telescope.actions.set")
 	local fixfolds = {
 		hidden = true,
 		attach_mappings = function(_)
 			telescope_actions.select:enhance({
 				post = function()
-					vim.cmd(":normal! zx")
+					vim.api.nvim_command([[:normal! zx"]])
 				end,
 			})
 			return true
@@ -23,8 +24,8 @@ function config.telescope()
 	require("telescope").setup({
 		defaults = {
 			initial_mode = "insert",
-			prompt_prefix = "  ",
-			selection_caret = " ",
+			prompt_prefix = " " .. icons.ui.Telescope .. " ",
+			selection_caret = icons.ui.ChevronRight,
 			entry_prefix = " ",
 			scroll_strategy = "limit",
 			results_title = false,
@@ -74,14 +75,19 @@ function config.telescope()
 end
 
 function config.trouble()
+	local icons = {
+		ui = require("modules.ui.icons").get("ui"),
+		diagnostics = require("modules.ui.icons").get("diagnostics"),
+	}
+
 	require("trouble").setup({
 		position = "bottom", -- position of the list can be: bottom, top, left, right
 		height = 10, -- height of the trouble list when position is top or bottom
 		width = 50, -- width of the list when position is left or right
 		icons = true, -- use devicons for filenames
 		mode = "document_diagnostics", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
-		fold_open = "", -- icon used for open folds
-		fold_closed = "", -- icon used for closed folds
+		fold_open = icons.ui.ArrowOpen, -- icon used for open folds
+		fold_closed = icons.ui.ArrowClosed, -- icon used for closed folds
 		action_keys = {
 			-- key mappings for actions in the trouble list
 			-- map to {} to remove a mapping, for example:
@@ -110,12 +116,12 @@ function config.trouble()
 		auto_preview = true, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
 		auto_fold = false, -- automatically fold a file trouble list at creation
 		signs = {
-			-- icons / text used for a diagnostic  in the <leader>cd
-			error = "",
-			warning = "",
-			hint = "",
-			information = "",
-			other = "﫠",
+			-- icons / text used for a diagnostic
+			error = icons.diagnostics.Error_alt,
+			warning = icons.diagnostics.Warning_alt,
+			hint = icons.diagnostics.Hint_alt,
+			information = icons.diagnostics.Information_alt,
+			other = icons.diagnostics.Question_alt,
 		},
 		use_lsp_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
 	})
@@ -146,6 +152,11 @@ function config.sniprun()
 end
 
 function config.which_key()
+	local icons = {
+		ui = require("modules.ui.icons").get("ui"),
+		misc = require("modules.ui.icons").get("misc"),
+	}
+
 	require("which-key").setup({
 		plugins = {
 			presets = {
@@ -160,9 +171,9 @@ function config.which_key()
 		},
 
 		icons = {
-			breadcrumb = "»",
-			separator = "│",
-			group = "+",
+			breadcrumb = icons.ui.Separator,
+			separator = icons.misc.Vbar,
+			group = icons.misc.Add,
 		},
 
 		window = {
@@ -176,38 +187,60 @@ function config.which_key()
 end
 
 function config.wilder()
-	vim.cmd([[
-call wilder#setup({'modes': [':', '/', '?']})
-call wilder#set_option('use_python_remote_plugin', 0)
-call wilder#set_option('pipeline', [wilder#branch(
-	\ wilder#cmdline_pipeline({'use_python': 0,'fuzzy': 1, 'fuzzy_filter': wilder#lua_fzy_filter()}),
-	\ wilder#vim_search_pipeline(),
-	\ [wilder#check({_, x -> empty(x)}), wilder#history(), wilder#result({'draw': [{_, x -> ' ' . x}]})]
-	\ )])
-call wilder#set_option('renderer', wilder#renderer_mux({
-	\ ':': wilder#popupmenu_renderer({
-		\ 'highlighter': wilder#lua_fzy_highlighter(),
-		\ 'left': [wilder#popupmenu_devicons()],
-		\ 'right': [' ', wilder#popupmenu_scrollbar()]
-		\ }),
-	\ '/': wilder#wildmenu_renderer({
-		\ 'highlighter': wilder#lua_fzy_highlighter(),
-		\ 'apply_incsearch_fix': v:true,
-		\})
-	\ }))
-]])
-end
+	local wilder = require("wilder")
+	local icons = { ui = require("modules.ui.icons").get("ui") }
 
-function config.filetype()
-	-- In init.lua or filetype.nvim's config file
-	require("filetype").setup({
-		overrides = {
-			shebang = {
-				-- Set the filetype of files with a dash shebang to sh
-				dash = "sh",
-			},
-		},
+	wilder.setup({ modes = { ":", "/", "?" } })
+	wilder.set_option("use_python_remote_plugin", 0)
+	wilder.set_option("pipeline", {
+		wilder.branch(
+			wilder.cmdline_pipeline({ use_python = 0, fuzzy = 1, fuzzy_filter = wilder.lua_fzy_filter() }),
+			wilder.vim_search_pipeline(),
+			{
+				wilder.check(function(_, x)
+					return x == ""
+				end),
+				wilder.history(),
+				wilder.result({
+					draw = {
+						function(_, x)
+							return icons.ui.Calendar .. " " .. x
+						end,
+					},
+				}),
+			}
+		),
 	})
+
+	local popupmenu_renderer = wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
+		border = "rounded",
+		empty_message = wilder.popupmenu_empty_message_with_spinner(),
+		highlighter = wilder.lua_fzy_highlighter(),
+		left = {
+			" ",
+			wilder.popupmenu_devicons(),
+			wilder.popupmenu_buffer_flags({
+				flags = " a + ",
+				icons = { ["+"] = icons.ui.Pencil, a = icons.ui.Indicator, h = icons.ui.File },
+			}),
+		},
+		right = {
+			" ",
+			wilder.popupmenu_scrollbar(),
+		},
+	}))
+	local wildmenu_renderer = wilder.wildmenu_renderer({
+		highlighter = wilder.lua_fzy_highlighter(),
+		apply_incsearch_fix = true,
+	})
+	wilder.set_option(
+		"renderer",
+		wilder.renderer_mux({
+			[":"] = popupmenu_renderer,
+			["/"] = wildmenu_renderer,
+			substitute = wildmenu_renderer,
+		})
+	)
 end
 
 function config.todo_comments()

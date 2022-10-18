@@ -1,9 +1,8 @@
 local formatting = require("modules.completion.formatting")
 
-vim.cmd([[packadd lsp_signature.nvim]])
-vim.cmd([[packadd lspsaga.nvim]])
-vim.cmd([[packadd cmp-nvim-lsp]])
-vim.cmd([[packadd nvim-navic]])
+vim.api.nvim_command([[packadd lsp_signature.nvim]])
+vim.api.nvim_command([[packadd lspsaga.nvim]])
+vim.api.nvim_command([[packadd cmp-nvim-lsp]])
 
 local nvim_lsp = require("lspconfig")
 local mason = require("mason")
@@ -12,9 +11,9 @@ local mason_lsp = require("mason-lspconfig")
 mason.setup()
 mason_lsp.setup({
 	ensure_installed = {
-		"bash-language-server",
+		-- "bash-language-server",
 		"efm",
-		"lua-language-server",
+		-- "lua-language-server",
 		"clangd",
 		"gopls",
 		"pyright",
@@ -22,7 +21,7 @@ mason_lsp.setup({
 })
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 vim.cmd("command! -nargs=0 LspLog call v:lua.open_lsp_log()")
 
@@ -45,7 +44,6 @@ local function custom_attach(client, bufnr)
 		hi_parameter = "Search",
 		handler_opts = { "double" },
 	})
-	require("nvim-navic").attach(client, bufnr)
 end
 
 local function switch_source_header_splitcmd(bufnr, splitcmd)
@@ -210,7 +208,7 @@ for _, server in ipairs(mason_lsp.get_installed_servers()) do
 				},
 			},
 		})
-	else
+	elseif server ~= "efm" then
 		nvim_lsp[server].setup({
 			capabilities = capabilities,
 			on_attach = custom_attach,

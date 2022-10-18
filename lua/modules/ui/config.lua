@@ -207,29 +207,8 @@ function config.catppuccin()
 		return cp
 	end
 
-	local function set_auto_compile(enable_compile)
-		-- Setting auto-compile for catppuccin.
-		if enable_compile then
-			vim.api.nvim_create_augroup("_catppuccin", { clear = true })
-
-			vim.api.nvim_create_autocmd("User", {
-				group = "_catppuccin",
-				pattern = "PackerCompileDone",
-				callback = function()
-					require("catppuccin").compile()
-					vim.defer_fn(function()
-						vim.cmd([[colorscheme catppuccin]])
-					end, 0)
-				end,
-			})
-		end
-	end
-
 	vim.g.catppuccin_flavour = "mocha" -- Set flavour here
 	local cp = get_modified_palette()
-
-	local enable_compile = true -- Set to false if you would like to disable catppuccin cache. (Not recommended)
-	set_auto_compile(enable_compile)
 
 	require("catppuccin").setup({
 		dim_inactive = {
@@ -241,10 +220,7 @@ function config.catppuccin()
 		},
 		transparent_background = false,
 		term_colors = true,
-		compile = {
-			enabled = enable_compile,
-			path = vim.fn.stdpath("cache") .. "/catppuccin",
-		},
+		compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
 		styles = {
 			comments = { "italic" },
 			properties = { "italic" },
@@ -306,7 +282,7 @@ function config.catppuccin()
 			aerial = false,
 			vimwiki = true,
 			beacon = false,
-			navic = { enabled = true, custom_bg = "NONE" },
+			navic = { enabled = false },
 			overseer = false,
 			fidget = true,
 		},
@@ -365,78 +341,89 @@ function config.catppuccin()
 				FidgetTitle = { fg = cp.blue, style = { "bold" } },
 
 				-- For treesitter.
-				TSField = { fg = cp.rosewater },
-				TSProperty = { fg = cp.yellow },
+				["@field"] = { fg = cp.rosewater },
+				["@property"] = { fg = cp.yellow },
 
-				TSInclude = { fg = cp.teal },
-				TSOperator = { fg = cp.sky },
-				TSKeywordOperator = { fg = cp.sky },
-				TSPunctSpecial = { fg = cp.maroon },
+				["@include"] = { fg = cp.teal },
+				["@operator"] = { fg = cp.sky },
+				["@keyword.operator"] = { fg = cp.sky },
+				["@punctuation.special"] = { fg = cp.maroon },
 
-				-- TSFloat = { fg = cp.peach },
-				-- TSNumber = { fg = cp.peach },
-				-- TSBoolean = { fg = cp.peach },
+				-- ["@float"] = { fg = cp.peach },
+				-- ["@number"] = { fg = cp.peach },
+				-- ["@boolean"] = { fg = cp.peach },
 
-				TSConstructor = { fg = cp.lavender },
-				-- TSConstant = { fg = cp.peach },
-				-- TSConditional = { fg = cp.mauve },
-				-- TSRepeat = { fg = cp.mauve },
-				TSException = { fg = cp.peach },
+				["@constructor"] = { fg = cp.lavender },
+				-- ["@constant"] = { fg = cp.peach },
+				-- ["@conditional"] = { fg = cp.mauve },
+				-- ["@repeat"] = { fg = cp.mauve },
+				["@exception"] = { fg = cp.peach },
 
-				TSConstBuiltin = { fg = cp.lavender },
-				-- TSFuncBuiltin = { fg = cp.peach, style = { "italic" } },
-				-- TSTypeBuiltin = { fg = cp.yellow, style = { "italic" } },
-				TSVariableBuiltin = { fg = cp.red, style = { "italic" } },
+				["@constant.builtin"] = { fg = cp.lavender },
+				-- ["@function.builtin"] = { fg = cp.peach, style = { "italic" } },
+				-- ["@type.builtin"] = { fg = cp.yellow, style = { "italic" } },
+				["@variable.builtin"] = { fg = cp.red, style = { "italic" } },
 
-				-- TSFunction = { fg = cp.blue },
-				TSFuncMacro = { fg = cp.red, style = {} },
-				TSParameter = { fg = cp.rosewater },
-				TSKeywordFunction = { fg = cp.maroon },
-				TSKeyword = { fg = cp.red },
-				TSKeywordReturn = { fg = cp.pink, style = {} },
+				-- ["@function"] = { fg = cp.blue },
+				["@function.macro"] = { fg = cp.red, style = {} },
+				["@parameter"] = { fg = cp.rosewater },
+				["@keyword.function"] = { fg = cp.maroon },
+				["@keyword"] = { fg = cp.red },
+				["@keyword.return"] = { fg = cp.pink, style = {} },
 
-				-- TSNote = { fg = cp.base, bg = cp.blue },
-				-- TSWarning = { fg = cp.base, bg = cp.yellow },
-				-- TSDanger = { fg = cp.base, bg = cp.red },
-				-- TSConstMacro = { fg = cp.mauve },
+				-- ["@text.note"] = { fg = cp.base, bg = cp.blue },
+				-- ["@text.warning"] = { fg = cp.base, bg = cp.yellow },
+				-- ["@text.danger"] = { fg = cp.base, bg = cp.red },
+				-- ["@constant.macro"] = { fg = cp.mauve },
 
-				-- TSLabel = { fg = cp.blue },
-				TSMethod = { style = { "italic" } },
-				TSNamespace = { fg = cp.rosewater },
+				-- ["@label"] = { fg = cp.blue },
+				["@method"] = { style = { "italic" } },
+				["@namespace"] = { fg = cp.rosewater, style = {} },
 
-				TSPunctDelimiter = { fg = cp.teal },
-				TSPunctBracket = { fg = cp.overlay2 },
-				-- TSString = { fg = cp.green },
-				-- TSStringRegex = { fg = cp.peach },
-				-- TSType = { fg = cp.yellow },
-				TSVariable = { fg = cp.text },
-				TSTagAttribute = { fg = cp.mauve, style = { "italic" } },
-				TSTag = { fg = cp.peach },
-				TSTagDelimiter = { fg = cp.maroon },
-				TSText = { fg = cp.text },
+				["@punctuation.delimiter"] = { fg = cp.teal },
+				["@punctuation.bracket"] = { fg = cp.overlay2 },
+				-- ["@string"] = { fg = cp.green },
+				-- ["@string.regex"] = { fg = cp.peach },
+				-- ["@type"] = { fg = cp.yellow },
+				["@variable"] = { fg = cp.text },
+				["@tag.attribute"] = { fg = cp.mauve, style = { "italic" } },
+				["@tag"] = { fg = cp.peach },
+				["@tag.delimiter"] = { fg = cp.maroon },
+				["@text"] = { fg = cp.text },
 
-				-- TSURI = { fg = cp.rosewater, style = { "italic", "underline" } },
-				-- TSLiteral = { fg = cp.teal, style = { "italic" } },
-				-- TSTextReference = { fg = cp.lavender, style = { "bold" } },
-				-- TSTitle = { fg = cp.blue, style = { "bold" } },
-				-- TSEmphasis = { fg = cp.maroon, style = { "italic" } },
-				-- TSStrong = { fg = cp.maroon, style = { "bold" } },
-				-- TSStringEscape = { fg = cp.pink },
+				-- ["@text.uri"] = { fg = cp.rosewater, style = { "italic", "underline" } },
+				-- ["@text.literal"] = { fg = cp.teal, style = { "italic" } },
+				-- ["@text.reference"] = { fg = cp.lavender, style = { "bold" } },
+				-- ["@text.title"] = { fg = cp.blue, style = { "bold" } },
+				-- ["@text.emphasis"] = { fg = cp.maroon, style = { "italic" } },
+				-- ["@text.strong"] = { fg = cp.maroon, style = { "bold" } },
+				-- ["@string.escape"] = { fg = cp.pink },
 
-				bashTSFuncBuiltin = { fg = cp.red, style = { "italic" } },
-				bashTSParameter = { fg = cp.yellow, style = { "italic" } },
+				-- ["@property.toml"] = { fg = cp.blue },
+				-- ["@field.yaml"] = { fg = cp.blue },
 
-				luaTSField = { fg = cp.lavender },
-				luaTSConstructor = { fg = cp.flamingo },
+				-- ["@label.json"] = { fg = cp.blue },
 
-				javaTSConstant = { fg = cp.teal },
+				["@function.builtin.bash"] = { fg = cp.red, style = { "italic" } },
+				["@parameter.bash"] = { fg = cp.yellow, style = { "italic" } },
 
-				typescriptTSProperty = { fg = cp.lavender, style = { "italic" } },
+				["@field.lua"] = { fg = cp.lavender },
+				["@constructor.lua"] = { fg = cp.flamingo },
 
-				cssTSType = { fg = cp.lavender },
-				cssTSProperty = { fg = cp.yellow, style = { "italic" } },
+				["@constant.java"] = { fg = cp.teal },
 
-				cppTSProperty = { fg = cp.text },
+				["@property.typescript"] = { fg = cp.lavender, style = { "italic" } },
+				-- ["@constructor.typescript"] = { fg = cp.lavender },
+
+				-- ["@constructor.tsx"] = { fg = cp.lavender },
+				-- ["@tag.attribute.tsx"] = { fg = cp.mauve },
+
+				["@type.css"] = { fg = cp.lavender },
+				["@property.css"] = { fg = cp.yellow, style = { "italic" } },
+
+				["@property.cpp"] = { fg = cp.text },
+
+				-- ["@symbol"] = { fg = cp.flamingo },
 			},
 		},
 	})
@@ -444,6 +431,11 @@ end
 
 function config.notify()
 	local notify = require("notify")
+	local icons = {
+		diagnostics = require("modules.ui.icons").get("diagnostics"),
+		ui = require("modules.ui.icons").get("ui"),
+	}
+
 	notify.setup({
 		---@usage Animation style one of { "fade", "slide", "fade_in_slide_out", "static" }
 		stages = "slide",
@@ -463,227 +455,178 @@ function config.notify()
 		level = "TRACE",
 		---@usage Icons for the different levels
 		icons = {
-			ERROR = "",
-			WARN = "",
-			INFO = "",
-			DEBUG = "",
-			TRACE = "✎",
+			ERROR = icons.diagnostics.Error,
+			WARN = icons.diagnostics.Warning,
+			INFO = icons.diagnostics.Information,
+			DEBUG = icons.ui.Bug,
+			TRACE = icons.ui.Pencil,
 		},
 	})
 
 	vim.notify = notify
 end
 
--- function config.lualine()
--- 	local navic = require("nvim-navic")
+function config.lualine()
+	local icons = {
+		diagnostics = require("modules.ui.icons").get("diagnostics", true),
+		misc = require("modules.ui.icons").get("misc", true),
+	}
 
--- 	local function escape_status()
--- 		local ok, m = pcall(require, "better_escape")
--- 		return ok and m.waiting and "✺ " or ""
--- 	end
+	local function escape_status()
+		local ok, m = pcall(require, "better_escape")
+		return ok and m.waiting and icons.misc.EscapeST or ""
+	end
 
--- 	local function diff_source()
--- 		local gitsigns = vim.b.gitsigns_status_dict
--- 		if gitsigns then
--- 			return {
--- 				added = gitsigns.added,
--- 				modified = gitsigns.changed,
--- 				removed = gitsigns.removed,
--- 			}
--- 		end
--- 	end
+	local function diff_source()
+		local gitsigns = vim.b.gitsigns_status_dict
+		if gitsigns then
+			return {
+				added = gitsigns.added,
+				modified = gitsigns.changed,
+				removed = gitsigns.removed,
+			}
+		end
+	end
 
--- 	local mini_sections = {
--- 		lualine_a = {},
--- 		lualine_b = {},
--- 		lualine_c = {},
--- 		lualine_x = {},
--- 		lualine_y = {},
--- 		lualine_z = { "location" },
--- 	}
--- 	local simple_sections = {
--- 		lualine_a = { "mode" },
--- 		lualine_b = { "filetype" },
--- 		lualine_c = {},
--- 		lualine_x = {},
--- 		lualine_y = {},
--- 		lualine_z = { "location" },
--- 	}
--- 	local outline = {
--- 		sections = mini_sections,
--- 		filetypes = { "lspsagaoutline" },
--- 	}
--- 	local dapui_scopes = {
--- 		sections = simple_sections,
--- 		filetypes = { "dapui_scopes" },
--- 	}
+	local mini_sections = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = { "location" },
+	}
+	local simple_sections = {
+		lualine_a = { "mode" },
+		lualine_b = { "filetype" },
+		lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = { "location" },
+	}
+	local outline = {
+		sections = mini_sections,
+		filetypes = { "lspsagaoutline" },
+	}
+	local dapui_scopes = {
+		sections = simple_sections,
+		filetypes = { "dapui_scopes" },
+	}
 
--- 	local dapui_breakpoints = {
--- 		sections = simple_sections,
--- 		filetypes = { "dapui_breakpoints" },
--- 	}
+	local dapui_breakpoints = {
+		sections = simple_sections,
+		filetypes = { "dapui_breakpoints" },
+	}
 
--- 	local dapui_stacks = {
--- 		sections = simple_sections,
--- 		filetypes = { "dapui_stacks" },
--- 	}
+	local dapui_stacks = {
+		sections = simple_sections,
+		filetypes = { "dapui_stacks" },
+	}
 
--- 	local dapui_watches = {
--- 		sections = simple_sections,
--- 		filetypes = { "dapui_watches" },
--- 	}
+	local dapui_watches = {
+		sections = simple_sections,
+		filetypes = { "dapui_watches" },
+	}
 
--- 	local function python_venv()
--- 		local function env_cleanup(venv)
--- 			if string.find(venv, "/") then
--- 				local final_venv = venv
--- 				for w in venv:gmatch("([^/]+)") do
--- 					final_venv = w
--- 				end
--- 				venv = final_venv
--- 			end
--- 			return venv
--- 		end
+	local function python_venv()
+		local function env_cleanup(venv)
+			if string.find(venv, "/") then
+				local final_venv = venv
+				for w in venv:gmatch("([^/]+)") do
+					final_venv = w
+				end
+				venv = final_venv
+			end
+			return venv
+		end
 
--- 		if vim.bo.filetype == "python" then
--- 			local venv = os.getenv("CONDA_DEFAULT_ENV")
--- 			if venv then
--- 				return string.format("%s", env_cleanup(venv))
--- 			end
--- 			venv = os.getenv("VIRTUAL_ENV")
--- 			if venv then
--- 				return string.format("%s", env_cleanup(venv))
--- 			end
--- 		end
--- 		return ""
--- 	end
+		if vim.bo.filetype == "python" then
+			local venv = os.getenv("CONDA_DEFAULT_ENV")
+			if venv then
+				return string.format("%s", env_cleanup(venv))
+			end
+			venv = os.getenv("VIRTUAL_ENV")
+			if venv then
+				return string.format("%s", env_cleanup(venv))
+			end
+		end
+		return ""
+	end
 
--- 	require("lualine").setup({
--- 		options = {
--- 			icons_enabled = true,
--- 			theme = "onedark",
--- 			disabled_filetypes = {},
--- 			component_separators = "|",
--- 			section_separators = { left = "", right = "" },
--- 		},
--- 		sections = {
--- 			lualine_a = { "mode" },
--- 			lualine_b = { { "branch" }, { "diff", source = diff_source } },
--- 			lualine_c = {
--- 				{ navic.get_location, cond = navic.is_available },
--- 			},
--- 			lualine_x = {
--- 				{ escape_status },
--- 				{
--- 					"diagnostics",
--- 					sources = { "nvim_diagnostic" },
--- 					symbols = { error = " ", warn = " ", info = " " },
--- 				},
--- 			},
--- 			lualine_y = {
--- 				{ "filetype", colored = true, icon_only = true },
--- 				{ python_venv },
--- 				{ "encoding" },
--- 				{
--- 					"fileformat",
--- 					icons_enabled = true,
--- 					symbols = {
--- 						unix = "LF",
--- 						dos = "CRLF",
--- 						mac = "CR",
--- 					},
--- 				},
--- 			},
--- 			lualine_z = { "progress", "location" },
--- 		},
--- 		inactive_sections = {
--- 			lualine_a = {},
--- 			lualine_b = {},
--- 			lualine_c = { "filename" },
--- 			lualine_x = { "location" },
--- 			lualine_y = {},
--- 			lualine_z = {},
--- 		},
--- 		tabline = {},
--- 		extensions = {
--- 			"quickfix",
--- 			"nvim-tree",
--- 			"toggleterm",
--- 			"fugitive",
--- 			outline,
--- 			dapui_scopes,
--- 			dapui_breakpoints,
--- 			dapui_stacks,
--- 			dapui_watches,
--- 		},
--- 	})
--- end
-
-function config.nvim_gps()
-	require("nvim-gps").setup({
-		icons = {
-			["class-name"] = " ", -- Classes and class-like objects
-			["function-name"] = " ", -- Functions
-			["method-name"] = " ", -- Methods (functions inside class-like objects)
+	require("lualine").setup({
+		options = {
+			icons_enabled = true,
+			theme = "onedark",
+			disabled_filetypes = {},
+			component_separators = "|",
+			section_separators = { left = "", right = "" },
 		},
-		languages = {
-			-- You can disable any language individually here
-			["c"] = true,
-			["cpp"] = true,
-			["go"] = true,
-			["java"] = true,
-			["javascript"] = true,
-			["lua"] = true,
-			["python"] = true,
-			["rust"] = true,
+		sections = {
+			lualine_a = { "mode" },
+			lualine_b = { { "branch" }, { "diff", source = diff_source } },
+			lualine_c = {},
+			lualine_x = {
+				{ escape_status },
+				{
+					"diagnostics",
+					sources = { "nvim_diagnostic" },
+					symbols = {
+						error = icons.diagnostics.Error,
+						warn = icons.diagnostics.Warning,
+						info = icons.diagnostics.Information,
+					},
+				},
+			},
+			lualine_y = {
+				{ "filetype", colored = true, icon_only = true },
+				{ python_venv },
+				{ "encoding" },
+				{
+					"fileformat",
+					icons_enabled = true,
+					symbols = {
+						unix = "LF",
+						dos = "CRLF",
+						mac = "CR",
+					},
+				},
+			},
+			lualine_z = { "progress", "location" },
 		},
-		separator = " > ",
-	})
-end
-
-function config.nvim_navic()
-	vim.g.navic_silence = true
-
-	require("nvim-navic").setup({
-		icons = {
-			Method = " ",
-			Function = " ",
-			Constructor = " ",
-			Field = " ",
-			Variable = " ",
-			Class = "ﴯ ",
-			Interface = " ",
-			Module = " ",
-			Property = "ﰠ ",
-			Enum = " ",
-			File = " ",
-			EnumMember = " ",
-			Constant = " ",
-			Struct = " ",
-			Event = " ",
-			Operator = " ",
-			TypeParameter = " ",
-			Namespace = " ",
-			Object = " ",
-			Array = " ",
-			Boolean = " ",
-			Number = " ",
-			Null = "ﳠ ",
-			Key = " ",
-			String = " ",
-			Package = " ",
+		inactive_sections = {
+			lualine_a = {},
+			lualine_b = {},
+			lualine_c = { "filename" },
+			lualine_x = { "location" },
+			lualine_y = {},
+			lualine_z = {},
 		},
-		highlight = true,
-		separator = " > ",
-		depth_limit = 0,
-		depth_limit_indicator = "..",
+		tabline = {},
+		extensions = {
+			"quickfix",
+			"nvim-tree",
+			"toggleterm",
+			"fugitive",
+			outline,
+			dapui_scopes,
+			dapui_breakpoints,
+			dapui_stacks,
+			dapui_watches,
+		},
 	})
 end
 
 function config.nvim_tree()
+	local icons = {
+		diagnostics = require("modules.ui.icons").get("diagnostics"),
+		documents = require("modules.ui.icons").get("documents"),
+		git = require("modules.ui.icons").get("git"),
+		ui = require("modules.ui.icons").get("ui"),
+	}
+
 	require("nvim-tree").setup({
 		create_in_closed_folder = false,
-		respect_buf_cwd = true,
+		respect_buf_cwd = false,
 		auto_reload_on_write = true,
 		disable_netrw = false,
 		hijack_cursor = true,
@@ -694,7 +637,7 @@ function config.nvim_tree()
 		open_on_setup_file = false,
 		open_on_tab = false,
 		sort_by = "name",
-		update_cwd = true,
+		sync_root_with_cwd = true,
 		view = {
 			adaptive_size = false,
 			centralize_selection = false,
@@ -747,29 +690,29 @@ function config.nvim_tree()
 				padding = " ",
 				symlink_arrow = "  ",
 				glyphs = {
-					default = "", --
-					symlink = "",
-					bookmark = "",
+					default = icons.documents.Default, --
+					symlink = icons.documents.Symlink, --
+					bookmark = icons.ui.Bookmark,
 					git = {
-						unstaged = "",
-						staged = "", --
-						unmerged = "שׂ",
-						renamed = "", --
-						untracked = "ﲉ",
-						deleted = "",
-						ignored = "", --◌
+						unstaged = icons.git.Mod_alt,
+						staged = icons.git.Add, --
+						unmerged = icons.git.Unmerged,
+						renamed = icons.git.Rename, --
+						untracked = icons.git.Untracked, -- "ﲉ"
+						deleted = icons.git.Remove, --
+						ignored = icons.git.Ignore, --◌
 					},
 					folder = {
 						-- arrow_open = "",
 						-- arrow_closed = "",
 						arrow_open = "",
 						arrow_closed = "",
-						default = "",
-						open = "",
-						empty = "",
-						empty_open = "",
-						symlink = "",
-						symlink_open = "",
+						default = icons.ui.Folder,
+						open = icons.ui.FolderOpen,
+						empty = icons.ui.EmptyFolder,
+						empty_open = icons.ui.EmptyFolderOpen,
+						symlink = icons.ui.SymlinkFolder,
+						symlink_open = icons.ui.FolderOpen,
 					},
 				},
 			},
@@ -780,7 +723,7 @@ function config.nvim_tree()
 		},
 		update_focused_file = {
 			enable = true,
-			update_cwd = true,
+			update_root = false,
 			ignore_list = {},
 		},
 		ignore_ft_on_setup = {},
@@ -816,10 +759,10 @@ function config.nvim_tree()
 			show_on_dirs = false,
 			debounce_delay = 50,
 			icons = {
-				hint = "",
-				info = "",
-				warning = "",
-				error = "",
+				hint = icons.diagnostics.Hint_alt,
+				info = icons.diagnostics.Information_alt,
+				warning = icons.diagnostics.Warning_alt,
+				error = icons.diagnostics.Error_alt,
 			},
 		},
 		filesystem_watchers = {
@@ -858,13 +801,16 @@ function config.nvim_tree()
 end
 
 function config.nvim_bufferline()
+	local icons = { ui = require("modules.ui.icons").get("ui") }
+
 	local opts = {
 		options = {
 			modified_icon = "",
 			number = nil,
-			buffer_close_icon = "",
-			left_trunc_marker = "",
-			right_trunc_marker = "",
+			modified_icon = icons.ui.Modified,
+			buffer_close_icon = icons.ui.Close,
+			left_trunc_marker = icons.ui.Left,
+			right_trunc_marker = icons.ui.Right,
 			max_name_length = 14,
 			max_prefix_length = 13,
 			tab_size = 20,
@@ -880,6 +826,13 @@ function config.nvim_bufferline()
 					text = "File Explorer",
 					text_align = "center",
 					padding = 1,
+				},
+				{
+					filetype = "undotree",
+					text = "Undo Tree",
+					text_align = "center",
+					highlight = "Directory",
+					separator = true,
 				},
 			},
 			diagnostics_indicator = function(count)
@@ -1035,8 +988,6 @@ function config.indent_blankline()
 		},
 		space_char_blankline = " ",
 	})
-	-- because lazy load indent-blankline so need readd this autocmd
-	vim.cmd("autocmd CursorMoved * IndentBlanklineRefresh")
 end
 
 function config.scrollview()

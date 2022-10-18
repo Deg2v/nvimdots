@@ -48,15 +48,12 @@ tools["folke/trouble.nvim"] = {
 	config = conf.trouble,
 }
 tools["dstein64/vim-startuptime"] = { opt = true, cmd = "StartupTime" }
+
 -- tools["gelguy/wilder.nvim"] = {
 -- 	event = "CmdlineEnter",
 -- 	config = conf.wilder,
 -- 	requires = { { "romgrk/fzy-lua-native", after = "wilder.nvim" } },
 -- }
-tools["nathom/filetype.nvim"] = {
-	opt = false,
-	config = conf.filetype,
-}
 tools["folke/todo-comments.nvim"] = {
 	opt = false,
 	config = conf.todo_comments,
