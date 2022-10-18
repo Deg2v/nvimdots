@@ -41,11 +41,6 @@ local plug_map = {
 	["n|gd"] = map_cr("Lspsaga peek_definition"):with_noremap():with_silent(),
 	["n|gD"] = map_cr("lua vim.lsp.buf.definition()"):with_noremap():with_silent(),
 
-	["n|<A-s>"] = map_cu("Lspsaga open_floaterm"):with_noremap():with_silent(),
-	["t|<A-s>"] = map_cu([[<C-\><C-n>:Lspsaga close_floaterm<CR>]]):with_noremap():with_silent(),
-	-- tmap({ '<A-d>', [[<C-\><C-n>:Lspsaga close_floaterm<CR>]], opts(noremap, silent) })
-
-	-- { '<A-d>', cmd('Lspsaga open_floaterm'), opts(noremap, silent) },
 	["n|gh"] = map_cr("Lspsaga lsp_finder"):with_noremap():with_silent(),
 	["n|gps"] = map_cr("G push"):with_noremap():with_silent(),
 	["n|gpl"] = map_cr("G pull"):with_noremap():with_silent(),
