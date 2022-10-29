@@ -17,7 +17,7 @@ mason_lsp.setup({
 		"efm",
 		"sumneko_lua",
 		"clangd",
-		"gopls",
+		-- "gopls",
 		"pyright",
 	},
 })
