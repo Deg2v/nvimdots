@@ -151,9 +151,9 @@ function config.onedark()
 			-- green = '#00ffaa',            -- redefine an existing color
 		}, -- Override default colors
 		highlights = {
-			TSVariable = { fg = "#e06150" },
-			-- TSParameter = { fg = "#ffb900" },
-			TSParameter = { fg = "#ff8800" },
+			["@variable"] = { fg = "#e06150" },
+			["@parameter"] = { fg = "#ffb900" },
+			["@parameter.reference"] = { fg = "#00ffaa" },
 			rainbowcol1 = { fg = "#ff8800" },
 		}, -- Override highlight groups
 
