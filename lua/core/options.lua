@@ -93,7 +93,7 @@ local function load_options()
 		wrap = true,
 		linebreak = true,
 		number = true,
-		relativenumber = true,
+		relativenumber = false,
 		foldenable = true,
 		signcolumn = "yes",
 		conceallevel = 0,
