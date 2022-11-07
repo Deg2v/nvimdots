@@ -70,13 +70,15 @@ local function addtitle()
 
 	local comment_str = {
 		"=============================================================================",
-		"FileName  : " .. filename,
-		"Describes : ",
-		"Author    : " .. name,
-		"Email     : " .. email,
-		"Version   : 0.0",
+		"  FileName: " .. filename,
+		" Describes: ",
+		"    Author: " .. name,
+		"     Email: " .. email,
+		"   Version: 0.0.1",
 		"LastChange: " .. time,
-		"History   : Created",
+		" Reference: ",
+		"   History: Created",
+		"      Tags: ",
 		"=============================================================================",
 	}
 
@@ -86,8 +88,8 @@ local function addtitle()
 	local result = vim.fn.getbufinfo()
 	local numall = result[1].linecount -- HACK:
 	local num20 = 0
-	if numall > 20 then
-		num20 = 20
+	if numall > 30 then
+		num20 = 30
 	else
 		num20 = numall
 	end
