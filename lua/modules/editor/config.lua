@@ -1,5 +1,6 @@
 local config = {}
 local sessions_dir = vim.fn.stdpath("data") .. "/sessions/"
+local use_ssh = require("core.settings").use_ssh
 
 function config.nvim_treesitter()
 	vim.api.nvim_set_option_value("foldmethod", "expr", {})
@@ -69,9 +70,11 @@ function config.nvim_treesitter()
 		matchup = { enable = true },
 	})
 	require("nvim-treesitter.install").prefer_git = true
-	local parsers = require("nvim-treesitter.parsers").get_parser_configs()
-	for _, p in pairs(parsers) do
-		p.install_info.url = p.install_info.url:gsub("https://github.com/", "git@github.com:")
+	if use_ssh then
+		local parsers = require("nvim-treesitter.parsers").get_parser_configs()
+		for _, p in pairs(parsers) do
+			p.install_info.url = p.install_info.url:gsub("https://github.com/", "git@github.com:")
+		end
 	end
 end
 
@@ -503,6 +506,30 @@ function config.accelerated_jk()
 		acceleration_table = { 7, 12, 17, 21, 24, 26, 28, 30 },
 		-- when 'enable_deceleration = true', 'deceleration_table = { {200, 3}, {300, 7}, {450, 11}, {600, 15}, {750, 21}, {900, 9999} }'
 		deceleration_table = { { 150, 9999 } },
+	})
+end
+
+function config.smartyank()
+	require("smartyank").setup({
+		highlight = {
+			enabled = false, -- highlight yanked text
+			higroup = "IncSearch", -- highlight group of yanked text
+			timeout = 2000, -- timeout for clearing the highlight
+		},
+		clipboard = {
+			enabled = true,
+		},
+		tmux = {
+			enabled = true,
+			-- remove `-w` to disable copy to host client's clipboard
+			cmd = { "tmux", "set-buffer", "-w" },
+		},
+		osc52 = {
+			enabled = true,
+			ssh_only = true, -- false to OSC52 yank also in local sessions
+			silent = false, -- true to disable the "n chars copied" echo
+			echo_hl = "Directory", -- highlight group of the OSC52 echo message
+		},
 	})
 end
 
