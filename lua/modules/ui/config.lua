@@ -58,15 +58,15 @@ function config.alpha()
 		}
 	end
 
-	local leader = "comma"
+	local leader = "backslash"
 	dashboard.section.buttons.val = {
-		button("comma s c", " Scheme change", leader, "<cmd>Telescope colorscheme<cr>"),
-		button("comma f r", " File frecency", leader, "<cmd>Telescope frecency<cr>"),
-		button("comma f e", " File history", leader, "<cmd>Telescope oldfiles<cr>"),
-		button("comma f p", " Project find", leader, "<cmd>Telescope project<cr>"),
-		button("comma f f", " File find", leader, "<cmd>Telescope find_files<cr>"),
-		button("comma f n", " File new", leader, "<cmd>enew<cr>"),
-		button("comma f w", " Word find", leader, "<cmd>Telescope live_grep<cr>"),
+		button("backslash s c", " Scheme change", leader, "<cmd>Telescope colorscheme<cr>"),
+		button("backslash f r", " File frecency", leader, "<cmd>Telescope frecency<cr>"),
+		button("backslash f e", " File history", leader, "<cmd>Telescope oldfiles<cr>"),
+		button("backslash f p", " Project find", leader, "<cmd>Telescope project<cr>"),
+		button("backslash f f", " File find", leader, "<cmd>Telescope find_files<cr>"),
+		button("backslash f n", " File new", leader, "<cmd>enew<cr>"),
+		button("backslash f w", " Word find", leader, "<cmd>Telescope live_grep<cr>"),
 	}
 	dashboard.section.buttons.opts.hl = "String"
 
