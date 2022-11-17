@@ -58,7 +58,6 @@ end
 local condition = require("galaxyline.condition")
 local fileinfo = require("galaxyline.provider_fileinfo")
 local gls = galaxyline.section
--- local navic = require("nvim-navic")
 galaxyline.short_line_list = { "NvimTree", "vista", "dbui", "packer" }
 
 local colors = {
@@ -110,17 +109,18 @@ local colors = {
 -- end
 local function file_name(is_active, highlight_group)
 	local normal_fg = is_active and colors.green or colors.blue2
-	local modified_fg = is_active and "#ff0000" or "#cc8800"
+	local modified_fg = is_active and "#ff8800"
+	local read_fg = is_active and "#ff0000"
 	if vim.bo.modifiable then
 		if vim.bo.modified then
-			vim.api.nvim_command("hi " .. highlight_group .. " guifg=" .. modified_fg .. " gui=bold")
+			vim.api.nvim_command("hi " .. highlight_group .. " guifg=" .. modified_fg .. " gui=bold,italic")
 		else
-			vim.api.nvim_command("hi " .. highlight_group .. " guifg=" .. normal_fg .. " gui=NONE")
+			vim.api.nvim_command("hi " .. highlight_group .. " guifg=" .. normal_fg .. " gui=None")
 		end
 	end
 
 	if buffer_is_readonly() then
-		vim.api.nvim_command("hi " .. highlight_group .. " guifg=" .. modified_fg .. " gui=bold")
+		vim.api.nvim_command("hi " .. highlight_group .. " guifg=" .. read_fg .. " gui=bold")
 		-- file = readonly_icon .. ' ' ..file
 	end
 	local fname = fileinfo.get_current_file_name("", "")
@@ -136,15 +136,6 @@ local function file_name(is_active, highlight_group)
 	-- end
 	return fname
 end
-
--- local function location_content()
--- 	if navic.is_available() and navic.get_location() ~= "" then
--- 		print(navic.get_location())
--- 		return navic.get_location()
--- 	else
--- 		return ""
--- 	end
--- end
 
 local function python_venv()
 	local function env_cleanup(venv)
@@ -333,17 +324,6 @@ gls.left[11] = {
 	},
 }
 
--- gls.left[12] = {
--- 	nvimNavic = {
--- 		provider = function()
--- 			return navic.get_location()
--- 		end,
--- 		condition = function()
--- 			return navic.is_available()
--- 		end,
--- 		highlight = { colors.magenta, colors.bg },
--- 	},
--- }
 gls.mid[1] = {
 	ShowLspClient = {
 		condition = function()
