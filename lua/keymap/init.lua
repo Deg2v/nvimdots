@@ -88,17 +88,21 @@ local plug_map = {
 	["n|j"] = map_cmd("v:lua.enhance_jk_move('j')"):with_silent():with_expr(),
 	["n|k"] = map_cmd("v:lua.enhance_jk_move('k')"):with_silent():with_expr(),
 	-- Plugin vim-eft
-	["n|f"] = map_cmd("v:lua.enhance_ft_move('f')"):with_expr(),
-	["n|F"] = map_cmd("v:lua.enhance_ft_move('F')"):with_expr(),
-	["n|t"] = map_cmd("v:lua.enhance_ft_move('t')"):with_expr(),
-	["n|T"] = map_cmd("v:lua.enhance_ft_move('T')"):with_expr(),
-	["n|;"] = map_cmd("v:lua.enhance_ft_move(';')"):with_expr(),
+	-- ["n|f"] = map_cmd("v:lua.enhance_ft_move('f')"):with_expr(),
+	-- ["n|F"] = map_cmd("v:lua.enhance_ft_move('F')"):with_expr(),
+	-- ["n|t"] = map_cmd("v:lua.enhance_ft_move('t')"):with_expr(),
+	-- ["n|T"] = map_cmd("v:lua.enhance_ft_move('T')"):with_expr(),
+	-- ["n|;"] = map_cmd("v:lua.enhance_ft_move(';')"):with_expr(),
 	-- Plugin Hop
-	["n|<leader>w"] = map_cu("HopWord"):with_noremap(),
-	["n|<leader>j"] = map_cu("HopLine"):with_noremap(),
-	["n|<leader>k"] = map_cu("HopLine"):with_noremap(),
-	["n|<leader>c"] = map_cu("HopChar1"):with_noremap(),
-	["n|<leader>cc"] = map_cu("HopChar2"):with_noremap(),
+	-- ["n|<leader>w"] = map_cu("HopWord"):with_noremap(),
+	-- ["n|<leader>j"] = map_cu("HopLine"):with_noremap(),
+	-- ["n|<leader>k"] = map_cu("HopLine"):with_noremap(),
+	-- ["n|<leader>c"] = map_cu("HopChar1"):with_noremap(),
+	-- ["n|<leader>cc"] = map_cu("HopChar2"):with_noremap(),
+	-- Plug leap
+	-- ["n|s"] = map_cmd([[<Plug>(leap-forward-to)]]),
+	-- ["n|S"] = map_cmd([[<Plug>(leap-back-to)]]),
+
 	-- Plugin EasyAlign
 	["n|ga"] = map_cmd("v:lua.enhance_align('nga')"):with_expr(),
 	["x|ga"] = map_cmd("v:lua.enhance_align('xga')"):with_expr(),

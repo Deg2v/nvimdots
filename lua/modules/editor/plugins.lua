@@ -53,16 +53,23 @@ editor["andymass/vim-matchup"] = {
 	after = "nvim-treesitter",
 }
 editor["rainbowhxch/accelerated-jk.nvim"] = { opt = true, event = "BufWinEnter", config = conf.accelerated_jk }
-editor["hrsh7th/vim-eft"] = { opt = true, event = "BufReadPost" }
+-- editor["hrsh7th/vim-eft"] = { opt = true, event = "BufReadPost" }
 editor["romainl/vim-cool"] = {
 	opt = true,
 	event = { "CursorMoved", "InsertEnter" },
 }
-editor["phaazon/hop.nvim"] = {
-	opt = true,
-	branch = "v2",
-	event = "BufReadPost",
-	config = conf.hop,
+-- editor["phaazon/hop.nvim"] = {
+-- 	opt = true,
+-- 	branch = "v2",
+-- 	event = "BufReadPost",
+-- 	config = conf.hop,
+-- }
+editor["ggandor/leap.nvim"] = {
+	config = conf.leap,
+}
+editor["ggandor/flit.nvim"] = {
+	require = "leap.nvim",
+	config = conf.flit,
 }
 editor["karb94/neoscroll.nvim"] = {
 	opt = true,
