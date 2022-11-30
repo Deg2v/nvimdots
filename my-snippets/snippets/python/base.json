@@ -8,5 +8,20 @@
 			"fjslkdfj"
 		],
 		"description": "logfhdsjfger"
+	},
+	"changelog": {
+		"prefix": "change",
+		"body": [
+            "'''",
+			" @Time_change : $CURRENT_YEAR/$CURRENT_MONTH/$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
+			" version: $1 description : $2",
+            "'''"
+		],
+        "description":"time"
+	},
+  "datetime1": {
+      "prefix": "tim1",
+      "body": ["${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}"],
+      "description": "I give you back the time and date (Y-m-d H:M:S)"
 	}
 }

@@ -10,30 +10,60 @@
 	"logging": {
 		"prefix": "sn_logg",
 		"body": [
-			"import logging",
-			"ch = logging.StreamHandler()",
-			"formatter = logging.Formatter('%(asctime)s [%(name)s] %(levelname)s: %(message)s')",
-			"ch.setFormatter(formatter)",
-			"logger = logging.getLogger('--hzf--')",
-			"if not logger.handlers:   # 解决重复输出",
-			"    logger.setLevel(logging.DEBUG)",
-			"    logger.addHandler(ch)",
-            "    # log 文件",
-            "    file_handler = logging.FileHandler(filename='checkerboard.log')",
-			"    file_handler.setLevel(logging.DEBUG)",
-			"    file_handler.setFormatter(formatter)",
-			"    logger.addHandler(file_handler)\n"
+            "import logging",
+            "from typing import Union",
+            "",
+            "",
+            "def setlogging(logname: str, silent: bool = False, filename: Union[str, None] = None):",
+            "    formatter = logging.Formatter('%(asctime)s [%(name)s] %(levelname)s: %(message)s')",
+            "    logger = logging.getLogger(logname)",
+            "    logger.setLevel(logging.DEBUG)",
+            "    if not silent:",
+            "        ch = logging.StreamHandler()",
+            "        ch.setFormatter(formatter)",
+            "        ch.setLevel(logging.INFO)",
+            "        logger.addHandler(ch)",
+            "    if filename:",
+            "        file_handler = logging.FileHandler(filename=f'{filename}.log')",
+            "        file_handler.setFormatter(formatter)",
+            "        file_handler.setLevel(logging.DEBUG)  # FIXME: not work???",
+            "        logger.addHandler(file_handler)",
+            "    return logger\n",
+            ""
 		],
 		"description": "logger"
 	},
-	"changelog": {
-		"prefix": "change",
-		"body": [
-            "'''",
-			" @Time_change : $CURRENT_YEAR/$CURRENT_MONTH/$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
-			" version: $1 description : $2",
-            "'''"
-		],
-        "description":"time"
-	}
+    "argparsee":{
+        "prefix": "sn_arg",
+        "body":[
+            "import argparse",
+            "",
+            "",
+            "def get_arg():",
+            "    parser = argparse.ArgumentParser(description='help', allow_abbrev=True)",
+            "    parser.add_argument('-z', action='store_true', default=False, help='zoom ')",
+            "    parser.add_argument(",
+            "        '-f',",
+            "        nargs='*',",
+            "        type=int,",
+            "        default=[0.02, 5],",
+            "        help='default ',",
+            "    )",
+            "    parser.add_argument('-c', type=str, default='BHZ', dest='channel', help=' ')",
+            "    parser.add_argument(",
+            "        '-o',",
+            "        '--orientation',",
+            "        type=str,",
+            "        default='horizontal',",
+            "        dest='ori',",
+            "        choices=['horizontal', 'vertical'],",
+            "        help='the orientation of waveform, default horizontal',",
+            "    )",
+            "",
+            "    args = parser.parse_args()",
+            "    return args\n",
+            ""
+        ],
+        "description": "Parse command line parameters"
+    }
 }
