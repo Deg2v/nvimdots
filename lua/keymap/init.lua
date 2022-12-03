@@ -91,7 +91,7 @@ local plug_map = {
 	-- ["n|;"] = map_cmd("v:lua.enhance_ft_move(';')"):with_expr(),
 	-- ["n|,"] = map_cmd("v:lua.enhance_ft_move(',')"):with_expr(),
 	-- Plugin EasyAlign
-	["n|ea"] = map_cmd("v:lua.enhance_align('nea')"):with_expr(),
+	-- ["n|ea"] = map_cmd("v:lua.enhance_align('nea')"):with_expr(),
 	["x|ea"] = map_cmd("v:lua.enhance_align('xea')"):with_expr(),
 	-- Plugin MarkdownPreview
 	["n|<F12>"] = map_cr("MarkdownPreviewToggle"):with_noremap():with_silent(),

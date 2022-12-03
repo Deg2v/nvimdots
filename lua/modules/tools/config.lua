@@ -294,6 +294,10 @@ function config.which_key()
 				g = true,
 			},
 		},
+		triggers_blacklist = {
+			-- 	n = { "e" },
+			-- c = {"w"},
+		},
 
 		icons = {
 			breadcrumb = icons.ui.Separator,
@@ -415,12 +419,12 @@ function config.legendary()
 		["<leader><leader>D"] = "git: Close diff",
 		["g["] = "lsp: Goto prev diagnostic",
 		["g]"] = "lsp: Goto next diagnostic",
-		["<leader>w"] = "jump: Goto word",
-		["<leader>j"] = "jump: Goto line",
-		["<leader>k"] = "jump: Goto line",
-		["<leader>c"] = "jump: Goto one char",
-		["<leader>cc"] = "jump: Goto two chars",
-		["<leader>o"] = "edit: Check spell",
+		-- ["<leader>w"] = "jump: Goto word",
+		-- ["<leader>j"] = "jump: Goto line",
+		-- ["<leader>k"] = "jump: Goto line",
+		-- ["<leader>c"] = "jump: Goto one char",
+		-- ["<leader>cc"] = "jump: Goto two chars",
+		["<leader>c"] = "edit: Check spell",
 	})
 end
 
