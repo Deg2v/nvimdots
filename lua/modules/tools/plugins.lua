@@ -59,6 +59,7 @@ tools["folke/todo-comments.nvim"] = {
 		{ "nvim-lua/plenary.nvim", opt = false },
 	},
 }
+-- Please don't remove which-key.nvim otherwise you need to set timeoutlen=300 at `lua/core/options.lua`
 tools["folke/which-key.nvim"] = {
 	opt = false,
 	config = conf.which_key,
