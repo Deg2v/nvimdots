@@ -415,7 +415,7 @@ function config.legendary()
 			},
 		},
 		["g"] = {
-			c = "lsp: Code action",
+			a = "lsp: Code action",
 			d = "lsp: Preview definition",
 			D = "lsp: Goto definition",
 			h = "lsp: Show reference",
