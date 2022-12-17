@@ -57,14 +57,9 @@ completion["windwp/nvim-autopairs"] = {
 	after = "nvim-cmp",
 	config = conf.autopairs,
 }
--- completion["github/copilot.vim"] = { opt = true, cmd = "Copilot" }
 -- completion["zbirenbaum/copilot.lua"] = {
 -- 	event = "VimEnter",
--- 	config = function()
--- 		vim.defer_fn(function()
--- 			require("copilot").setup()
--- 		end, 100)
--- 	end,
+-- 	config = conf.copilot,
 -- }
 -- completion["zbirenbaum/copilot-cmp"] = {
 -- 	after = "copilot.lua",
