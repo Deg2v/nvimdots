@@ -73,10 +73,11 @@ editor["romainl/vim-cool"] = {
 -- 	config = conf.hop,
 -- }
 editor["ggandor/leap.nvim"] = {
+	requires = { { "tpope/vim-repeat" } },
 	config = conf.leap,
 }
 editor["ggandor/flit.nvim"] = {
-	require = "leap.nvim",
+	requires = "leap.nvim",
 	config = conf.flit,
 }
 editor["karb94/neoscroll.nvim"] = {
