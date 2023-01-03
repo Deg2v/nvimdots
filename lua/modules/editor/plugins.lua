@@ -23,6 +23,11 @@ editor["numToStr/Comment.nvim"] = {
 }
 editor["nvim-treesitter/nvim-treesitter"] = {
 	opt = true,
+	module = {
+		"nvim-treesitter",
+		"nvim-treesitter.parsers",
+		"nvim-treesitter.ts_utils",
+	},
 	run = ":TSUpdate",
 	event = "BufReadPost",
 	config = conf.nvim_treesitter,
