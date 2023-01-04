@@ -168,6 +168,8 @@ function config.onedark()
 end
 
 function config.catppuccin()
+	local transparent_background = false -- Set background transparency here!
+
 	require("catppuccin").setup({
 		flavour = "mocha", -- Can be one of: latte, frappe, macchiato, mocha
 		background = { light = "latte", dark = "mocha" },
@@ -178,7 +180,7 @@ function config.catppuccin()
 			shade = "dark",
 			percentage = 0.15,
 		},
-		transparent_background = false,
+		transparent_background = transparent_background,
 		term_colors = true,
 		compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
 		styles = {
@@ -288,6 +290,7 @@ function config.catppuccin()
 			mocha = function(cp)
 				return {
 					-- For base configs.
+					NormalFloat = { fg = cp.text, bg = transparent_background and cp.none or cp.base },
 					CursorLineNr = { fg = cp.green },
 					Search = { bg = cp.surface1, fg = cp.pink, style = { "bold" } },
 					IncSearch = { bg = cp.pink, fg = cp.surface1 },
@@ -394,7 +397,10 @@ function config.catppuccin()
 					["@type.css"] = { fg = cp.lavender },
 					["@property.css"] = { fg = cp.yellow, style = { "italic" } },
 
+					["@type.builtin.c"] = { fg = cp.yellow, style = {} },
+
 					["@property.cpp"] = { fg = cp.text },
+					["@type.builtin.cpp"] = { fg = cp.yellow, style = {} },
 
 					-- ["@symbol"] = { fg = cp.flamingo },
 				}
@@ -405,8 +411,7 @@ end
 
 function config.neodim()
 	vim.api.nvim_command([[packadd nvim-treesitter]])
-	local normal_background = vim.api.nvim_get_hl_by_name("Normal", true).background
-	local blend_color = normal_background ~= nil and string.format("#%06x", normal_background) or "#000000"
+	local blend_color = require("modules.utils").hl_to_rgb("Normal", true)
 
 	require("neodim").setup({
 		alpha = 0.45,
@@ -474,6 +479,28 @@ function config.lualine()
 		return ok and m.waiting and icons.misc.EscapeST or ""
 	end
 
+	local function lspsaga_symbols()
+		local exclude = {
+			["terminal"] = true,
+			["toggleterm"] = true,
+			["prompt"] = true,
+			["NvimTree"] = true,
+			["help"] = true,
+		}
+		if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
+			return "" -- Excluded filetypes
+		else
+			local ok, lspsaga = pcall(require, "lspsaga.symbolwinbar")
+			if ok then
+				if lspsaga.get_symbol_node() ~= nil then
+					return lspsaga.get_symbol_node()
+				else
+					return "" -- Cannot get node
+				end
+			end
+		end
+	end
+
 	local function diff_source()
 		local gitsigns = vim.b.gitsigns_status_dict
 		if gitsigns then
@@ -493,6 +520,12 @@ function config.lualine()
 		end
 		return icons.ui.RootFolderOpened .. cwd
 	end
+
+	local conditions = {
+		check_code_context = function()
+			return lspsaga_symbols() ~= ""
+		end,
+	}
 
 	local mini_sections = {
 		lualine_a = { "filetype" },
@@ -547,7 +580,7 @@ function config.lualine()
 		sections = {
 			lualine_a = { { "mode" } },
 			lualine_b = { { "branch" }, { "diff", source = diff_source } },
-			lualine_c = { { get_cwd } },
+			lualine_c = { { lspsaga_symbols, cond = conditions.check_code_context } },
 			lualine_x = {
 				{ escape_status },
 				{
@@ -559,6 +592,7 @@ function config.lualine()
 						info = icons.diagnostics.Information,
 					},
 				},
+				{ get_cwd },
 			},
 			lualine_y = {
 				{ "filetype", colored = true, icon_only = true },
@@ -595,6 +629,13 @@ function config.lualine()
 			diffview,
 		},
 	})
+
+	-- Properly set background color for lspsaga
+	local winbar_bg = require("modules.utils").hl_to_rgb("StatusLine", true, "#000000")
+	require("modules.utils").extend_hl("LspSagaWinbarSep", { bg = winbar_bg })
+	for _, hlGroup in pairs(require("lspsaga.lspkind")) do
+		require("modules.utils").extend_hl("LspSagaWinbar" .. hlGroup[1], { bg = winbar_bg })
+	end
 end
 
 function config.nvim_tree()
