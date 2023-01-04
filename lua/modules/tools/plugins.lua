@@ -1,19 +1,19 @@
 local tools = {}
 local conf = require("modules.tools.config")
 
-tools["nvim-lua/plenary.nvim"] = { opt = false }
 tools["glepnir/template.nvim"] = {
 	-- opt = true,
 	config = conf.template_nvim,
 	-- event = "CmdlineEnter",
 }
+tools["nvim-lua/plenary.nvim"] = { opt = true, module = "plenary" }
 tools["nvim-telescope/telescope.nvim"] = {
 	opt = true,
 	module = "telescope",
 	cmd = "Telescope",
 	config = conf.telescope,
 	requires = {
-		{ "nvim-lua/plenary.nvim", opt = false },
+		"nvim-lua/plenary.nvim",
 		{ "nvim-lua/popup.nvim", opt = true },
 		{ "debugloop/telescope-undo.nvim", opt = true },
 	},
