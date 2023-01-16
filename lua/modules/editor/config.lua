@@ -17,6 +17,8 @@ function config.nvim_treesitter()
 			"json",
 			-- "yaml",
 			"make",
+			"markdown",
+			"markdown_inline",
 			"python",
 			-- "rust",
 			-- "html",
