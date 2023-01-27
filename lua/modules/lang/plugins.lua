@@ -1,34 +1,37 @@
 local lang = {}
 local conf = require("modules.lang.config")
 
--- lang["fatih/vim-go"] = {
--- 	opt = true,
--- 	ft = "go",
--- 	run = ":GoInstallBinaries",
--- 	config = conf.lang_go,
--- }
--- lang["simrat39/rust-tools.nvim"] = {
--- 	opt = true,
--- 	ft = "rust",
--- 	config = conf.rust_tools,
--- 	requires = "nvim-lua/plenary.nvim",
--- }
--- lang["kristijanhusak/orgmode.nvim"] = {
--- 	opt = true,
--- 	ft = "org",
--- 	config = conf.lang_org,
--- 	}
 lang["nvim-orgmode/orgmode"] = {
-	opt = true,
+	lazy = true,
 	after = "nvim-treesitter",
 	ft = "org",
 	config = conf.lang_org,
 }
+-- lang["kristijanhusak/orgmode.nvim"] = {
+-- 	opt = true,
+-- 	ft = "org",
+-- 	config = conf.lang_org,
+-- }
+-- lang["fatih/vim-go"] = {
+-- 	lazy = true,
+-- 	ft = "go",
+-- 	build = ":GoInstallBinaries",
+-- 	config = conf.lang_go,
+-- }
+-- lang["simrat39/rust-tools.nvim"] = {
+-- 	lazy = true,
+-- 	ft = "rust",
+-- 	config = conf.rust_tools,
+-- 	dependencies = { { "nvim-lua/plenary.nvim" } },
+-- }
 lang["iamcco/markdown-preview.nvim"] = {
-	opt = true,
+	lazy = true,
 	ft = "markdown",
-	run = "cd app && yarn install",
+	build = "cd app && yarn install",
 }
-lang["chrisbra/csv.vim"] = { opt = true, ft = "csv" }
-lang["lervag/vimtex"] = { opt = true, ft = "tex" }
+lang["chrisbra/csv.vim"] = {
+	lazy = true,
+	ft = "csv",
+}
+lang["lervag/vimtex"] = { lazy = true, ft = "tex" }
 return lang

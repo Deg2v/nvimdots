@@ -18,7 +18,6 @@ end
 -- end
 
 _G.enhance_align = function(key)
-	vim.api.nvim_command([[packadd vim-easy-align]])
 	local map = { ["nea"] = "<Plug>(EasyAlign)", ["xea"] = "<Plug>(EasyAlign)" }
 	return t(map[key])
 end

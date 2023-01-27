@@ -115,12 +115,10 @@ local clipboard_config = function()
 end
 
 local load_core = function()
-	local pack = require("core.pack")
 	createdir()
 	disable_distribution_plugins()
 	leader_map()
 
-	pack.ensure_plugins()
 	neovide_config()
 	clipboard_config()
 
@@ -129,10 +127,12 @@ local load_core = function()
 	require("keymap")
 	require("core.event")
 	require("core.authorinfo")
-	pack.load_compile()
+	require("core.lazy")
 
-	-- vim.api.nvim_command([[set background=light]])
-	vim.api.nvim_command([[colorscheme onedark]])
+	local colorscheme = require("core.settings").colorscheme
+	local background = require("core.settings").background
+	vim.api.nvim_command("set background=" .. background)
+	vim.api.nvim_command("colorscheme " .. colorscheme)
 end
 
 load_core()
