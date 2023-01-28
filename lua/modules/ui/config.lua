@@ -374,7 +374,7 @@ function config.catppuccin()
 					-- ["@constant.macro"] = { fg = cp.mauve },
 
 					-- ["@label"] = { fg = cp.blue },
-					["@method"] = { style = { "italic" } },
+					["@method"] = { fg = cp.blue, style = { "italic" } },
 					["@namespace"] = { fg = cp.rosewater, style = {} },
 
 					["@punctuation.delimiter"] = { fg = cp.teal },
@@ -669,7 +669,7 @@ function config.nvim_tree()
 		hijack_netrw = true,
 		hijack_unnamed_buffer_when_opening = true,
 		ignore_buffer_on_setup = false,
-		open_on_setup = true,
+		open_on_setup = false,
 		open_on_setup_file = false,
 		open_on_tab = false,
 		sort_by = "name",
