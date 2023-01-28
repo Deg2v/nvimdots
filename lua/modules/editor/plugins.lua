@@ -97,53 +97,6 @@ editor["max397574/better-escape.nvim"] = {
 	event = "BufReadPost",
 	config = conf.better_escape,
 }
-<<<<<<< HEAD
--- editor["mfussenegger/nvim-dap"] = {
--- 	opt = true,
--- 	cmd = {
--- 		"DapSetLogLevel",
--- 		"DapShowLog",
--- 		"DapContinue",
--- 		"DapToggleBreakpoint",
--- 		"DapToggleRepl",
--- 		"DapStepOver",
--- 		"DapStepInto",
--- 		"DapStepOut",
--- 		"DapTerminate",
--- 	},
--- 	module = "dap",
--- 	config = conf.dap,
--- }
--- editor["rcarriga/nvim-dap-ui"] = {
--- 	opt = true,
--- 	after = "nvim-dap", -- Need to call setup after dap has been initialized.
--- 	config = conf.dapui,
--- }
-editor["tpope/vim-fugitive"] = { opt = true, cmd = { "Git", "G" } }
-||||||| 3eb10f2
-editor["mfussenegger/nvim-dap"] = {
-	opt = true,
-	cmd = {
-		"DapSetLogLevel",
-		"DapShowLog",
-		"DapContinue",
-		"DapToggleBreakpoint",
-		"DapToggleRepl",
-		"DapStepOver",
-		"DapStepInto",
-		"DapStepOut",
-		"DapTerminate",
-	},
-	module = "dap",
-	config = conf.dap,
-}
-editor["rcarriga/nvim-dap-ui"] = {
-	opt = true,
-	after = "nvim-dap", -- Need to call setup after dap has been initialized.
-	config = conf.dapui,
-}
-editor["tpope/vim-fugitive"] = { opt = true, cmd = { "Git", "G" } }
-=======
 editor["mfussenegger/nvim-dap"] = {
 	lazy = true,
 	cmd = {
@@ -166,7 +119,6 @@ editor["tpope/vim-fugitive"] = {
 	lazy = true,
 	cmd = { "Git", "G" },
 }
->>>>>>> upstream/main
 editor["ojroques/nvim-bufdel"] = {
 	lazy = true,
 	event = "BufReadPost",

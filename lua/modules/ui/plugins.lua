@@ -7,19 +7,19 @@ ui["glepnir/galaxyline.nvim"] = {
 	lazy = false,
 	branch = "main",
 	config = conf.galaxyline,
-	dependencies = "kyazdani42/nvim-web-devicons",
--- ui["shaunsingh/nord.nvim"] = {
--- 	lazy = true,
--- 	config = conf.nord,
--- }
--- ui["sainnhe/edge"] = {
--- 	lazy = true,
--- 	config = conf.edge,
--- }
--- ui["catppuccin/nvim"] = {
--- 	lazy = false,
--- 	name = "catppuccin",
--- 	config = conf.catppuccin,
+	dependencies = "nvim-tree/nvim-web-devicons",
+	-- ui["shaunsingh/nord.nvim"] = {
+	-- 	lazy = true,
+	-- 	config = conf.nord,
+	-- }
+	-- ui["sainnhe/edge"] = {
+	-- 	lazy = true,
+	-- 	config = conf.edge,
+	-- }
+	-- ui["catppuccin/nvim"] = {
+	-- 	lazy = false,
+	-- 	name = "catppuccin",
+	-- 	config = conf.catppuccin,
 }
 ui["rcarriga/nvim-notify"] = {
 	lazy = true,
@@ -31,11 +31,11 @@ ui["zbirenbaum/neodim"] = {
 	event = "LspAttach",
 	config = conf.neodim,
 }
-ui["nvim-lualine/lualine.nvim"] = {
-	lazy = true,
-	event = { "BufReadPost", "BufAdd", "BufNewFile" },
-	config = conf.lualine,
-}
+-- ui["nvim-lualine/lualine.nvim"] = {
+-- 	lazy = true,
+-- 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
+-- 	config = conf.lualine,
+-- }
 ui["goolord/alpha-nvim"] = {
 	lazy = true,
 	event = "BufWinEnter",
