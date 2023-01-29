@@ -33,7 +33,7 @@ function config.lspsaga()
 	require("lspsaga").setup({
 		preview = {
 			lines_above = 1,
-			lines_below = 12,
+			lines_below = 17,
 		},
 		scroll_preview = {
 			scroll_down = "<C-j>",
@@ -67,12 +67,12 @@ function config.lspsaga()
 			sign = true,
 			enable_in_insert = true,
 			sign_priority = 20,
-			virtual_text = true,
+			virtual_text = false,
 		},
 		diagnostic = {
-			twice_into = false,
 			show_code_action = false,
 			show_source = true,
+			jump_num_shortcut = true,
 			keys = {
 				exec_action = "<CR>",
 				quit = "q",
@@ -81,9 +81,9 @@ function config.lspsaga()
 		},
 		rename = {
 			quit = "<C-c>",
-			exec = "<CR>",
 			mark = "x",
 			confirm = "<CR>",
+			exec = "<CR>",
 			in_select = true,
 		},
 		outline = {
@@ -106,100 +106,65 @@ function config.lspsaga()
 			-- in_custom = true,
 			-- enable = false,
 			separator = " " .. icons.ui.Separator,
-			file_formatter = "",
+			hide_keyword = true,
 			show_file = true,
-
-			click_support = function(node, clicks, button, modifiers)
-				local st = node.range.start
-				local en = node.range["end"]
-				if button == "l" then
-					if clicks == 2 then
-					-- double left click to do nothing
-					else -- jump to node's starting line+char
-						vim.fn.cursor(st.line + 1, st.character + 1)
-					end
-				elseif button == "r" then
-					if modifiers == "s" then
-						print("symbol_winbar")
-					end
-					vim.fn.cursor(en.line + 1, en.character + 1)
-				elseif button == "m" then
-					-- middle click to visual select node
-					vim.fn.cursor(st.line + 1, st.character + 1)
-					vim.api.nvim_command([[normal v]])
-					vim.fn.cursor(en.line + 1, en.character + 1)
-				end
-			end,
-			-- 	hide_keyword = true,
-			-- 	show_file = false,
-			-- 	color_mode = true,
-			-- },
-			-- ui = {
-			-- 	theme = "round",
-			-- 	border = "single", -- Can be single, double, rounded, solid, shadow.
-			-- 	winblend = 0,
-			-- 	expand = icons.ui.ArrowClosed,
-			-- 	collapse = icons.ui.ArrowOpen,
-			-- 	preview = icons.ui.Newspaper,
-			-- 	code_action = icons.ui.CodeAction,
-			-- 	diagnostic = icons.ui.Bug,
-			-- 	incoming = icons.ui.Incoming,
-			-- 	outgoing = icons.ui.Outgoing,
-			-- 	colors = {
-			-- 		normal_bg = colors.base,
-			-- 		title_bg = colors.base,
-			-- 		red = colors.red,
-			-- 		megenta = colors.maroon,
-			-- 		orange = colors.peach,
-			-- 		yellow = colors.yellow,
-			-- 		green = colors.green,
-			-- 		cyan = colors.sapphire,
-			-- 		blue = colors.blue,
-			-- 		purple = colors.mauve,
-			-- 		white = colors.text,
-			-- 		black = colors.mantle,
-			-- 		fg = colors.text,
-			-- 	},
-			-- 	kind = {
-			-- 		-- Kind
-			-- 		Class = { icons.kind.Class, colors.yellow },
-			-- 		Constant = { icons.kind.Constant, colors.peach },
-			-- 		Constructor = { icons.kind.Constructor, colors.sapphire },
-			-- 		Enum = { icons.kind.Enum, colors.yellow },
-			-- 		EnumMember = { icons.kind.EnumMember, colors.rosewater },
-			-- 		Event = { icons.kind.Event, colors.yellow },
-			-- 		Field = { icons.kind.Field, colors.teal },
-			-- 		File = { icons.kind.File, colors.rosewater },
-			-- 		Function = { icons.kind.Function, colors.blue },
-			-- 		Interface = { icons.kind.Interface, colors.yellow },
-			-- 		Key = { icons.kind.Keyword, colors.red },
-			-- 		Method = { icons.kind.Method, colors.blue },
-			-- 		Module = { icons.kind.Module, colors.blue },
-			-- 		Namespace = { icons.kind.Namespace, colors.blue },
-			-- 		Number = { icons.kind.Number, colors.peach },
-			-- 		Operator = { icons.kind.Operator, colors.sky },
-			-- 		Package = { icons.kind.Package, colors.blue },
-			-- 		Property = { icons.kind.Property, colors.teal },
-			-- 		Struct = { icons.kind.Struct, colors.yellow },
-			-- 		TypeParameter = { icons.kind.TypeParameter, colors.maroon },
-			-- 		Variable = { icons.kind.Variable, colors.peach },
-			-- 		-- Type
-			-- 		Array = { icons.type.Array, colors.peach },
-			-- 		Boolean = { icons.type.Boolean, colors.peach },
-			-- 		Null = { icons.type.Null, colors.yellow },
-			-- 		Object = { icons.type.Object, colors.yellow },
-			-- 		String = { icons.type.String, colors.green },
-			-- 		-- ccls-specific icons.
-			-- 		TypeAlias = { icons.kind.TypeAlias, colors.green },
-			-- 		Parameter = { icons.kind.Parameter, colors.blue },
-			-- 		StaticMethod = { icons.kind.StaticMethod, colors.peach },
-			-- 		-- Microsoft-specific icons.
-			-- 		Text = { icons.kind.Text, colors.green },
-			-- 		Snippet = { icons.kind.Snippet, colors.mauve },
-			-- 		Folder = { icons.kind.Folder, colors.blue },
-			-- 		Unit = { icons.kind.Unit, colors.green },
-			-- 		Value = { icons.kind.Value, colors.peach },
-			-- 	},
+			color_mode = true,
+		},
+		beacon = {
+			enable = true,
+			frequency = 12,
+		},
+		ui = {
+			theme = "round",
+			border = "single", -- Can be single, double, rounded, solid, shadow.
+			winblend = 0,
+			expand = icons.ui.ArrowClosed,
+			collapse = icons.ui.ArrowOpen,
+			preview = icons.ui.Newspaper,
+			code_action = icons.ui.CodeAction,
+			diagnostic = icons.ui.Bug,
+			incoming = icons.ui.Incoming,
+			outgoing = icons.ui.Outgoing,
+			kind = {
+				-- Kind
+				Class = { icons.kind.Class, colors.yellow },
+				Constant = { icons.kind.Constant, colors.peach },
+				Constructor = { icons.kind.Constructor, colors.sapphire },
+				Enum = { icons.kind.Enum, colors.yellow },
+				EnumMember = { icons.kind.EnumMember, colors.teal },
+				Event = { icons.kind.Event, colors.yellow },
+				Field = { icons.kind.Field, colors.teal },
+				File = { icons.kind.File, colors.rosewater },
+				Function = { icons.kind.Function, colors.blue },
+				Interface = { icons.kind.Interface, colors.yellow },
+				Key = { icons.kind.Keyword, colors.red },
+				Method = { icons.kind.Method, colors.blue },
+				Module = { icons.kind.Module, colors.blue },
+				Namespace = { icons.kind.Namespace, colors.blue },
+				Number = { icons.kind.Number, colors.peach },
+				Operator = { icons.kind.Operator, colors.sky },
+				Package = { icons.kind.Package, colors.blue },
+				Property = { icons.kind.Property, colors.teal },
+				Struct = { icons.kind.Struct, colors.yellow },
+				TypeParameter = { icons.kind.TypeParameter, colors.maroon },
+				Variable = { icons.kind.Variable, colors.peach },
+				-- Type
+				Array = { icons.type.Array, colors.peach },
+				Boolean = { icons.type.Boolean, colors.peach },
+				Null = { icons.type.Null, colors.yellow },
+				Object = { icons.type.Object, colors.yellow },
+				String = { icons.type.String, colors.green },
+				-- ccls-specific icons.
+				TypeAlias = { icons.kind.TypeAlias, colors.green },
+				Parameter = { icons.kind.Parameter, colors.blue },
+				StaticMethod = { icons.kind.StaticMethod, colors.peach },
+				-- Microsoft-specific icons.
+				Text = { icons.kind.Text, colors.green },
+				Snippet = { icons.kind.Snippet, colors.mauve },
+				Folder = { icons.kind.Folder, colors.blue },
+				Unit = { icons.kind.Unit, colors.green },
+				Value = { icons.kind.Value, colors.peach },
+			},
 		},
 	})
 end
@@ -472,6 +437,7 @@ function config.copilot()
 			},
 			filetypes = {
 				["dap-repl"] = false,
+				["big_file_disabled_ft"] = false,
 			},
 		})
 	end, 100)
