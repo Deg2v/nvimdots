@@ -30,6 +30,7 @@ completion["hrsh7th/nvim-cmp"] = {
 		{ "hrsh7th/cmp-buffer" },
 		{ "kdheepak/cmp-latex-symbols" },
 		{ "windwp/nvim-autopairs", config = conf.autopairs },
+		{ "hrsh7th/cmp-cmdline" },
 		-- { "tzachar/cmp-tabnine", build = "./install.sh", config = conf.tabnine },
 	},
 }
