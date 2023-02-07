@@ -4,7 +4,7 @@ tool["folke/todo-comments.nvim"] = {
 	lazy = false,
 	config = require("tool.todo_comments"),
 	dependencies = {
-		{ "nvim-lua/plenary.nvim", opt = false },
+		{ "nvim-lua/plenary.nvim", lazy = false },
 	},
 }
 -- tools["glepnir/template.nvim"] = {

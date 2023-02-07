@@ -26,7 +26,7 @@ local lang = {}
 -- }
 lang["nvim-orgmode/orgmode"] = {
 	lazy = true,
-	after = "nvim-treesitter",
+	dependencies = { "nvim-treesitter/nvim-treesitter" },
 	ft = "org",
 	config = require("lang.orgmode"),
 }
