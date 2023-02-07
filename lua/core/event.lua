@@ -24,8 +24,18 @@ vim.api.nvim_create_autocmd("BufEnter", {
 			and vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(layout[2]), "filetype") == "NvimTree"
 			and layout[3] == nil
 		then
-			vim.cmd("confirm quit")
+			vim.api.nvim_command([[confirm quit]])
 		end
+	end,
+})
+
+-- Fix fold issue of files opened by telescope
+vim.api.nvim_create_autocmd("BufRead", {
+	callback = function()
+		vim.api.nvim_create_autocmd("BufWinEnter", {
+			once = true,
+			command = "normal! zx",
+		})
 	end,
 })
 
@@ -49,9 +59,6 @@ function autocmd.load_autocmds()
 			{ "BufWritePre", "MERGE_MSG", "setlocal noundofile" },
 			{ "BufWritePre", "*.tmp", "setlocal noundofile" },
 			{ "BufWritePre", "*.bak", "setlocal noundofile" },
-			-- auto change directory
-			-- { "VimEnter", "*", "hi link illuminatedWord Underlined" },
-			-- { "BufEnter", "*", "silent! lcd %:p:h" },
 			-- auto place to last edit
 			{
 				"BufReadPost",
