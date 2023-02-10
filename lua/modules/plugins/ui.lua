@@ -3,22 +3,11 @@ local ui = {}
 -- ui["kyazdani42/nvim-web-devicons"] = { opt = false }
 ui["navarasu/onedark.nvim"] = { lazy = false, config = require("ui.onedark") }
 ui["glepnir/galaxyline.nvim"] = {
-	lazy = false,
+	lazy = true,
+	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	branch = "main",
 	config = require("ui.galaxyline"),
 	dependencies = "nvim-tree/nvim-web-devicons",
-	-- ui["shaunsingh/nord.nvim"] = {
-	-- 	lazy = true,
-	-- 	config = conf.nord,
-	-- }
-	-- ui["sainnhe/edge"] = {
-	-- 	lazy = true,
-	-- 	config = conf.edge,
-	-- }
-	-- ui["catppuccin/nvim"] = {
-	-- 	lazy = false,
-	-- 	name = "catppuccin",
-	-- 	config = conf.catppuccin,
 }
 -- ui["nvim-lualine/lualine.nvim"] = {
 -- 	lazy = true,
@@ -51,7 +40,7 @@ ui["j-hui/fidget.nvim"] = {
 }
 ui["lewis6991/gitsigns.nvim"] = {
 	lazy = true,
-	event = { "BufReadPost", "BufNewFile" },
+	event = { "CursorHold", "CursorHoldI" },
 	config = require("ui.gitsigns"),
 }
 ui["lukas-reineke/indent-blankline.nvim"] = {
@@ -60,9 +49,9 @@ ui["lukas-reineke/indent-blankline.nvim"] = {
 	config = require("ui.indent-blankline"),
 }
 -- ui["nvim-lualine/lualine.nvim"] = {
-	-- lazy = true,
-	-- event = { "BufReadPost", "BufAdd", "BufNewFile" },
-	-- config = require("ui.lualine"),
+-- lazy = true,
+-- event = { "BufReadPost", "BufAdd", "BufNewFile" },
+-- config = require("ui.lualine"),
 -- }
 ui["zbirenbaum/neodim"] = {
 	lazy = true,
