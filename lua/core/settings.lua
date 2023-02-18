@@ -38,7 +38,7 @@ settings["background"] = "dark"
 settings["lsp"] = {
 	"bashls",
 	"clangd",
-	"gopls",
+	-- "gopls",
 	"html",
 	"lua_ls",
 	"pyright",
