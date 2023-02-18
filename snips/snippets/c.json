@@ -1,29 +1,29 @@
 {
-	"fori": {
-		"prefix": "fori",
-		"body": [
-			"for (${1:int} ${2:i} = ${3:0}; $2 < ${4:length}; ++$2) {",
-			"\t$0",
-			"}"
-		],
-		"description": ""
-	},
-	"goroutine anonymous function": {
-		"prefix": "go",
-		"body": "go func($1) {\n\t$0\n}($2)",
-		"description": "Snippet for anonymous goroutine declaration"
-	},
-	"gous function": {
-		"prefix": "gogggg",
-		"body": "go func($1) {\n\t$0\n}($2)",
-		"description": "Snippet for anonymous goroutine declaration"
-	},
-	"changelog": {
-		"prefix": "change",
-		"body": [
-            "// @Time_change : $CURRENT_YEAR/$CURRENT_MONTH/$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
-            "// version: $1 description : $2"
-        ],
-		"description": "Snippet for anonymous goroutine declaration"
-	}
+  "fori": {
+    "prefix": "fori",
+    "body": [
+      "for (${1:int} ${2:i} = ${3:0}; $2 < ${4:length}; ++$2) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Code snippet for 'fori' loop"
+  },
+  "goroutine anonymous function": {
+    "prefix": "go",
+    "body": "go func($1) {\n\t$0\n}($2)",
+    "description": "Snippet for anonymous goroutine declaration"
+  },
+  "gous function": {
+    "prefix": "gogggg",
+    "body": "go func($1) {\n\t$0\n}($2)",
+    "description": "Snippet for anonymous goroutine declaration"
+  },
+  "changelog": {
+    "prefix": "change",
+    "body": [
+      "// @Time_change : $CURRENT_YEAR/$CURRENT_MONTH/$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
+      "// version: $1 description : $2"
+    ],
+    "description": "Snippet for anonymous goroutine declaration"
+  }
 }
