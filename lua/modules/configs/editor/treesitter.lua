@@ -10,8 +10,8 @@ return function()
 			"c",
 			"cpp",
 			"css",
-			"go",
-			"gomod",
+			-- "go",
+			-- "gomod",
 			"help",
 			"html",
 			"javascript",
@@ -22,15 +22,20 @@ return function()
 			"markdown",
 			"markdown_inline",
 			"python",
-			"rust",
+			-- "rust",
 			"typescript",
-			"vue",
+			-- "vue",
 			"yaml",
+			"cmake",
+			"org",
+			"cmake",
+			"fortran",
+			"bibtex",
 		},
 		highlight = {
 			enable = true,
 			disable = function(ft, bufnr)
-				if vim.tbl_contains({ "vim" }, ft) then
+				if vim.tbl_contains({ "vim", "latex" }, ft) then
 					return true
 				end
 
