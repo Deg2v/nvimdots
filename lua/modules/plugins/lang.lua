@@ -46,4 +46,8 @@ lang["chrisbra/csv.vim"] = {
 	ft = "csv",
 }
 lang["lervag/vimtex"] = { lazy = true, ft = "tex" }
+lang["vigoux/ltex-ls.nvim"] = {
+	config = require("completion.servers.ltex"),
+	ft = { "latex", "tex", "bib", "markdown", "gitcommit", "text" },
+}
 return lang
