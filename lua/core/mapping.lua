@@ -33,6 +33,7 @@ local core_map = {
 	["n|<leader>o"] = map_cr("setlocal spell! spelllang=en_us"):with_desc("editn: Toggle spell check"),
 	["n|<C-m>"] = map_cmd("q"):with_silent():with_noremap():with_desc("justify recording macro keymap"),
 	["n|q"] = map_cmd("<ESC>"):with_silent():with_desc("disable recording macro in q"),
+	["v|q"] = map_cmd("<ESC>"):with_silent():with_desc("disable recording macro in q"),
 	-- Insert mode
 	["i|<C-u>"] = map_cmd("<C-G>u<C-U>"):with_noremap():with_desc("editi: Delete previous block"),
 	["i|<C-b>"] = map_cmd("<Left>"):with_noremap():with_desc("editi: Move cursor to left"),
