@@ -1,12 +1,5 @@
 local lang = {}
 
--- lang["nvim-orgmode/orgmode"] = {
--- 	lazy = true,
--- <<<<<<< HEAD:lua/modules/lang/plugins.lua
--- 	after = "nvim-treesitter",
--- 	ft = "org",
--- 	config = conf.lang_org,
--- =======
 -- lang["fatih/vim-go"] = {
 -- 	lazy = true,
 -- 	ft = "go",
