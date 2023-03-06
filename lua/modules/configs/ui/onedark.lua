@@ -30,6 +30,8 @@ return function()
 			["@variable"] = { fg = "#e06150" },
 			["@parameter"] = { fg = "#ffb900" },
 			["@parameter.reference"] = { fg = "#00ffaa" },
+			["@comment"] = { fg = "#abb9b1" },
+			-- ["@comment"] = { fg = "#a1b976" },
 			rainbowcol1 = { fg = "#ff8800" },
 		}, -- Override highlight groups
 
