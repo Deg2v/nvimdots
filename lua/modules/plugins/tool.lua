@@ -70,6 +70,18 @@ tool["folke/trouble.nvim"] = {
 	cmd = { "Trouble", "TroubleToggle", "TroubleRefresh" },
 	config = require("tool.trouble"),
 }
+tool["glepnir/flybuf.nvim"] = {
+	cmd = "FlyBuf",
+	config = function()
+		require("flybuf").setup({
+			hotkey = "asdfghwertyuiopzcvbnm", -- hotkye
+			border = "single", -- border
+			quit = "q", -- quit flybuf window
+			mark = "l", -- mark as delet or cancel delete
+			delete = "x", -- delete marked buffers or buffers which cursor in
+		})
+	end,
+}
 -- tool["gelguy/wilder.nvim"] = {
 -- 	lazy = true,
 -- 	event = "CmdlineEnter",

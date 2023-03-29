@@ -1,1 +1,3 @@
-return { "-style={BasedOnStyle: LLVM, IndentWidth: 4}" }
+return {
+	"-style={BasedOnStyle: Google, IndentWidth: 4, BreakBeforeBraces: Linux, PointerAlignment: Right, AccessModifierOffset: -2 }",
+}
