@@ -25,6 +25,7 @@ return vim.schedule_wrap(function()
 			-- "rust",
 			"typescript",
 			-- "vue",
+			"vimdoc",
 			"yaml",
 			"cmake",
 			"org",
