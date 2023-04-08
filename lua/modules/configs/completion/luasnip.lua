@@ -54,7 +54,7 @@ return function()
 	-- vim.api.nvim_set_keymap("s", "<C-j>", "<Plug>luasnip-next-choice", {})
 	require("luasnip").config.set_config({
 		history = true,
-		updateevents = "TextChanged,TextChangedI",
+		update_events = "TextChanged,TextChangedI",
 		delete_check_events = "TextChanged,InsertLeave",
 	})
 	require("luasnip.loaders.from_lua").lazy_load()
