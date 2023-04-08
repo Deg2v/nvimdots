@@ -106,6 +106,16 @@ function autocmd.load_autocmds()
 				"*",
 				[[if &cursorline && &filetype !~# '^\(dashboard\|clap_\)' && ! &pvw | setlocal nocursorline | endif]],
 			},
+			{
+				"BufEnter,FocusGained,WinEnter,InsertLeave",
+				"*",
+				[[if &number | set relativenumber | endif]],
+			},
+			{
+				"BufLeave,FocusLost,WinLeave,Insertenter",
+				"*",
+				[[if &number | set norelativenumber | endif]],
+			},
 			-- Force write shada on leaving nvim
 			{
 				"VimLeave",
