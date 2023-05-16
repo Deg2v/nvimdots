@@ -168,6 +168,11 @@ return function()
 			-- { name = "codeium" },
 			-- { name = "cmp_tabnine" },
 		},
+		experimental = {
+			ghost_text = {
+				hl_group = "Whitespace",
+			},
+		},
 	})
 	cmp.setup.cmdline("/", {
 		mapping = cmp.mapping.preset.cmdline(),
