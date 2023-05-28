@@ -124,11 +124,11 @@ function autocmd.load_autocmds()
 				"*",
 				[[if &number | set norelativenumber | endif]],
 			},
-			-- Force write shada on leaving nvim
+			-- Attempt to write shada when leaving nvim
 			{
 				"VimLeave",
 				"*",
-				[[if has('nvim') | wshada! | else | wviminfo! | endif]],
+				[[if has('nvim') | wshada | else | wviminfo! | endif]],
 			},
 			-- Check if file changed when its window is focus, more eager than 'autoread'
 			{ "FocusGained", "* checktime" },
