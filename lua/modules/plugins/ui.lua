@@ -1,6 +1,5 @@
 local ui = {}
 
--- ui["kyazdani42/nvim-web-devicons"] = { opt = false }
 ui["navarasu/onedark.nvim"] = { lazy = false, config = require("ui.onedark") }
 ui["glepnir/galaxyline.nvim"] = {
 	lazy = true,
@@ -9,11 +8,6 @@ ui["glepnir/galaxyline.nvim"] = {
 	config = require("ui.galaxyline"),
 	dependencies = "nvim-tree/nvim-web-devicons",
 }
--- ui["nvim-lualine/lualine.nvim"] = {
--- 	lazy = true,
--- 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
--- 	config = conf.lualine,
--- }
 ui["goolord/alpha-nvim"] = {
 	lazy = true,
 	event = "BufWinEnter",
@@ -24,8 +18,9 @@ ui["akinsho/bufferline.nvim"] = {
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("ui.bufferline"),
 }
--- ui["catppuccin/nvim"] = {
+-- ui["Jint-lzxy/nvim"] = {
 -- 	lazy = false,
+-- 	branch = "refactor/syntax-highlighting",
 -- 	name = "catppuccin",
 -- 	config = require("ui.catppuccin"),
 -- }
@@ -87,4 +82,5 @@ ui["edluffy/specs.nvim"] = {
 	event = "CursorMoved",
 	config = require("ui.specs"),
 }
+
 return ui
