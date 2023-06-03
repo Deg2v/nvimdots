@@ -11,8 +11,16 @@ ui["glepnir/galaxyline.nvim"] = {
 ui["goolord/alpha-nvim"] = {
 	lazy = true,
 	event = "BufWinEnter",
-	config = require("ui.alpha"),
+	-- config = require("ui.alpha"),
+	config = function()
+		require("alpha").setup(require("alpha.themes.startify").config)
+	end,
 }
+-- ui["nvimdev/dashboard-nvim"] = {
+-- 	event = "BufWinEnter",
+-- 	config = require("ui.dashboard"),
+-- 	dependencies = { { "nvim-tree/nvim-web-devicons" } },
+-- }
 ui["akinsho/bufferline.nvim"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
