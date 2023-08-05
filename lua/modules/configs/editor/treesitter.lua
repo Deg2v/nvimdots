@@ -28,7 +28,6 @@ return vim.schedule_wrap(function()
 			"yaml",
 			"cmake",
 			"org",
-			"cmake",
 			"fortran",
 			"bibtex",
 		},
