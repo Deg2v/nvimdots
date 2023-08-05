@@ -10,13 +10,6 @@
 -- Dependence : numToStr/Comment.nvim
 -- TODO:  每次修改后，在history中添加时间，然后把光标放到后面，方便添加信息，可能是倒
 -- 序，即新的在旧的上面
-local function length(t)
-	local res = 0
-	for k, v in pairs(t) do
-		res = res + 1
-	end
-	return res
-end
 
 local function findfirstline()
 	local filetype = vim.bo.filetype
@@ -139,15 +132,12 @@ local function addtitle()
 		vim.api.nvim_buf_set_lines(0, num_shebang, num_shebang, 1, comment_str)
 		vim.api.nvim_win_set_cursor(0, { num_shebang + 1, 1 })
 
-		-- local comment_num = length(comment_str)  -- TODO: remove in future
 		local comment_num = #comment_str
 		-- require("Comment.api").toggle_linewise_count(Config)  -- TODO:  comment n count
 		if filetype_cur ~= "c" and filetype_cur ~= "cpp" then --TODO:  comment.api
-			-- require("Comment.opfunc").count(comment_num, Config, 1) -- line
-			require("Comment.api").toggle.linewise.count(comment_num, Config)
+			require("Comment.api").toggle.linewise.count(comment_num, Config) -- line
 		else
-			-- require("Comment.opfunc").count(comment_num, Config, 2) -- block eg   /*  */
-			require("Comment.api").toggle.blockwise.count(comment_num, Config)
+			require("Comment.api").toggle.blockwise.count(comment_num, Config) -- block eg   /*  */
 		end
 		vim.api.nvim_win_set_cursor(0, { num_shebang + 11, 13 })
 		-- for key, val in pairs(lines2) do
