@@ -22,6 +22,7 @@ return function()
 			cpp = init_strategy(true),
 			vimdoc = init_strategy(true),
 			vim = init_strategy(true),
+			make = init_strategy(true),
 		},
 		query = {
 			[""] = "rainbow-delimiters",
