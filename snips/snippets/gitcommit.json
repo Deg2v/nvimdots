@@ -1,0 +1,10 @@
+{
+  "conventional commit": {
+    "prefix": "hh",
+    "body": [
+      "${1:type}(${2:scope}): ${3:title}",
+      "",
+      "$0"
+    ]
+  }
+}
