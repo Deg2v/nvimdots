@@ -27,11 +27,10 @@ local function findfirstline()
 	local findmatch = 0
 	if readnum > 0 then
 		local line = vim.api.nvim_buf_get_lines(0, 0, readnum, 1)
-		for keyline, valline in pairs(line) do
-			print(keyline)
+		for _, valline in pairs(line) do
 			for key, val in pairs(shebang) do
 				if key == "python" then
-					for key2, val2 in pairs(val) do
+					for _, val2 in pairs(val) do
 						if string.find(valline, val2) then
 							findmatch = findmatch + 1
 						end
