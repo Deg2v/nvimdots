@@ -5,5 +5,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: lunarmodules/luacheck@v1
         with:
-          args: . --std luajit --globals vim _toggle_lazygit _command_panel _debugging --max-line-length 150 --no-config -g '!template/**'
+          args: . --std luajit --globals vim _toggle_lazygit _command_panel _debugging --max-line-length 150 --no-config

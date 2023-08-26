@@ -3,6 +3,7 @@ local mappings = {}
 -- Place global keymaps here.
 mappings["plug_map"] = {}
 
+print("com")
 -- NOTE: This function is special! Keymaps defined here are ONLY effective in buffers with LSP(s) attached
 -- NOTE: Make sure to include `:with_buffer(buf)` to limit the scope of your mappings.
 ---@param buf number @The effective bufnr

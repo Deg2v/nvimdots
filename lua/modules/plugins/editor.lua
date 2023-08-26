@@ -38,11 +38,11 @@ editor["ojroques/nvim-bufdel"] = {
 	lazy = true,
 	cmd = { "BufDel", "BufDelAll", "BufDelOthers" },
 }
--- editor["rhysd/clever-f.vim"] = {
--- 	lazy = true,
--- 	event = { "CursorHold", "CursorHoldI" },
--- 	config = require("editor.cleverf"),
--- }
+editor["rhysd/clever-f.vim"] = {
+	lazy = true,
+	event = { "CursorHold", "CursorHoldI" },
+	config = require("editor.cleverf"),
+}
 editor["numToStr/Comment.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
@@ -56,36 +56,12 @@ editor["junegunn/vim-easy-align"] = {
 	lazy = true,
 	cmd = "EasyAlign",
 }
--- editor["smoka7/hop.nvim"] = {
--- 	version = "*",
--- 	event = { "CursorHold", "CursorHoldI" },
--- 	config = require("editor.hop"),
--- }
-editor["folke/flash.nvim"] = {
-	event = "VeryLazy",
-	---@type Flash.Config
-	opts = {},
-  -- stylua: ignore
-    keys = {
-    { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-    { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-    { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-    { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-    { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-  },
+editor["smoka7/hop.nvim"] = {
+	lazy = true,
+	version = "*",
+	event = { "CursorHold", "CursorHoldI" },
+	config = require("editor.hop"),
 }
--- editor["ggandor/leap.nvim"] = {
--- 	lazy = true,
--- 	event = "BufReadPost",
--- 	dependencies = { { "tpope/vim-repeat" } },
--- 	config = require("editor.leap"),
--- }
--- editor["ggandor/flit.nvim"] = {
--- 	lazy = true,
--- 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
--- 	dependencies = "leap.nvim",
--- 	config = require("editor.flit"),
--- }
 editor["RRethy/vim-illuminate"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },

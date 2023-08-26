@@ -1,13 +1,5 @@
 local ui = {}
 
-ui["navarasu/onedark.nvim"] = { lazy = false, config = require("ui.onedark") }
-ui["glepnir/galaxyline.nvim"] = {
-	lazy = true,
-	event = { "BufReadPost", "BufAdd", "BufNewFile" },
-	branch = "main",
-	config = require("ui.galaxyline"),
-	dependencies = "nvim-tree/nvim-web-devicons",
-}
 ui["goolord/alpha-nvim"] = {
 	lazy = true,
 	event = "BufWinEnter",
@@ -16,26 +8,21 @@ ui["goolord/alpha-nvim"] = {
 		require("alpha").setup(require("alpha.themes.startify").config)
 	end,
 }
--- ui["nvimdev/dashboard-nvim"] = {
--- 	event = "BufWinEnter",
--- 	config = require("ui.dashboard"),
--- 	dependencies = { { "nvim-tree/nvim-web-devicons" } },
--- }
 ui["akinsho/bufferline.nvim"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("ui.bufferline"),
 }
--- ui["Jint-lzxy/nvim"] = {
--- 	lazy = false,
--- 	branch = "refactor/syntax-highlighting",
--- 	name = "catppuccin",
--- 	config = require("ui.catppuccin"),
--- }
--- ui["sainnhe/edge"] = {
--- 	lazy = true,
--- 	config = require("ui.edge"),
--- }
+ui["Jint-lzxy/nvim"] = {
+	lazy = false,
+	branch = "refactor/syntax-highlighting",
+	name = "catppuccin",
+	config = require("ui.catppuccin"),
+}
+ui["sainnhe/edge"] = {
+	lazy = true,
+	config = require("ui.edge"),
+}
 ui["j-hui/fidget.nvim"] = {
 	lazy = true,
 	branch = "legacy",
@@ -52,11 +39,11 @@ ui["lukas-reineke/indent-blankline.nvim"] = {
 	event = "BufReadPost",
 	config = require("ui.indent-blankline"),
 }
--- ui["nvim-lualine/lualine.nvim"] = {
--- lazy = true,
--- event = { "BufReadPost", "BufAdd", "BufNewFile" },
--- config = require("ui.lualine"),
--- }
+ui["nvim-lualine/lualine.nvim"] = {
+	lazy = true,
+	event = { "BufReadPost", "BufAdd", "BufNewFile" },
+	config = require("ui.lualine"),
+}
 ui["zbirenbaum/neodim"] = {
 	lazy = true,
 	event = "LspAttach",
@@ -67,10 +54,10 @@ ui["karb94/neoscroll.nvim"] = {
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("ui.neoscroll"),
 }
--- ui["shaunsingh/nord.nvim"] = {
--- 	lazy = true,
--- 	config = require("ui.nord"),
--- }
+ui["shaunsingh/nord.nvim"] = {
+	lazy = true,
+	config = require("ui.nord"),
+}
 ui["rcarriga/nvim-notify"] = {
 	lazy = true,
 	event = "VeryLazy",

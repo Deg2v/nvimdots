@@ -1,17 +1,5 @@
 local tool = {}
 
-tool["folke/todo-comments.nvim"] = {
-	lazy = false,
-	config = require("tool.todo_comments"),
-	dependencies = {
-		{ "nvim-lua/plenary.nvim", lazy = false },
-	},
-}
--- tools["glepnir/template.nvim"] = {
--- 	-- opt = true,
--- 	config = conf.template_nvim,
--- 	-- event = "CmdlineEnter",
--- }
 tool["tpope/vim-fugitive"] = {
 	lazy = true,
 	cmd = { "Git", "G" },
@@ -81,12 +69,12 @@ tool["folke/which-key.nvim"] = {
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("tool.which-key"),
 }
--- tool["gelguy/wilder.nvim"] = {
--- 	lazy = true,
--- 	event = "CmdlineEnter",
--- 	config = require("tool.wilder"),
--- 	dependencies = { "romgrk/fzy-lua-native" },
--- }
+tool["gelguy/wilder.nvim"] = {
+	lazy = true,
+	event = "CmdlineEnter",
+	config = require("tool.wilder"),
+	dependencies = { "romgrk/fzy-lua-native" },
+}
 
 ----------------------------------------------------------------------
 --                        Telescope Plugins                         --
