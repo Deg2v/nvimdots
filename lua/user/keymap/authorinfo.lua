@@ -28,6 +28,7 @@ local function findfirstline()
 	if readnum > 0 then
 		local line = vim.api.nvim_buf_get_lines(0, 0, readnum, 1)
 		for keyline, valline in pairs(line) do
+			print(keyline)
 			for key, val in pairs(shebang) do
 				if key == "python" then
 					for key2, val2 in pairs(val) do
@@ -84,7 +85,7 @@ local function addtitle()
 
 	local result = vim.fn.getbufinfo()
 	local numall = result[1].linecount -- HACK:
-	local num20 = 0
+	local num20
 	if numall > 30 then
 		num20 = 30
 	else
