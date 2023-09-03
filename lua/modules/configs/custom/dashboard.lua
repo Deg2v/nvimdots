@@ -13,11 +13,11 @@ return function()
 			disable_move = true,
 			shortcut = {
 				{
-					desc = "Update",
+					desc = "Quit",
 					icon = " ",
-					group = "Include",
-					action = "Lazy update",
-					key = "u",
+					group = "Function",
+					action = "q",
+					key = "q",
 				},
 				{
 					desc = "Newfile",
@@ -35,18 +35,25 @@ return function()
 				},
 				{
 					icon = " ",
-					desc = "Apps",
-					group = "String",
-					action = "Telescope app",
-					key = "a",
+					desc = "Plugins",
+					group = "Include",
+					action = "Lazy",
+					key = "p",
 				},
-				{
-					icon = " ",
-					desc = "dotfiles",
-					group = "Constant",
-					action = "Telescope dotfiles",
-					key = "d",
-				},
+				-- {
+				-- 	desc = "Update",
+				-- 	icon = " ",
+				-- 	group = "Include",
+				-- 	action = "Lazy update",
+				-- 	key = "u",
+				-- },
+				-- {
+				-- 	icon = " ",
+				-- 	desc = "dotfiles",
+				-- 	group = "Constant",
+				-- 	action = "Telescope dotfiles",
+				-- 	key = "d",
+				-- },
 			},
 		},
 	})

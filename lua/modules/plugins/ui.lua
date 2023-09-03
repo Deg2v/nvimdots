@@ -1,24 +1,24 @@
 local ui = {}
 
-ui["goolord/alpha-nvim"] = {
-	lazy = true,
-	event = "BufWinEnter",
-	-- config = require("ui.alpha"),
-	config = function()
-		require("alpha").setup(require("alpha.themes.startify").config)
-	end,
-}
+-- ui["goolord/alpha-nvim"] = {
+-- 	lazy = true,
+-- 	event = "BufWinEnter",
+-- 	-- config = require("ui.alpha"),
+-- 	config = function()
+-- 		require("alpha").setup(require("alpha.themes.startify").config)
+-- 	end,
+-- }
 ui["akinsho/bufferline.nvim"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("ui.bufferline"),
 }
-ui["Jint-lzxy/nvim"] = {
-	lazy = false,
-	branch = "refactor/syntax-highlighting",
-	name = "catppuccin",
-	config = require("ui.catppuccin"),
-}
+-- ui["Jint-lzxy/nvim"] = {
+-- 	lazy = false,
+-- 	branch = "refactor/syntax-highlighting",
+-- 	name = "catppuccin",
+-- 	config = require("ui.catppuccin"),
+-- }
 ui["sainnhe/edge"] = {
 	lazy = true,
 	config = require("ui.edge"),

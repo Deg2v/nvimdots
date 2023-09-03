@@ -8,11 +8,11 @@ my["glepnir/galaxyline.nvim"] = {
 	config = require("custom.galaxyline"),
 	dependencies = "nvim-tree/nvim-web-devicons",
 }
--- ui["nvimdev/dashboard-nvim"] = {
--- 	event = "BufWinEnter",
--- 	config = require("ui.dashboard"),
--- 	dependencies = { { "nvim-tree/nvim-web-devicons" } },
--- }
+my["nvimdev/dashboard-nvim"] = {
+	event = "BufWinEnter",
+	config = require("custom.dashboard"),
+	dependencies = { { "nvim-tree/nvim-web-devicons" } },
+}
 
 -- editor
 my["folke/flash.nvim"] = {
