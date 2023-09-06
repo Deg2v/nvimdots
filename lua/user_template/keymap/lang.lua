@@ -1,0 +1,2 @@
+print("lang")
+return {}
