@@ -21,7 +21,12 @@ my["folke/flash.nvim"] = {
 	opts = {
 		modes = {
 			search = {
-				enabled = false,
+				enabled = true,
+				highlight = { backdrop = false },
+				search = {
+					incremental = true,
+					trigger = ";",
+				},
 			},
 		},
 	},
