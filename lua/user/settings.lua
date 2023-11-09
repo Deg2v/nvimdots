@@ -10,12 +10,9 @@ settings["colorscheme"] = "onedark"
 ---@type string[]
 settings["disabled_plugins"] = {
 	-- ui
-	"Jint-lzxy/nvim",
-	"sainnhe/edge",
+	"Jint-lzxy/nvim", -- set in lua/modules/plugins/ui.lua
 	"nvim-lualine/lualine.nvim",
-	"shaunsingh/nord.nvim",
 	-- editor
-	"rhysd/clever-f.vim",
 	"smoka7/hop.nvim",
 	-- lang
 	"fatih/vim-go",
