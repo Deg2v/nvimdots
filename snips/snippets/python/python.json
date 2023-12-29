@@ -1,15 +1,15 @@
 {
-	"plot2": {
-		"prefix": "plott2",
-		"body": [
-			"import numpy as np",
-			"import matplotlib.pyplot as plt"
-		],
-		"description": "numpy matplotlib"
-	},
-	"logging": {
-		"prefix": "sn_logg",
-		"body": [
+    "plot2": {
+        "prefix": "plott2",
+        "body": [
+            "import numpy as np",
+            "import matplotlib.pyplot as plt"
+        ],
+        "description": "numpy matplotlib"
+    },
+    "logging": {
+        "prefix": "sn_logg",
+        "body": [
             "import logging",
             "from typing import Union",
             "",
@@ -30,12 +30,12 @@
             "        logger.addHandler(file_handler)",
             "    return logger\n",
             ""
-		],
-		"description": "logger"
-	},
-    "argparsee":{
+        ],
+        "description": "logger"
+    },
+    "argparsee": {
         "prefix": "sn_arg",
-        "body":[
+        "body": [
             "import argparse",
             "",
             "",
@@ -65,5 +65,22 @@
             ""
         ],
         "description": "Parse command line parameters"
+    },
+    "changelog": {
+        "prefix": "change",
+        "body": [
+            "'''",
+            " @Time_change : $CURRENT_YEAR/$CURRENT_MONTH/$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
+            " version: $1 description : $2",
+            "'''"
+        ],
+        "description": "time"
+    },
+    "datetime1": {
+        "prefix": "tim1",
+        "body": [
+            "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}"
+        ],
+        "description": "I give you back the time and date (Y-m-d H:M:S)"
     }
 }
