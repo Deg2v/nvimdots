@@ -16,7 +16,7 @@ settings["disabled_plugins"] = {
 	"smoka7/hop.nvim",
 	-- lang
 	"fatih/vim-go",
-	"simrat39/rust-tools.nvim",
+	"mrcjkb/rustaceanvim",
 	"Saecki/crates.nvim",
 	-- tool
 	"gelguy/wilder.nvim",
