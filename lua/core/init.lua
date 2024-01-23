@@ -144,6 +144,18 @@ You're recommended to install PowerShell for better experience.]],
 	end
 end
 
+local function getMax(list)
+	local max = list[1] -- 将第一个元素作为初始最大值
+
+	for i = 2, #list do -- 从第二个元素开始遍历列表
+		if list[i] > max then -- 判断当前元素是否比最大值更大
+			max = list[i] -- 若是则更新最大值
+		end
+	end
+
+	return max -- 返回最大值
+end
+
 local load_core = function()
 	createdir()
 	disable_distribution_plugins()
@@ -154,13 +166,28 @@ local load_core = function()
 	clipboard_config()
 	shell_config()
 
+	local filesize = {}
+	for buffer = 1, vim.fn.bufnr("$") do
+		local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buffer))
+		if ok and stats then
+			table.insert(filesize, stats.size)
+		end
+	end
+	local max_filesize = getMax(filesize)
+
+	local threshold_filesize = 50 * 1024 * 1024 -- 50 MB
 	require("core.options")
 	require("core.mapping")
-	require("core.event")
-	require("core.pack")
-	require("keymap")
+	local colorscheme = "slate"
+	if max_filesize == nil or max_filesize <= threshold_filesize then
+		require("core.event")
+		require("core.pack")
+		require("keymap")
+		colorscheme = settings.colorscheme
+	else
+		require("core.pack_csv")
+	end
 
-	local colorscheme = settings.colorscheme
 	local background = settings.background
 	vim.api.nvim_command("set background=" .. background)
 	vim.api.nvim_command("colorscheme " .. colorscheme)
