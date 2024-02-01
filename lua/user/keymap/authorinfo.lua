@@ -127,7 +127,7 @@ local function addtitle()
 
 	-- no comment title and add
 	if findtitle > 0 then
-		vim.notify("Success to update doc information!")
+		vim.notify("Success to update doc information!", vim.log.levels.INFO, { title = "doc" })
 	elseif findtitle == 0 then
 		vim.api.nvim_buf_set_lines(0, num_shebang, num_shebang, 1, comment_str)
 		vim.api.nvim_win_set_cursor(0, { num_shebang + 1, 1 })
@@ -145,7 +145,7 @@ local function addtitle()
 		-- 	require("Comment.api").toggle_current_linewise(Config)
 		-- end
 
-		vim.notify("Success to add doc information!")
+		vim.notify("Success to add doc information!", vim.log.levels.INFO, { title = "doc" })
 	end
 
 	-- after_title()

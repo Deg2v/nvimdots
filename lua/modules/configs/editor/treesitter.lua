@@ -13,8 +13,18 @@ return vim.schedule_wrap(function()
 					return true
 				end
 
-				local ok, is_large_file = pcall(vim.api.nvim_buf_get_var, bufnr, "bigfile_disable_treesitter")
-				return ok and is_large_file
+				local max_filesize = 110 * 1024 -- 110 KB
+				local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(bufnr))
+				if ok and stats and stats.size > max_filesize then
+					return true
+				end
+
+				-- TODO: this seem does not work: key not found bigfile_disable_treesitter
+				local ok1, is_large_file = pcall(vim.api.nvim_buf_get_var, bufnr, "bigfile_disable_treesitter")
+				if ok1 and is_large_file then
+					vim.notify(string.format("[%s]  [%s]", ok, is_large_file), vim.log.levels.DEBUG)
+				end
+				return ok1 and is_large_file
 			end,
 			additional_vim_regex_highlighting = false,
 		},
