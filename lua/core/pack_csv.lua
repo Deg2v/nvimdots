@@ -1,11 +1,12 @@
-local fn, api = vim.fn, vim.api
+-- local fn, api = vim.fn, vim.api
+local api = vim.api
 local global = require("core.global")
 local is_mac = global.is_mac
-local vim_path = global.vim_path
+-- local vim_path = global.vim_path
 local data_dir = global.data_dir
 local lazy_path = data_dir .. "lazy/lazy.nvim"
-local modules_dir = vim_path .. "/lua/modules"
-local user_config_dir = vim_path .. "/lua/user"
+-- local modules_dir = vim_path .. "/lua/modules"
+-- local user_config_dir = vim_path .. "/lua/user"
 
 local settings = require("core.settings")
 local use_ssh = settings.use_ssh
