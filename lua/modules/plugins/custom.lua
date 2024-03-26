@@ -39,18 +39,6 @@ my["nvimdev/dashboard-nvim"] = {
 --     { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
 --   },
 -- }
--- editor["ggandor/leap.nvim"] = {
--- 	lazy = true,
--- 	event = "BufReadPost",
--- 	dependencies = { { "tpope/vim-repeat" } },
--- 	config = require("editor.leap"),
--- }
--- editor["ggandor/flit.nvim"] = {
--- 	lazy = true,
--- 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
--- 	dependencies = "leap.nvim",
--- 	config = require("editor.flit"),
--- }
 
 --lang
 my["nvim-orgmode/orgmode"] = {
@@ -65,31 +53,6 @@ my["vigoux/ltex-ls.nvim"] = {
 	config = require("custom.ltex"),
 	ft = { "latex", "tex", "bib", "markdown", "gitcommit", "text" },
 }
--- lang["nvim-neorg/neorg"] = {
--- 	ft = "org",
--- 	build = ":Neorg sync-parsers",
--- 	dependencies = { "nvim-lua/plenary.nvim" },
--- 	config = function()
--- 		require("neorg").setup({
--- 			load = {
--- 				["core.defaults"] = {}, -- Loads default behaviour
--- 				["core.concealer"] = {}, -- Adds pretty icons to your documents
--- 				["core.dirman"] = { -- Manages Neorg workspaces
--- 					config = {
--- 						workspaces = {
--- 							notes = "~/notes",
--- 						},
--- 					},
--- 				},
--- 			},
--- 		})
--- 	end,
--- }
--- lang["kristijanhusak/orgmode.nvim"] = {
--- 	opt = true,
--- 	ft = "org",
--- 	config = conf.lang_org,
--- }
 
 -- tool
 my["folke/todo-comments.nvim"] = {
@@ -99,10 +62,5 @@ my["folke/todo-comments.nvim"] = {
 		{ "nvim-lua/plenary.nvim", lazy = false },
 	},
 }
--- tools["glepnir/template.nvim"] = {
--- 	-- opt = true,
--- 	config = conf.template_nvim,
--- 	-- event = "CmdlineEnter",
--- }
 
 return my
