@@ -14,6 +14,8 @@ settings["disabled_plugins"] = {
 	"nvim-lualine/lualine.nvim",
 	-- editor
 	"smoka7/hop.nvim",
+	-- local-highlight not work, so use vim-illuminate
+	"tzachar/local-highlight.nvim",
 	-- lang
 	"fatih/vim-go",
 	"mrcjkb/rustaceanvim",

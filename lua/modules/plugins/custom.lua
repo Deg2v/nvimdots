@@ -15,6 +15,11 @@ my["nvimdev/dashboard-nvim"] = {
 }
 
 -- editor
+my["RRethy/vim-illuminate"] = {
+	lazy = true,
+	event = { "CursorHold", "CursorHoldI" },
+	config = require("custom.vim-illuminate"),
+}
 -- my["folke/flash.nvim"] = {
 -- 	event = "VeryLazy",
 -- 	---Flash.Config
