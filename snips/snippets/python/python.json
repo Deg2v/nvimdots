@@ -1,86 +1,97 @@
 {
-    "plot2": {
-        "prefix": "plott2",
-        "body": [
-            "import numpy as np",
-            "import matplotlib.pyplot as plt"
-        ],
-        "description": "numpy matplotlib"
-    },
-    "logging": {
-        "prefix": "sn_logg",
-        "body": [
-            "import logging",
-            "from typing import Union",
-            "",
-            "",
-            "def setlogging(logname: str, silent: bool = False, filename: Union[str, None] = None):",
-            "    formatter = logging.Formatter('%(asctime)s [%(name)s] %(levelname)s: %(message)s')",
-            "    logger = logging.getLogger(logname)",
-            "    logger.setLevel(logging.DEBUG)",
-            "    if not silent:",
-            "        ch = logging.StreamHandler()",
-            "        ch.setFormatter(formatter)",
-            "        ch.setLevel(logging.INFO)",
-            "        logger.addHandler(ch)",
-            "    if filename:",
-            "        file_handler = logging.FileHandler(filename=f'{filename}.log')",
-            "        file_handler.setFormatter(formatter)",
-            "        file_handler.setLevel(logging.DEBUG)  # FIXME: not work???",
-            "        logger.addHandler(file_handler)",
-            "    return logger\n",
-            ""
-        ],
-        "description": "logger"
-    },
-    "argparsee": {
-        "prefix": "sn_arg",
-        "body": [
-            "import argparse",
-            "",
-            "",
-            "def get_arg():",
-            "    parser = argparse.ArgumentParser(description='help', allow_abbrev=True)",
-            "    parser.add_argument('-z', action='store_true', default=False, help='zoom ')",
-            "    parser.add_argument(",
-            "        '-f',",
-            "        nargs='*',",
-            "        type=int,",
-            "        default=[0.02, 5],",
-            "        help='default ',",
-            "    )",
-            "    parser.add_argument('-c', type=str, default='BHZ', dest='channel', help=' ')",
-            "    parser.add_argument(",
-            "        '-o',",
-            "        '--orientation',",
-            "        type=str,",
-            "        default='horizontal',",
-            "        dest='ori',",
-            "        choices=['horizontal', 'vertical'],",
-            "        help='the orientation of waveform, default horizontal',",
-            "    )",
-            "",
-            "    args = parser.parse_args()",
-            "    return args\n",
-            ""
-        ],
-        "description": "Parse command line parameters"
-    },
-    "changelog": {
-        "prefix": "change",
-        "body": [
-            "'''",
-            " @Time_change : $CURRENT_YEAR/$CURRENT_MONTH/$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
-            " version: $1 description : $2",
-            "'''"
-        ],
-        "description": "time"
-    },
-    "datetime1": {
-        "prefix": "tim1",
-        "body": [
-            "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}"
-        ],
-        "description": "I give you back the time and date (Y-m-d H:M:S)"
-    }
+  "plot2": {
+    "prefix": "plott2",
+    "body": ["import numpy as np", "import matplotlib.pyplot as plt"],
+    "description": "numpy matplotlib"
+  },
+  "logging": {
+    "prefix": "sn_logg",
+    "body": [
+      "import logging",
+      "from typing import Union",
+      "",
+      "",
+      "def setlogging(logname: str = 'main', echo: bool = True, filename: Union[str, None] = None, warningsplit=False):",
+      "    '''",
+      "    call once, or will print duplicate message",
+      "    logname: name, such main.",
+      "    echo: False will not print in terminal, default set True and level INFO.",
+      "    filename: default DEBUG level. The file name of the output log, if it is None, will not be output to the file",
+      "    warningsplit: default False, if True will output warning/error messages to extra files ",
+      "    '''",
+      "    formatter = logging.Formatter('%(asctime)s [%(name)s] %(levelname)s: %(message)s')",
+      "    logger = logging.getLogger(logname)",
+      "    logger.setLevel(logging.DEBUG)  # init level",
+      "    if echo:",
+      "        ch = logging.StreamHandler()",
+      "        ch.setFormatter(formatter)",
+      "        ch.setLevel(logging.INFO)  # default: INFO",
+      "        logger.addHandler(ch)",
+      "    if filename:",
+      "        file_handler = logging.FileHandler(filename=f'log_{filename}.log')",
+      "        file_handler.setFormatter(formatter)",
+      "        file_handler.setLevel(logging.DEBUG)  # default: DEBUG",
+      "        logger.addHandler(file_handler)",
+      "    if warningsplit:",
+      "        file_handler2 = logging.FileHandler(filename=f'log_{filename}_warning.log')",
+      "        warn_filter = logging.Filter()",
+      "        warn_filter.filter = lambda record: record.levelno > logging.INFO  # 设置过滤等级",
+      "        file_handler2.addFilter(warn_filter)",
+      "        file_handler2.setFormatter(formatter)",
+      "        logger.addHandler(file_handler2)",
+      "    return logger\n",
+      ""
+    ],
+    "description": "logger"
+  },
+  "argparsee": {
+    "prefix": "sn_arg",
+    "body": [
+      "import argparse",
+      "",
+      "",
+      "def get_arg():",
+      "    parser = argparse.ArgumentParser(description='help', allow_abbrev=True)",
+      "    parser.add_argument('-z', action='store_true', default=False, help='zoom ')",
+      "    parser.add_argument(",
+      "        '-f',",
+      "        nargs='*',",
+      "        type=int,",
+      "        default=[0.02, 5],",
+      "        help='default ',",
+      "    )",
+      "    parser.add_argument('-c', type=str, default='BHZ', dest='channel', help=' ')",
+      "    parser.add_argument(",
+      "        '-o',",
+      "        '--orientation',",
+      "        type=str,",
+      "        default='horizontal',",
+      "        dest='ori',",
+      "        choices=['horizontal', 'vertical'],",
+      "        help='the orientation of waveform, default horizontal',",
+      "    )",
+      "",
+      "    args = parser.parse_args()",
+      "    return args\n",
+      ""
+    ],
+    "description": "Parse command line parameters"
+  },
+  "changelog": {
+    "prefix": "change",
+    "body": [
+      "'''",
+      " @Time_change : $CURRENT_YEAR/$CURRENT_MONTH/$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
+      " version: $1 description : $2",
+      "'''"
+    ],
+    "description": "time"
+  },
+  "datetime1": {
+    "prefix": "tim1",
+    "body": [
+      "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}"
+    ],
+    "description": "I give you back the time and date (Y-m-d H:M:S)"
+  }
 }
