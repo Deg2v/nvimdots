@@ -19,7 +19,7 @@ settings["disabled_plugins"] = {
 	-- local-highlight not work, so use vim-illuminate
 	"tzachar/local-highlight.nvim",
 	-- lang
-	"fatih/vim-go",
+	"ray-x/go.nvim",
 	"mrcjkb/rustaceanvim",
 	"Saecki/crates.nvim",
 	-- tool
