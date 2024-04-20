@@ -14,6 +14,8 @@ settings["disabled_plugins"] = {
 	"nvim-lualine/lualine.nvim",
 	-- editor
 	"smoka7/hop.nvim",
+	"lambdalisue/suda.vim",
+	"olimorris/persisted.nvim",
 	-- local-highlight not work, so use vim-illuminate
 	"tzachar/local-highlight.nvim",
 	-- lang
@@ -22,5 +24,7 @@ settings["disabled_plugins"] = {
 	"Saecki/crates.nvim",
 	-- tool
 	"goolord/alpha-nvim",
+	"gelguy/wilder.nvim",
 }
+
 return settings
