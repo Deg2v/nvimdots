@@ -37,13 +37,22 @@
         "description": "A simple shell comment block for functions, with a description. Useful when the user prefers to add the other documentation tags manually."
     },
     "shell_set": {
-        "prefix": "bash",
+        "prefix": "sn_bash",
         "body": [
             "#!/usr/bin/env bash",
-            "# set -x # debug",
+            "# set -x # debug echo every line command",
             "set -eu",
-            "set -o pipefail"
-        ]
+            "set -o pipefail",
+            "# ------------ set suffix --------------",
+            "final=0",
+            "if [[ \\$final -eq 0 ]]; then",
+            "    suf=$(date +'%y-%m-%d') # 以年月日为后缀",
+            "else",
+            "    suf='final'",
+            "fi",
+            "# --------------------------------------"
+        ],
+        "description": " bash"
     },
     "Print to console": {
         "prefix": "time",
