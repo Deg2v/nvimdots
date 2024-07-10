@@ -61,11 +61,10 @@ my["vigoux/ltex-ls.nvim"] = {
 
 -- tool
 my["folke/todo-comments.nvim"] = {
-	lazy = false,
+	lazy = true,
+	event = { "CursorHold", "CursorHoldI" },
 	config = require("custom.todo_comments"),
-	dependencies = {
-		{ "nvim-lua/plenary.nvim", lazy = false },
-	},
+	dependencies = { "nvim-lua/plenary.nvim" },
 }
 
 return my

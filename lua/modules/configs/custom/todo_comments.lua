@@ -10,13 +10,13 @@ return function()
 				alt = { "FIXME", "BUG", "FIXIT", "ISSUE", "ERROR", "CRITICAL" }, -- a set of other keywords that all map to this FIX keywords
 				-- signs = false, -- configure signs for some keywords individually
 			},
-			EXPLA = { icon = "", color = "explanation", alt = { "explain", "DESC", "REFER" } },
+			EXPLA = { icon = "󰌵", color = "explanation", alt = { "explain", "DESC", "REFER" } },
 			TODO = { icon = " ", color = "todo" },
 			HACK = { icon = " ", color = "warning" },
 			WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
-			PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-			NOTE = { icon = " ", color = "hint", alt = { "INFO", "HINT" } },
-			TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+			PERF = { icon = "󰅒", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+			NOTE = { icon = "󰍨", color = "hint", alt = { "INFO", "HINT" } },
+			TEST = { icon = "󰍁", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
 		},
 		colors = {
 			todo = { "#ffc125" },
@@ -30,7 +30,7 @@ return function()
 		},
 		gui_style = {
 			fg = "NONE", -- The gui style to use for the fg highlight group.
-			bg = "NONE", -- The gui style to use for the bg highlight group.
+			bg = "BOLD", -- The gui style to use for the bg highlight group.
 		},
 		merge_keywords = true, -- when true, custom keywords will be merged with the defaults
 		-- highlighting of the line containing the todo comment
@@ -47,7 +47,23 @@ return function()
 			pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlightng (vim regex)
 			comments_only = true, -- uses treesitter to match keywords in comments only
 			max_line_len = 400, -- ignore lines longer than this
-			exclude = {}, -- list of file types to exclude highlighting
+			-- exclude = { "big_file_disabled_ft", "checkhealth" }, -- list of file types to exclude highlighting
+			exclude = {
+				"alpha",
+				"bigfile",
+				"checkhealth",
+				"dap-repl",
+				"diff",
+				"help",
+				"log",
+				"notify",
+				"NvimTree",
+				"Outline",
+				"qf",
+				"TelescopePrompt",
+				"toggleterm",
+				"undotree",
+			},
 		},
 		-- list of named colors where we try to extract the guifg from the
 		-- list of hilight groups or use the hex color if hl not found as a fallback
