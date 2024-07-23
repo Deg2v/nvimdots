@@ -27,6 +27,7 @@ return function()
 			-- green = '#00ffaa',            -- redefine an existing color
 		}, -- Override default colors
 		highlights = {
+			["@lsp.type.variable"] = { fg = "#e06150" },
 			["@variable"] = { fg = "#e06150" },
 			["@parameter"] = { fg = "#ffb900" },
 			["@parameter.reference"] = { fg = "#00ffaa" },
