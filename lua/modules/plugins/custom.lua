@@ -54,10 +54,10 @@ my["nvim-orgmode/orgmode"] = {
 }
 
 my["lervag/vimtex"] = { lazy = true, ft = "tex" }
-my["vigoux/ltex-ls.nvim"] = {
-	config = require("custom.ltex"),
-	ft = { "latex", "tex", "bib", "markdown", "gitcommit", "text" },
-}
+-- my["vigoux/ltex-ls.nvim"] = {
+-- 	config = require("custom.ltex"),
+-- 	ft = { "latex", "tex", "bib", "markdown", "gitcommit", "text" },
+-- }
 
 -- tool
 my["folke/todo-comments.nvim"] = {
