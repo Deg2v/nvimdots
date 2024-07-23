@@ -24,7 +24,7 @@ settings["disabled_plugins"] = {
 	"Saecki/crates.nvim",
 	-- tool
 	"goolord/alpha-nvim",
-	"gelguy/wilder.nvim",
+	-- "gelguy/wilder.nvim",
 }
 
 return settings
