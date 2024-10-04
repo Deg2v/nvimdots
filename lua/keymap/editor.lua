@@ -4,7 +4,9 @@ local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
 local et = bind.escape_termcode
-
+-- 或许有更好的设置keymap的方法，先这样吧
+local addtitle = require("keymap.authorinfo").addtitle
+vim.keymap.set("n", "<F4>", addtitle, { noremap = true, silent = true })
 local plug_map = {
 	-- Plugin persisted.nvim
 	["n|<leader>ss"] = map_cu("SessionSave"):with_noremap():with_silent():with_desc("session: Save"),
