@@ -128,6 +128,7 @@ local load_core = function()
 	require("core.options")
 	require("core.mapping")
 	local colorscheme = "slate"
+	-- if file is too big do not load many plugins, excpet for csv.nvim
 	if max_filesize == nil or max_filesize <= threshold_filesize then
 		require("core.event")
 		require("core.pack")
@@ -138,7 +139,7 @@ local load_core = function()
 	end
 
 	vim.api.nvim_set_option_value("background", settings.background, {})
-	vim.cmd.colorscheme(settings.colorscheme)
+	vim.cmd.colorscheme(colorscheme)
 end
 
 load_core()

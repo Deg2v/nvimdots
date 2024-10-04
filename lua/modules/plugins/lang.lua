@@ -45,5 +45,6 @@ lang["iamcco/markdown-preview.nvim"] = {
 lang["chrisbra/csv.vim"] = {
 	lazy = true,
 	ft = "csv",
+	config = require("lang.csv"),
 }
 return lang
