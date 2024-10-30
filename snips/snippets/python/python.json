@@ -1,7 +1,27 @@
 {
   "plot2": {
     "prefix": "plott2",
-    "body": ["import numpy as np", "import matplotlib.pyplot as plt"],
+    "body": [
+      "import numpy as np",
+      "import matplotlib.pyplot as plt",
+      "",
+      "fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(10, 7), dpi=100)  # figsize 宽和高",
+      "",
+      "A = [2,4,6,8,9]",
+      "B = [1,2,3,4,5]",
+      "ax.plot(A, B, label='Xlabel', alpha=1, color='b')",
+      "ax.plot(B, A, label='Ylabel', alpha=1, marker='o', color='r', markersize=7)",
+      "ax.set_title('Title', fontsize=18)",
+      "ax.set_xlabel('Xlabel', fontsize=12)",
+      "ax.set_ylabel('Ylabel', fontsize='x-large')",
+      "ax.set_xlim(0, 16)  # x轴刻度范围设置",
+      "ax.set_ylim(0, 16)  # y轴刻度范围设置",
+      "ax.legend(loc='upper right')",
+      "ax.set_aspect(1)",
+      "ax.grid(which='minor', axis='both')",
+      "plt.show()",
+      ""
+    ],
     "description": "numpy matplotlib"
   },
   "logging": {
@@ -103,5 +123,17 @@
       "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}"
     ],
     "description": "I give you back the time and date (Y-m-d H:M:S)"
+  },
+  "debug": {
+    "prefix": "sn_debug",
+    "body": [
+      "import inspect",
+      "def debug_print(msg='DEBUG'):",
+      "    'print current line number'",
+      "    caller_frame = inspect.currentframe().f_back",
+      "    frame_info = inspect.getframeinfo(caller_frame)",
+      "    print(f'{frame_info.filename}:{frame_info.lineno} - {msg}')",
+      ""
+    ]
   }
 }

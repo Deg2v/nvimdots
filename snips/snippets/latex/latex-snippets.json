@@ -4,9 +4,9 @@
         "body": [
             "\\ifx\\allfiles\\undefined",
             "",
-      "	% 如果有这一部分另外的package，在这里加上",
-      "	% 没有的话不需要",
-      "	",
+            "% 如果有这一部分另外的package，在这里加上",
+            "% 没有的话不需要",
+            "",
             "    \\input{../config}",
             "\\begin{document}",
             "\\else",
