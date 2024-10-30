@@ -110,10 +110,10 @@ settings["external_browser"] = "chrome-cli open"
 settings["lsp_deps"] = {
 	"bashls",
 	"clangd",
-	"html",
+	-- "html",
 	"jsonls",
 	"lua_ls",
-	"pylsp",
+	-- "pylsp",
 	-- "gopls",
 }
 
@@ -129,7 +129,7 @@ settings["null_ls_deps"] = {
 	"prettier",
 	"shfmt",
 	"stylua",
-	"vint",
+	-- "vint",
 }
 
 -- Set the Debug Adapter Protocol (DAP) clients that will be installed and configured during bootstrap here.
