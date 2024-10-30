@@ -53,7 +53,7 @@ my["nvim-orgmode/orgmode"] = {
 	config = require("custom.orgmode"),
 }
 
-my["lervag/vimtex"] = { lazy = true, ft = "tex" }
+-- my["lervag/vimtex"] = { lazy = true, ft = "tex" }
 -- my["vigoux/ltex-ls.nvim"] = {
 -- 	config = require("custom.ltex"),
 -- 	ft = { "latex", "tex", "bib", "markdown", "gitcommit", "text" },
