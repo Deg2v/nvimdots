@@ -32,7 +32,13 @@ local leader_map = function()
 end
 
 local gui_config = function()
-	vim.api.nvim_set_option_value("guifont", settings.gui_config.font_name .. ":h" .. settings.gui_config.font_size, {})
+	if next(settings.gui_config) then
+		vim.api.nvim_set_option_value(
+			"guifont",
+			settings.gui_config.font_name .. ":h" .. settings.gui_config.font_size,
+			{}
+		)
+	end
 end
 
 local neovide_config = function()
@@ -126,7 +132,6 @@ local load_core = function()
 
 	local threshold_filesize = 50 * 1024 * 1024 -- 50 MB
 	require("core.options")
-	require("core.mapping")
 	local colorscheme = "slate"
 	-- if file is too big do not load many plugins, excpet for csv.nvim
 	if max_filesize == nil or max_filesize <= threshold_filesize then
