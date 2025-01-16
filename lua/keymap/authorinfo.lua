@@ -57,7 +57,7 @@ end
 
 function M.addtitle()
 	-- = addtitle()
-	local num_shebang, filetype_cur = findfirstline()
+	local num_shebang, _ = findfirstline() -- _ filetype
 	-- before_title()
 	local file = vim.api.nvim_buf_get_name(0)
 	local filename = string.match(file, ".+/([^/]*%.%w+)$") -- 只有文件名，去除路径
