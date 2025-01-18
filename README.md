@@ -1,10 +1,8 @@
+<<<<<<< HEAD
 # 0.Modified from [nvimdots](https://github.com/ayamir/nvimdots)
-
-my custom configuration is in branch **mycustom02**
-
----
-
-# Introduction
+||||||| a5b8ec04
+# Table of Contents
+=======
 <h1 align="center">
     nvimdots
     <br>
@@ -19,7 +17,18 @@ my custom configuration is in branch **mycustom02**
         src="https://img.shields.io/github/v/release/ayamir/nvimdots.svg?style=for-the-badge&logo=github&color=F2CDCD&logoColor=D9E0EE&labelColor=363A4F">
     </a>
 </h1>
+>>>>>>> upstream/main
 
+<<<<<<< HEAD
+my custom configuration is in branch **mycustom02**
+||||||| a5b8ec04
+1. [Prerequisites](#prerequisites)
+2. [Introduction](#introduction)
+3. [Structure](#structure)
+4. [Plugins](#plugins)
+5. [Keybindings](#keybindings)
+6. [Credit](#credit)
+=======
 <p align="center">
     <a href="https://github.com/ayamir/nvimdots/stargazers">
     <img
@@ -40,9 +49,92 @@ my custom configuration is in branch **mycustom02**
         alt="Code Size"
         src="https://img.shields.io/github/languages/code-size/ayamir/nvimdots?colorA=363A4F&colorB=DDB6F2&logo=gitlfs&logoColor=D9E0EE&style=for-the-badge">
 </p>
+>>>>>>> upstream/main
 
+<<<<<<< HEAD
+---
+||||||| a5b8ec04
+<a id="prerequisites"></a>
+
+# Prerequisites
+
+**Nvim version > 0.5**
+
+<a id="introduction"></a>
+=======
 ## 🪷 Introduction
 
+This repo hosts our [Neovim](https://neovim.io/) configuration for Linux [(with NixOS support)](#nixos-support), macOS, and Windows. `init.lua` is the config entry point.
+
+Branch info:
+
+<div align="center">
+>>>>>>> upstream/main
+
+<<<<<<< HEAD
+# Introduction
+<h1 align="center">
+    nvimdots
+    <br>
+    <a href="https://github.com/neovim/neovim/releases/tag/stable">
+    <img
+        alt="Neovim Version Capability"
+        src="https://img.shields.io/badge/Supports%20Nvim-v0.10-A6D895?style=for-the-badge&colorA=363A4F&logo=neovim&logoColor=D9E0EE">
+    </a>
+    <a href="https://github.com/ayamir/nvimdots/releases">
+    <img
+        alt="Release"
+        src="https://img.shields.io/github/v/release/ayamir/nvimdots.svg?style=for-the-badge&logo=github&color=F2CDCD&logoColor=D9E0EE&labelColor=363A4F">
+    </a>
+</h1>
+||||||| a5b8ec04
+# Introduction
+=======
+| Branch | Supported Neovim version |
+| :----: | :----------------------: |
+|  main  |     nvim 0.10 stable     |
+|  0.11  |    nvim 0.11 nightly     |
+|  0.9   |         nvim 0.9         |
+|  0.8   |         nvim 0.8         |
+>>>>>>> upstream/main
+
+<<<<<<< HEAD
+<p align="center">
+    <a href="https://github.com/ayamir/nvimdots/stargazers">
+    <img
+        alt="Stars"
+        src="https://img.shields.io/github/stars/ayamir/nvimdots?colorA=363A4F&colorB=B7BDF8&logo=adafruit&logoColor=D9E0EE&style=for-the-badge">
+    </a>
+    <a href="https://github.com/ayamir/nvimdots/issues">
+    <img
+        alt="Issues"
+        src="https://img.shields.io/github/issues-raw/ayamir/nvimdots?colorA=363A4f&colorB=F5A97F&logo=github&logoColor=D9E0EE&style=for-the-badge">
+    </a>
+    <a href="https://github.com/ayamir/nvimdots/contributors">
+    <img
+        alt="Contributors"
+        src="https://img.shields.io/github/contributors/ayamir/nvimdots?colorA=363A4F&colorB=B5E8E0&logo=git&logoColor=D9E0EE&style=for-the-badge">
+    </a>
+    <img
+        alt="Code Size"
+        src="https://img.shields.io/github/languages/code-size/ayamir/nvimdots?colorA=363A4F&colorB=DDB6F2&logo=gitlfs&logoColor=D9E0EE&style=for-the-badge">
+</p>
+||||||| a5b8ec04
+![Dashboard](./shots/dashboard.png)
+=======
+</div>
+>>>>>>> upstream/main
+
+<<<<<<< HEAD
+## 🪷 Introduction
+||||||| a5b8ec04
+![Telescope](./shots/telescope.png)
+=======
+> [!IMPORTANT]
+> The `0.11` branch is intended for nightly Neovim builds and is **not** stable. It typically harbors subtle issues scattered throughout. Therefore, refrain from submitting issues if you happen to encounter them. They will be closed directly unless a viable solution is proposed or included.
+>>>>>>> upstream/main
+
+<<<<<<< HEAD
 This repo hosts our [Neovim](https://neovim.io/) configuration for Linux [(with NixOS support)](#nixos-support), macOS, and Windows. `init.lua` is the config entry point.
 
 Branch info:
@@ -62,6 +154,17 @@ Branch info:
 > The `0.11` branch is intended for nightly Neovim builds and is **not** stable. It typically harbors subtle issues scattered throughout. Therefore, refrain from submitting issues if you happen to encounter them. They will be closed directly unless a viable solution is proposed or included.
 
 We currently manage plugins using [lazy.nvim](https://github.com/folke/lazy.nvim).
+||||||| a5b8ec04
+![Coding](./shots/coding.png)
+
+This is my neovim's configuration.
+
+I use [Vim-Plug](https://github.com/junegunn/vim-plug) to manage plugins.
+
+I use [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) to realize code complete.
+=======
+We currently manage plugins using [lazy.nvim](https://github.com/folke/lazy.nvim).
+>>>>>>> upstream/main
 
 Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 
