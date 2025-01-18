@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {
     "comment": {
         "prefix": "/**",
@@ -122,17 +121,3 @@
         "description": "Snippet for anonymous goroutine declaration"
     }
 }
-||||||| a5b8ec04
-=======
-{
-  "fori": {
-    "prefix": "fori",
-    "body": [
-      "for (${1:int} ${2:i} = ${3:0}; $2 < ${4:length}; ++$2) {",
-      "\t$0",
-      "}"
-    ],
-    "description": "Code snippet for 'fori' loop"
-  }
-}
->>>>>>> upstream/main
